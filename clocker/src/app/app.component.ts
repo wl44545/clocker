@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {APPROUTES} from "../assets/constans/AppRoutes";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'clocker';
+  appRoutes = APPROUTES;
+
+  getRole(): string | null{
+    return localStorage.getItem("role");
+  }
 }

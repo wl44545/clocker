@@ -1,1 +1,17 @@
+<nav *ngIf="getRole() != null">
+  <input type="checkbox" id="check">
+  <label for="check" class="checkbtn">
+    <i class="fas fa-bars"></i>
+  </label>
+  <label class="logo">Clocker</label>
+  <ul>
+    <li *ngIf="getRole() == 'ADMIN'"><a routerLink="/{{appRoutes.HOME}}">Użytkownicy</a></li>
+    <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.HOME}}">Timer</a></li>
+    <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.HOME}}">Projekty</a></li>
+    <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.HOME}}">Klienci</a></li>
+    <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.HOME}}">Raporty</a></li>
+    <li><a href="#">Wyloguj</a></li>
+  </ul>
+</nav>
+
 <router-outlet></router-outlet>

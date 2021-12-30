@@ -11,7 +11,6 @@ p {
 .column {
   float: left;
   padding: 10px;
-
 }
 .left {
   width: 60%;
@@ -23,4 +22,36 @@ p {
   content: "";
   display: table;
   clear: both;
+}
+.login {
+  border-radius: 2vh;
+  background-color: #706993;
+  top: 25vh;
+  height: 25vh;
+  width: 20vw;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.login-button{
+  background-color: #331E38;
+  color: #70A0AF;
+  border-radius: 1vh;
+}
+.wrong-login{
+  color: #70A0AF;
+}
+input{
+  width: 15vw;
+  height: 5vh;
+  margin-bottom: 1vh;
+}
+button{
+  width: 5vw;
+  height: 5vh;
+  font-size: 2vh;
 }

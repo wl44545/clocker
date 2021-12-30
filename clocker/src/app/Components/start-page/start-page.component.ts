@@ -3,6 +3,8 @@ import {LoginService} from "../../Services/login.service";
 import {StatsService} from "../../Services/stats.service";
 import {StatsModel} from "../../Models/stats.model";
 import {UserModel} from "../../Models/user.model";
+import {Router} from "@angular/router";
+import {APPROUTES} from "../../../assets/constans/AppRoutes";
 
 @Component({
   selector: 'app-start-page',
@@ -21,7 +23,8 @@ export class StartPageComponent implements OnInit {
   yearStats: number = 0;
 
   constructor(public loginService: LoginService,
-              public statsService: StatsService) { }
+              private statsService: StatsService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.loadStats();
@@ -38,11 +41,13 @@ export class StartPageComponent implements OnInit {
     });
     //TODO: REMOVE BELOW
     if(this.username == "u" && this.password == "u"){
+      this.router.navigateByUrl('/timer');
       localStorage.setItem("USERNAME", "USER");
       localStorage.setItem("ROLE", "USER");
       this.wrongLogin = false;
     }
     else if(this.username == "a" && this.password == "a"){
+      this.router.navigateByUrl('/admin');
       localStorage.setItem("USERNAME", "ADMIN");
       localStorage.setItem("ROLE", "ADMIN");
       this.wrongLogin = false;

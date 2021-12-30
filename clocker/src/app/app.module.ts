@@ -8,12 +8,21 @@ import {FormsModule} from "@angular/forms";
 import {LoginService} from "./Services/login.service";
 import {HttpClientModule} from "@angular/common/http";
 import {StatsService} from "./Services/stats.service";
+import { TimerComponent } from './Components/timer/timer.component';
+import { ProjectsComponent } from './Components/projects/projects.component';
+import { ClientsComponent } from './Components/clients/clients.component';
+import { ReportsComponent } from './Components/reports/reports.component';
+import { AdminComponent } from './Components/admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartPageComponent,
-
+    TimerComponent,
+    ProjectsComponent,
+    ClientsComponent,
+    ReportsComponent,
+    AdminComponent
   ],
     imports: [
         BrowserModule,

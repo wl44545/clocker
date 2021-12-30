@@ -5,11 +5,11 @@
   </label>
   <label class="logo">Clocker</label>
   <ul>
-    <li *ngIf="getRole() == 'ADMIN'"><a routerLink="/{{appRoutes.HOME}}">Użytkownicy</a></li>
-    <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.HOME}}">Timer</a></li>
-    <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.HOME}}">Projekty</a></li>
-    <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.HOME}}">Klienci</a></li>
-    <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.HOME}}">Raporty</a></li>
+    <li *ngIf="getRole() == 'ADMIN'"><a routerLink="/{{appRoutes.ADMIN}}">Użytkownicy</a></li>
+    <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.TIMER}}">Timer</a></li>
+    <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.PROJECTS}}">Projekty</a></li>
+    <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.CLIENTS}}">Klienci</a></li>
+    <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.REPORTS}}">Raporty</a></li>
     <li *ngIf="getRole() != null" (click)="logout()"><a href="#">Wyloguj</a></li>
   </ul>
 </nav>

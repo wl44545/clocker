@@ -9,6 +9,8 @@ import {Router} from "@angular/router";
 })
 export class ClientsComponent implements OnInit {
 
+  clientName: string = "";
+
   constructor(private loginService: LoginService,
               private router: Router) { }
 
@@ -20,6 +22,10 @@ export class ClientsComponent implements OnInit {
     if(this.loginService.getRole() != "USER"){
       this.router.navigateByUrl('/').then();
     }
+  }
+
+  public add(){
+    this.clientName = "";
   }
 
 }

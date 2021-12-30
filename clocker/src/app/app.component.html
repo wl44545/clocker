@@ -1,4 +1,4 @@
-<nav *ngIf="getRole() != null">
+<nav>
   <input type="checkbox" id="check">
   <label for="check" class="checkbtn">
     <i class="fas fa-bars"></i>
@@ -10,7 +10,7 @@
     <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.HOME}}">Projekty</a></li>
     <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.HOME}}">Klienci</a></li>
     <li *ngIf="getRole() == 'USER'"><a routerLink="/{{appRoutes.HOME}}">Raporty</a></li>
-    <li><a href="#">Wyloguj</a></li>
+    <li *ngIf="getRole() != null" (click)="logout()"><a href="#">Wyloguj</a></li>
   </ul>
 </nav>
 

@@ -5,3 +5,22 @@ p {
   text-align: center;
   color: $GRAY;
 }
+* {
+  box-sizing: border-box;
+}
+.column {
+  float: left;
+  padding: 10px;
+
+}
+.left {
+  width: 60%;
+}
+.right {
+  width: 40%;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {APPROUTES} from "../assets/constans/AppRoutes";
+import {LoginService} from "./Services/login.service";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,14 @@ export class AppComponent {
   title = 'clocker';
   appRoutes = APPROUTES;
 
+  constructor(private loginService: LoginService) { }
+
   getRole(): string | null{
-    return localStorage.getItem("role");
+    return this.loginService.getRole();
   }
+
+  logout() {
+    this.loginService.logout();
+  }
+
 }

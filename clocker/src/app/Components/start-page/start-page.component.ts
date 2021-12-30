@@ -37,9 +37,19 @@ export class StartPageComponent implements OnInit {
       }
     });
     //TODO: REMOVE BELOW
-    let user = new UserModel(this.username, this.password);
-    localStorage.setItem("USERNAME", user.username);
-    localStorage.setItem("ROLE", user.role);
+    if(this.username == "u" && this.password == "u"){
+      localStorage.setItem("USERNAME", "USER");
+      localStorage.setItem("ROLE", "USER");
+      this.wrongLogin = false;
+    }
+    else if(this.username == "a" && this.password == "a"){
+      localStorage.setItem("USERNAME", "ADMIN");
+      localStorage.setItem("ROLE", "ADMIN");
+      this.wrongLogin = false;
+    }
+    else{
+      this.wrongLogin = true;
+    }
     //TODO: REMOVE ABOVE
     this.clearLoginForm();
   }

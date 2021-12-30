@@ -41,13 +41,13 @@ export class StartPageComponent implements OnInit {
     });
     //TODO: REMOVE BELOW
     if(this.username == "u" && this.password == "u"){
-      this.router.navigateByUrl('/timer');
+      this.router.navigateByUrl('/timer').then();
       localStorage.setItem("USERNAME", "USER");
       localStorage.setItem("ROLE", "USER");
       this.wrongLogin = false;
     }
     else if(this.username == "a" && this.password == "a"){
-      this.router.navigateByUrl('/admin');
+      this.router.navigateByUrl('/admin').then();
       localStorage.setItem("USERNAME", "ADMIN");
       localStorage.setItem("ROLE", "ADMIN");
       this.wrongLogin = false;

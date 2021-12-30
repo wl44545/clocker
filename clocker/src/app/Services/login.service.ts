@@ -5,13 +5,15 @@ import {StatsModel} from "../Models/stats.model";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {LoginModel} from "../Models/login.model";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+              private router: Router) {
   }
 
   public login(username: string, password: string): Observable<UserModel> {
@@ -21,6 +23,7 @@ export class LoginService {
   public logout() {
     localStorage.removeItem("ROLE");
     localStorage.removeItem("USERNAME");
+    this.router.navigateByUrl("/").then();
   }
 
   public getRole(): string | null{

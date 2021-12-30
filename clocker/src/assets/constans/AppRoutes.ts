@@ -1,7 +1,7 @@
 export enum APPROUTES {
   HOME = '',
   ADMIN = 'admin',
-  USER_LIST = 'userlist',
+  USERS = 'users',
   TIMER = 'timer',
   PROJECTS = 'projects',
   CLIENTS = 'clients',

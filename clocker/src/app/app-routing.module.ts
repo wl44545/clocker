@@ -7,10 +7,12 @@ import {TimerComponent} from "./Components/timer/timer.component";
 import {ProjectsComponent} from "./Components/projects/projects.component";
 import {ClientsComponent} from "./Components/clients/clients.component";
 import {ReportsComponent} from "./Components/reports/reports.component";
+import {UsersComponent} from "./Components/users/users.component";
 
 const routes: Routes = [
   { path: APPROUTES.HOME, pathMatch: 'full', component: StartPageComponent },
   { path: APPROUTES.ADMIN, component: AdminComponent },
+  { path: APPROUTES.USERS, component: UsersComponent },
   { path: APPROUTES.TIMER, component: TimerComponent },
   { path: APPROUTES.PROJECTS, component: ProjectsComponent },
   { path: APPROUTES.CLIENTS, component: ClientsComponent },

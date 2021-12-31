@@ -1,0 +1,54 @@
+{
+  "stats": {
+    "dayStats": 1,
+    "weekStats": 2,
+    "monthStats": 3,
+    "yearStats": 4
+  },
+  "login": {
+    "username": "a",
+    "password": "a"
+  },
+  "clients": [
+    {
+      "name": "fdfd",
+      "username": "USER2",
+      "id": 4
+    },
+    {
+      "name": "aaaaa",
+      "username": "USER2",
+      "id": 5
+    },
+    {
+      "name": "aa",
+      "username": "USER2",
+      "id": 6
+    },
+    {
+      "name": "kjhgf",
+      "username": "USER",
+      "id": 11
+    },
+    {
+      "name": "a",
+      "username": "USERADMIN",
+      "id": 12
+    },
+    {
+      "name": "sd",
+      "username": "USERADMIN",
+      "id": 13
+    },
+    {
+      "name": "asa",
+      "username": "USERADMIN",
+      "id": 14
+    },
+    {
+      "name": "aa",
+      "username": "USERADMIN",
+      "id": 15
+    }
+  ]
+}

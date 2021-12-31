@@ -8,15 +8,18 @@
 
 <div class="add">
   <input type="text" id="clientName" placeholder="Nazwa klienta" [(ngModel)]="clientName" name="clientName">
-  <button (click)="add()">Dodaj</button>
+  <button *ngIf="!clientEdit" (click)="addClient()">Dodaj</button>
+  <button *ngIf="clientEdit" (click)="saveClient()">Zapisz</button>
 </div>
 
-<div class="client">sss</div>
-<div class="client">sss</div>
-<div class="client">sss</div>
-<div class="client">sss</div>
-<div class="client">sss</div>
+<div class="client" *ngFor="let client of clients">
+  {{client.name}}
+  <div class="panel">
+    <i (click)="editClient(client)" class="fas fa-edit"></i>
+    <i (click)="removeClient(client)" class="fa fa-trash" aria-hidden="true"></i>
+  </div>
 
+</div>
 
 </body>
 </html>

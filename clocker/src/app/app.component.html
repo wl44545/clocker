@@ -10,7 +10,7 @@
     <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.PROJECTS}}">Projekty</a></li>
     <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.CLIENTS}}">Klienci</a></li>
     <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.REPORTS}}">Raporty</a></li>
-    <li *ngIf="loginService.getRole() != null" (click)="loginService.logout()"><a href="#">Wyloguj</a></li>
+    <li *ngIf="loginService.isLogged()" (click)="loginService.logout()"><a href="#">Wyloguj</a></li>
   </ul>
 </nav>
 <router-outlet></router-outlet>

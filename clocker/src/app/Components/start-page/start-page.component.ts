@@ -31,14 +31,14 @@ export class StartPageComponent implements OnInit {
   }
 
   public login(){
-    this.loginService.login(this.username, this.password).subscribe(user => {
+    /*this.loginService.login(this.username, this.password).subscribe(user => {
       if(user == null){
         this.wrongLogin = true;
       }else{
         localStorage.setItem("USERNAME", user.username);
         localStorage.setItem("ROLE", user.role);
       }
-    });
+    });*/
     //TODO: REMOVE BELOW
     if(this.username == "u" && this.password == "u"){
       this.router.navigateByUrl('/timer').then();
@@ -77,12 +77,5 @@ export class StartPageComponent implements OnInit {
       this.monthStats = stats.monthStats;
       this.yearStats = stats.yearStats;
     });
-    //TODO: REMOVE BELOW
-    let stats = new StatsModel(20,200,2000,20000);
-    this.dayStats = stats.dayStats;
-    this.weekStats = stats.weekStats;
-    this.monthStats = stats.monthStats;
-    this.yearStats = stats.yearStats;
-    //TODO: REMOVE ABOVE
   }
 }

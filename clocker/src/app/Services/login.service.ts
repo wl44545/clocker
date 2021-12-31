@@ -26,16 +26,16 @@ export class LoginService {
     this.router.navigateByUrl("/").then();
   }
 
-  public getRole(): string | null{
-    return localStorage.getItem("ROLE");
+  public getRole(): string{
+    return localStorage.getItem("ROLE") || "GUEST";
   }
 
-  public getUsername(): string | null{
-    return localStorage.getItem("USERNAME");
+  public getUsername(): string{
+    return localStorage.getItem("USERNAME") || "GUEST";
   }
 
   public isLogged(): boolean{
-    return this.getRole() != null && this.getUsername() != null;
+    return this.getRole() != "GUEST" && this.getUsername() != "GUEST";
   }
 
   public isUser(): boolean{

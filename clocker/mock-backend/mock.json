@@ -56,47 +56,42 @@
       "id": 19
     },
     {
-      "name": "uyt",
+      "name": "Klient 1",
       "username": "USER",
       "id": 20
     },
     {
-      "name": "wrr",
+      "name": "Klient 2",
       "username": "USER",
       "id": 21
     },
     {
-      "name": "33",
+      "name": "Klient 3",
       "username": "USER",
       "id": 22
     }
   ],
   "projects": [
     {
-      "name": "aa",
+      "name": "Projekt 1",
       "username": "USER",
-      "client": "20",
+      "client": "21",
       "id": 1,
       "clientName": ""
     },
     {
-      "name": "aa",
+      "name": "Projekt 2",
       "username": "USER",
       "client": "20",
-      "id": 2
+      "id": 2,
+      "clientName": ""
     },
     {
-      "name": "ww",
+      "name": "Projekt 3",
       "username": "USER",
       "client": null,
       "id": 4,
       "clientName": ""
-    },
-    {
-      "name": "aaa",
-      "username": "USER",
-      "client": "null",
-      "id": 5
     },
     {
       "name": "ggg",

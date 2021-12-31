@@ -9,11 +9,17 @@
   search query
 </div>
 <div class="entry" *ngFor="let entry of worklog">
+  <i class="far fa-comment-dots"></i>
   {{entry.description}}
+  <i class="fas fa-project-diagram"></i>
   {{entry.projectName}}
+  <i class="far fa-building"></i>
   {{entry.clientName}}
+  <i class="far fa-play-circle"></i>
   {{entry.start}}
+  <i class="far fa-stop-circle"></i>
   {{entry.stop}}
+  <i class="fas fa-hourglass-start"></i>
   {{entry.timeDiff}}
 </div>
 <div class="csv">

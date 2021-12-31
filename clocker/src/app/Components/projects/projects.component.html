@@ -1,1 +1,31 @@
-<p>projects works!</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="projects.component.scss">
+</head>
+<body>
+
+<div class="add">
+  <input type="text" id="projectName" placeholder="Nazwa projektu" [(ngModel)]="projectName" name="projectName">
+  <select [(ngModel)]="clientId">
+    <option [value]=0>Brak</option>
+    <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
+  </select>
+  <button *ngIf="!projectEdit" (click)="addProject()">Dodaj</button>
+  <button *ngIf="projectEdit" (click)="saveProject()">Zapisz</button>
+</div>
+
+<div class="project" *ngFor="let project of projects">
+  {{project.name}}
+  <i *ngIf="project.client" class="far fa-building"></i>
+  {{project.clientName}}
+  <div class="panel">
+    <i (click)="editProject(project)" class="fas fa-edit"></i>
+    <i (click)="removeProject(project)" class="fa fa-trash" aria-hidden="true"></i>
+  </div>
+
+</div>
+
+</body>
+</html>

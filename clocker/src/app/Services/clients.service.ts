@@ -17,8 +17,12 @@ export class ClientsService {
     return this.httpClient.get<ClientModel[]>(`${environment.apiUrl}/clients?username=${username}`);
   }
 
-  public addClient(clientname: string, username: string): Observable<ClientModel> {
-    return this.httpClient.post<ClientModel>(`${environment.apiUrl}/clients`, new ClientModelRequest(clientname, username));
+  public getClient(id: number): Observable<ClientModel> {
+    return this.httpClient.get<ClientModel>(`${environment.apiUrl}/clients/${id}`);
+  }
+
+  public addClient(clientName: string, username: string): Observable<ClientModel> {
+    return this.httpClient.post<ClientModel>(`${environment.apiUrl}/clients`, new ClientModelRequest(clientName, username));
   }
 
   public editClient(client: ClientModel): Observable<ClientModel>{

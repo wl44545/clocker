@@ -11,14 +11,7 @@ export class AppComponent {
   title = 'clocker';
   appRoutes = APPROUTES;
 
-  constructor(private loginService: LoginService) { }
+  constructor(public loginService: LoginService) { }
 
-  getRole(): string | null{
-    return this.loginService.getRole();
-  }
-
-  logout() {
-    this.loginService.logout();
-  }
 
 }

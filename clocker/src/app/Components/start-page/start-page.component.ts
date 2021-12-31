@@ -46,6 +46,12 @@ export class StartPageComponent implements OnInit {
       localStorage.setItem("ROLE", "USER");
       this.wrongLogin = false;
     }
+    if(this.username == "ua" && this.password == "ua"){
+      this.router.navigateByUrl('/timer').then();
+      localStorage.setItem("USERNAME", "USERADMIN");
+      localStorage.setItem("ROLE", "USERADMIN");
+      this.wrongLogin = false;
+    }
     else if(this.username == "a" && this.password == "a"){
       this.router.navigateByUrl('/admin').then();
       localStorage.setItem("USERNAME", "ADMIN");

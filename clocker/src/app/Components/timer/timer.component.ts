@@ -17,7 +17,7 @@ export class TimerComponent implements OnInit {
   }
 
   private checkPermission(){
-    if(this.loginService.getRole() != "USER"){
+    if(!this.loginService.isUser()){
       this.router.navigateByUrl('/').then();
     }
   }

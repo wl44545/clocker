@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
   }
 
   private checkPermission(){
-    if(this.loginService.getRole() != "ADMIN"){
+    if(!this.loginService.isAdmin()){
       this.router.navigateByUrl('/').then();
     }
   }

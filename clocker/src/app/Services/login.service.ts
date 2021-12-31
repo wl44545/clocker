@@ -38,4 +38,12 @@ export class LoginService {
     return this.getRole() != null && this.getUsername() != null;
   }
 
+  public isUser(): boolean{
+    return this.getRole() == "USER" || this.getRole() == "USERADMIN";
+  }
+
+  public isAdmin(): boolean{
+    return this.getRole() == "ADMIN" || this.getRole() == "USERADMIN";
+  }
+
 }

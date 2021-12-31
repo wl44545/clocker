@@ -47,6 +47,7 @@ export class ProjectsComponent implements OnInit {
     if(this.projectName != "") {
       this.projectsService.addProject(this.projectName,this.clientId, this.loginService.getUsername()).subscribe(project => {
         this.projectName = "";
+        this.clientId = null;
         this.getProjects();
       });
     }
@@ -55,6 +56,7 @@ export class ProjectsComponent implements OnInit {
   public removeProject(project: ProjectModel){
     this.projectsService.removeProject(project).subscribe(project => {
       this.projectName = "";
+      this.clientId = null;
       this.projectEdit = false;
       this.getProjects();
     });
@@ -84,10 +86,8 @@ export class ProjectsComponent implements OnInit {
 
   public saveProject() {
     this.project.name = this.projectName;
-    if(this.clientId == 0){
-      this.project.client = null;
-    }
     this.project.clientName = "";
+    this.project.client = this.clientId;
     this.projectsService.editProject(this.project).subscribe(project => {
       this.projectName = "";
       this.clientId = null;

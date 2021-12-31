@@ -9,7 +9,7 @@
 <div class="add">
   <input type="text" id="projectName" placeholder="Nazwa projektu" [(ngModel)]="projectName" name="projectName">
   <select [(ngModel)]="clientId">
-    <option [value]=0>Brak</option>
+    <option [value]=null>Brak</option>
     <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
   </select>
   <button *ngIf="!projectEdit" (click)="addProject()">Dodaj</button>

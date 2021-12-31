@@ -22,6 +22,19 @@ export class ReportsComponent implements OnInit {
   queryProject: number = 0;
   queryClient: number = 0;
 
+  csvOptions = {
+    fieldSeparator: ',',
+    quoteStrings: '"',
+    decimalseparator: '.',
+    showLabels: false,
+    headers: ["description", "projectName", "clientName", "start", "stop", "timeDiff"],
+    showTitle: true,
+    title: 'report',
+    useBom: false,
+    removeNewLines: true,
+    keys: ["description", "projectName", "clientName", "start", "stop", "timeDiff"],
+    filename: "report"
+  };
 
   constructor(private loginService: LoginService,
               private router: Router,
@@ -57,7 +70,13 @@ export class ReportsComponent implements OnInit {
             }
           })
         }
-        entry.timeDiff = "22:11:01";
+        let ms = (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
+        let seconds = ms / 1000;
+        const hours = Math.floor(seconds / 3600);
+        seconds = seconds % 3600;
+        const minutes =  Math.floor(seconds / 60);
+        seconds = seconds % 60;
+        entry.timeDiff = `${hours}:${minutes}:${seconds}`;
       }
       this.worklogQuery = this.worklog;
     })
@@ -87,9 +106,5 @@ export class ReportsComponent implements OnInit {
     this.clientsService.getClients(this.loginService.getUsername()).subscribe(clients => {
       this.clients = clients;
     })
-  }
-
-  getReport() {
-
   }
 }

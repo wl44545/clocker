@@ -14,6 +14,7 @@ import { ClientsComponent } from './Components/clients/clients.component';
 import { ReportsComponent } from './Components/reports/reports.component';
 import { AdminComponent } from './Components/admin/admin.component';
 import { UsersComponent } from './Components/users/users.component';
+import {Angular2CsvModule} from "angular2-csv";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UsersComponent } from './Components/users/users.component';
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        Angular2CsvModule
     ],
   providers: [
     LoginService,

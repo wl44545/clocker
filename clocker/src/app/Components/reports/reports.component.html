@@ -32,7 +32,7 @@
   {{entry.timeDiff}}
 </div>
 <div class="csv">
-  <a (click)="getReport()" href="#">Pobierz raport <b>CSV</b></a>
+  <angular2csv [data]="worklogQuery" filename="report" [options]="csvOptions" ></angular2csv>
 </div>
 </body>
 </html>

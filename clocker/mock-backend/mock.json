@@ -89,7 +89,7 @@
     {
       "name": "Projekt 3",
       "username": "USER",
-      "client": null,
+      "client": "20",
       "id": 4,
       "clientName": ""
     },

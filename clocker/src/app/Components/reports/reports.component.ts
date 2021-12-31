@@ -28,7 +28,7 @@ export class ReportsComponent implements OnInit {
     decimalseparator: '.',
     showLabels: false,
     headers: ["description", "projectName", "clientName", "start", "stop", "timeDiff"],
-    showTitle: true,
+    showTitle: false,
     title: 'report',
     useBom: false,
     removeNewLines: true,

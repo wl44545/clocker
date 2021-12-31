@@ -110,5 +110,39 @@
       "client": "14",
       "id": 7
     }
+  ],
+  "worklog": [
+    {
+      "id": 1,
+      "description": "test1",
+      "username": "USER",
+      "start": "2020-12-31T20:00:00",
+      "stop": "2020-12-31T10:00:00",
+      "project": 5
+    },
+    {
+      "id": 2,
+      "description": "test2",
+      "username": "USER",
+      "start": "2020-12-31T20:00:00",
+      "stop": "2020-12-31T10:00:00",
+      "project": 5
+    },
+    {
+      "id": 3,
+      "description": "test3",
+      "username": "USER",
+      "start": "2020-12-31T20:00:00",
+      "stop": "2020-12-31T10:00:00",
+      "project": 5
+    },
+    {
+      "id": 4,
+      "description": "test4",
+      "username": "USERADMIN",
+      "start": "2020-12-31T20:00:00",
+      "stop": "2020-12-31T10:00:00",
+      "project": 5
+    }
   ]
 }

@@ -1,1 +1,23 @@
-<p>reports works!</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="reports.component.scss">
+</head>
+<body>
+<div class="query">
+  search query
+</div>
+<div class="entry" *ngFor="let entry of worklog">
+  {{entry.description}}
+  {{entry.projectName}}
+  {{entry.clientName}}
+  {{entry.start}}
+  {{entry.stop}}
+  {{entry.timeDiff}}
+</div>
+<div class="csv">
+  <a (click)="getReport()" href="#">Pobierz raport <b>CSV</b></a>
+</div>
+</body>
+</html>

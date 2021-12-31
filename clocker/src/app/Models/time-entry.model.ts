@@ -5,6 +5,9 @@ export class TimeEntryModel {
   start: Date;
   stop: Date;
   project: number;
+  projectName: string = "";
+  clientName: string = "";
+  timeDiff: string = "";
 
   constructor(id: number, description: string, username: string, start: Date, stop: Date, project: number) {
     this.id = id;

@@ -3,6 +3,10 @@ import {LoginService} from "../../Services/login.service";
 import {Router} from "@angular/router";
 import {TimeEntryModel} from "../../Models/time-entry.model";
 import {TimerService} from "../../Services/timer.service";
+import {ProjectsService} from "../../Services/projects.service";
+import {ClientsService} from "../../Services/clients.service";
+import {ProjectModel} from "../../Models/project.model";
+import {ClientModel} from "../../Models/client.model";
 
 @Component({
   selector: 'app-reports',
@@ -12,14 +16,24 @@ import {TimerService} from "../../Services/timer.service";
 export class ReportsComponent implements OnInit {
 
   worklog: TimeEntryModel[] = [];
+  worklogQuery: TimeEntryModel[] = [];
+  projects: ProjectModel[] = [];
+  clients: ClientModel[] = [];
+  queryProject: number = 0;
+  queryClient: number = 0;
+
 
   constructor(private loginService: LoginService,
               private router: Router,
-              private timerService: TimerService) { }
+              private timerService: TimerService,
+              private projectsService: ProjectsService,
+              private clientsService: ClientsService) { }
 
   ngOnInit(): void {
     this.checkPermission();
     this.getWorklog();
+    this.getProjects();
+    this.getClients();
   }
 
   private checkPermission(){
@@ -32,8 +46,46 @@ export class ReportsComponent implements OnInit {
     this.timerService.getWorklog(this.loginService.getUsername()).subscribe(worklog => {
       this.worklog = worklog;
       for(let entry of this.worklog){
+        if(entry.project != null){
+          this.projectsService.getProject(entry.project).subscribe(project => {
+            entry.projectName = project.name;
+            if(project.client != null){
+              this.clientsService.getClient(project.client).subscribe(client => {
+                entry.clientName = client.name;
+                entry.client = client.id;
+              })
+            }
+          })
+        }
         entry.timeDiff = "22:11:01";
       }
+      this.worklogQuery = this.worklog;
+    })
+  }
+
+  public doQuery() {
+    if(this.queryClient == 0 && this.queryProject == 0){
+      this.worklogQuery = this.worklog;
+    }else{
+      this.worklogQuery = [];
+      for (let entry of this.worklog) {
+        let query1: boolean = this.queryProject == entry.project || this.queryProject == 0;
+        let query2: boolean = this.queryClient == entry.client || this.queryClient == 0;
+        if (query1 && query2) {
+          this.worklogQuery.push(entry);
+        }
+      }
+    }
+  }
+
+  public getProjects(){
+    this.projectsService.getProjects(this.loginService.getUsername()).subscribe(projects => {
+      this.projects = projects;
+    });
+  }
+  public getClients(){
+    this.clientsService.getClients(this.loginService.getUsername()).subscribe(clients => {
+      this.clients = clients;
     })
   }
 

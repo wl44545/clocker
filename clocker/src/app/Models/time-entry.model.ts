@@ -5,6 +5,8 @@ export class TimeEntryModel {
   start: Date;
   stop: Date;
   project: number;
+
+  client: number = 0;
   projectName: string = "";
   clientName: string = "";
   timeDiff: string = "";

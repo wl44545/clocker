@@ -18,6 +18,10 @@ export class ProjectsService {
     return this.httpClient.get<ProjectModel[]>(`${environment.apiUrl}/projects?username=${username}`);
   }
 
+  public getProject(id: number): Observable<ProjectModel> {
+    return this.httpClient.get<ProjectModel>(`${environment.apiUrl}/projects/${id}`);
+  }
+
   public addProject(projectName: string, clientId: number|null, username: string): Observable<ProjectModel> {
     return this.httpClient.post<ProjectModel>(`${environment.apiUrl}/projects`, new ProjectModelRequest(projectName, username, clientId));
   }

@@ -6,9 +6,18 @@
 </head>
 <body>
 <div class="query">
-  search query
+  <i class="fas fa-project-diagram"></i>
+  <select [(ngModel)]="queryProject" (change)="doQuery()">
+    <option [value]=0>Wszystkie projekty</option>
+    <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+  </select>
+  <i class="far fa-building"></i>
+  <select [(ngModel)]="queryClient" (change)="doQuery()">
+    <option [value]=0>Wszyscy klienci</option>
+    <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
+  </select>
 </div>
-<div class="entry" *ngFor="let entry of worklog">
+<div class="entry" *ngFor="let entry of worklogQuery">
   <i class="far fa-comment-dots"></i>
   {{entry.description}}
   <i class="fas fa-project-diagram"></i>

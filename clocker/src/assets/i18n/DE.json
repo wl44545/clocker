@@ -1,0 +1,25 @@
+{
+  "save": "Speichern",
+  "add": "Hinzufügen",
+  "users": "Benutzer",
+  "timer": "Timer",
+  "clients": "Kunden",
+  "projects": "Projekte",
+  "reports": "Berichte",
+  "logout": "Abmelden",
+  "clientName": "Kundenname",
+  "projectName": "Projektname",
+  "allProjects": "Alle Projekte",
+  "allClients": "Alle Kunde",
+  "totalTime": "Gesamtzeit",
+  "statsHeader": "Unsere Benutzer haben sich bereits registriert ...",
+  "statsDay": "Minuten heute",
+  "statsWeek": "Minuten diese Woche",
+  "statsMonth": "Minuten in diesem Monat",
+  "statsYear": "Minuten dieses Jahr",
+  "username": "Benutzer",
+  "password": "Passwort",
+  "login": "Einloggen",
+  "wrongLoginPassword": "Falsches Login oder Passwort!"
+
+}

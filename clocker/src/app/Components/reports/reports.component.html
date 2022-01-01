@@ -8,12 +8,12 @@
 <div class="query">
   <i class="icon fas fa-project-diagram"></i>
   <select [(ngModel)]="queryProject" (change)="doQuery()">
-    <option [value]=0>Wszystkie projekty</option>
+    <option [value]=0>{{'allProjects' | translate}}</option>
     <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
   </select>
   <i class="icon far fa-building"></i>
   <select [(ngModel)]="queryClient" (change)="doQuery()">
-    <option [value]=0>Wszyscy klienci</option>
+    <option [value]=0>{{'allClients' | translate}}</option>
     <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
   </select>
 </div>
@@ -32,7 +32,7 @@
   {{entry.timeDiff}}
 </div>
 <div class="query">
-	Łączny czas: {{ totalTime }}
+	{{'totalTime' | translate}}: {{ totalTime }}
 </div>
 <div class="csv">
   <i class="icon fas fa-file-csv"></i>

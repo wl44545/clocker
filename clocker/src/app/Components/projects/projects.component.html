@@ -8,14 +8,14 @@
 
 <div class="add">
   <i class="icon fas fa-project-diagram"></i>
-  <input type="text" id="projectName" placeholder="Nazwa projektu" [(ngModel)]="projectName" name="projectName">
+  <input type="text" id="projectName" placeholder="{{'projectName' | translate}}" [(ngModel)]="projectName" name="projectName">
   <i class="icon far fa-building"></i>
   <select [(ngModel)]="clientId">
-    <option [value]=null>Brak</option>
+    <option [value]=null>---</option>
     <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
   </select>
-  <button *ngIf="!projectEdit" (click)="addProject()">Dodaj</button>
-  <button *ngIf="projectEdit" (click)="saveProject()">Zapisz</button>
+  <button *ngIf="!projectEdit" (click)="addProject()">{{'add' | translate}}</button>
+  <button *ngIf="projectEdit" (click)="saveProject()">{{'save' | translate}}</button>
 </div>
 
 <div class="project" *ngFor="let project of projects">

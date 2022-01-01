@@ -1,0 +1,25 @@
+{
+  "save": "Save",
+  "add": "Add",
+  "users": "Users",
+  "timer": "Timer",
+  "clients": "Clients",
+  "projects": "Projects",
+  "reports": "Reports",
+  "logout": "Log out",
+  "clientName": "Client name",
+  "projectName": "Project name",
+  "allProjects": "All projects",
+  "allClients": "All clients",
+  "totalTime": "Total time",
+  "statsHeader": "Our users have already registered ...",
+  "statsDay": "minutes today",
+  "statsWeek": "minutes this week",
+  "statsMonth": "minutes this month",
+  "statsYear": "minutes this year",
+  "username": "User",
+  "password": "Password",
+  "login": "Log in",
+  "wrongLoginPassword": "Wrong login or password!"
+
+}

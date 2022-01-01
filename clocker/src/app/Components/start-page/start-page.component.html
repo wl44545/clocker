@@ -7,28 +7,26 @@
 <body>
   <div class="row">
     <div class="column left">
-      <p>Nasi użytkownicy zarejestrowali już ...</p>
-      <p>{{dayStats}} minut w dniu dzisiejszym</p>
-      <p>{{weekStats}} minut w tym tygodniu</p>
-      <p>{{monthStats}} minut w tym miesiącu</p>
-      <p>{{yearStats}} minut w tym roku</p>
+      <p>{{'statsHeader' | translate}}</p>
+      <p>{{dayStats}} {{ 'statsDay' | translate}}</p>
+      <p>{{weekStats}} {{ 'statsWeek' | translate}}</p>
+      <p>{{monthStats}} {{ 'statsMonth' | translate}}</p>
+      <p>{{yearStats}} {{ 'statsYear' | translate}}</p>
     </div>
     <div class="column right" *ngIf="!loginService.isLogged()">
       <div class="login">
         <form>
         <div class="wrong-login" *ngIf="wrongLogin">
-          Zły login lub hasło!
+          {{ 'wrongLoginPassword' | translate}}
         </div>
         <div>
-          <input type="email" id="username" placeholder="Użytkownik" [(ngModel)]="username" name="username">
-<!--          <label for="username">username</label>-->
+          <input type="email" id="username" placeholder="{{ 'username' | translate}}" [(ngModel)]="username" name="username">
         </div>
         <div>
-          <input type="password" id="password" placeholder="Hasło"[(ngModel)]="password" name="password">
-<!--          <label for="password">password</label>-->
+          <input type="password" id="password" placeholder="{{ 'password' | translate}}"[(ngModel)]="password" name="password">
         </div>
         <div>
-          <button class="login-button" (click)="login()">Zaloguj</button>
+          <button class="login-button" (click)="login()">{{ 'login' | translate}}</button>
         </div>
       </form>
       </div>

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { StartPageComponent } from './Components/start-page/start-page.component';
 import {FormsModule} from "@angular/forms";
 import {LoginService} from "./Services/login.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {StatsService} from "./Services/stats.service";
 import { TimerComponent } from './Components/timer/timer.component';
 import { ProjectsComponent } from './Components/projects/projects.component';
@@ -15,6 +15,8 @@ import { ReportsComponent } from './Components/reports/reports.component';
 import { AdminComponent } from './Components/admin/admin.component';
 import { UsersComponent } from './Components/users/users.component';
 import {Angular2CsvModule} from "angular2-csv";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,14 @@ import {Angular2CsvModule} from "angular2-csv";
         AppRoutingModule,
         FormsModule,
         HttpClientModule,
-        Angular2CsvModule
+        Angular2CsvModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: httpTranslateLoader,
+            deps: [HttpClient]
+          }
+        })
     ],
   providers: [
     LoginService,
@@ -41,3 +50,7 @@ import {Angular2CsvModule} from "angular2-csv";
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

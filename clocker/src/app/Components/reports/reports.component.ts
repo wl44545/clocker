@@ -76,6 +76,8 @@ export class ReportsComponent implements OnInit {
         }else{
           entry.project = 0;
           entry.projectName = "";
+          entry.client = 0;
+          entry.clientName = "";
         }
         let ms = (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
         let seconds = ms / 1000;

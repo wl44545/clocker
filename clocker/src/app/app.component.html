@@ -11,9 +11,9 @@
     <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.CLIENTS}}">{{ 'clients' | translate}}</a></li>
     <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.REPORTS}}">{{ 'reports' | translate}}</a></li>
     <li *ngIf="loginService.isLogged()" (click)="loginService.logout()"><a href="#">{{ 'logout' | translate}}</a></li>
-    <li><img class="flag" (click)="switchLang('PL')" src="../assets/icons/PL.png"/></li>
-    <li><img class="flag" (click)="switchLang('EN')" src="../assets/icons/EN.png"/></li>
-    <li><img class="flag" (click)="switchLang('DE')" src="../assets/icons/DE.png"/></li>
+    <li><img class="flag" (click)="switchLang('PL')" src="../assets/icons/PL.png" alt="PL"/></li>
+    <li><img class="flag" (click)="switchLang('EN')" src="../assets/icons/EN.png" alt="EN"/></li>
+    <li><img class="flag" (click)="switchLang('DE')" src="../assets/icons/DE.png" alt="DE"/></li>
   </ul>
 </nav>
 <router-outlet></router-outlet>

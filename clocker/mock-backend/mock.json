@@ -142,11 +142,12 @@
       "username": "USER",
       "start": "2022-01-01T19:43:03",
       "stop": "2022-01-01T19:46:06",
-      "project": "2",
+      "project": "0",
       "id": 6,
       "timeDiff": "",
       "projectName": "",
-      "clientName": ""
+      "clientName": "",
+      "client": 22
     }
   ]
 }

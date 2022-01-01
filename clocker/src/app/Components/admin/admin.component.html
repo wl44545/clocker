@@ -14,3 +14,9 @@
     <button type="submit"> Dodaj </button>
   </form>
 </div>
+
+  <div class="user" *ngFor="let user of users">
+    <div class="content name">{{user.username}}</div>
+    <div class="content type" *ngIf="user.role == 'USER' || user.role == 'USERADMIN'">User</div>
+    <div class="content type" *ngIf="user.role == 'ADMIN' || user.role == 'USERADMIN'">Admin</div>
+  </div>

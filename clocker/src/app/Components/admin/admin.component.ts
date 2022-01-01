@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../../Services/login.service";
 import {Router} from "@angular/router";
 import {UserModel} from "../../Models/user.model";
+import {UserService} from "../../Services/user.service";
 
 @Component({
   selector: 'app-admin',
@@ -22,7 +23,9 @@ export class AdminComponent implements OnInit {
 
 
   constructor(private loginService: LoginService,
-              private router: Router) { }
+              private router: Router, private userService: UserService) {
+    this.getUsers();
+  }
 
   ngOnInit(): void {
     this.checkPermission();
@@ -60,8 +63,14 @@ export class AdminComponent implements OnInit {
     this.show = true;
   }
 
-  getSize(){
-    return this.width;
+  getUsers(){
+    this.userService.getUsers().subscribe((response) =>{
+      this.users = response;
+      },
+      (error => {
+        console.log(error);
+      })
+    );
   }
 
 }

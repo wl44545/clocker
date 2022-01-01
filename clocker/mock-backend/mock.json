@@ -5,10 +5,23 @@
     "monthStats": 3,
     "yearStats": 4
   },
-  "login": {
-    "username": "a",
-    "password": "a"
-  },
+  "login": [
+    {
+      "username": "a",
+      "password": "a",
+      "role": "ADMIN"
+    },
+    {
+      "username": "u",
+      "password": "u",
+      "role": "USER"
+    },
+    {
+      "username": "testowy",
+      "password": "a",
+      "role": "USERADMIN"
+    }
+  ],
   "clients": [
     {
       "name": "Klient1",
@@ -49,16 +62,11 @@
       "stop": "2022-01-01T22:17:33",
       "project": 0,
       "active": false,
-      "id": 1
-    },
-    {
-      "description": "Zadanie2",
-      "username": "USER",
-      "start": "2021-12-31T23:19:44",
-      "stop": "2022-01-01T21:17:47",
-      "project": "1",
-      "active": false,
-      "id": 2
+      "id": 1,
+      "projectName": "",
+      "client": 0,
+      "clientName": "",
+      "timeDiff": ""
     },
     {
       "description": "Zadanie3",
@@ -67,7 +75,11 @@
       "stop": "2022-01-01T21:17:59",
       "project": "2",
       "active": false,
-      "id": 3
+      "id": 3,
+      "timeDiff": "",
+      "projectName": "",
+      "clientName": "",
+      "client": 2
     },
     {
       "description": "Zadanie4",
@@ -76,7 +88,11 @@
       "stop": "2022-01-01T21:18:11",
       "project": "3",
       "active": false,
-      "id": 4
+      "id": 4,
+      "timeDiff": "",
+      "projectName": "",
+      "client": 0,
+      "clientName": ""
     }
   ]
 }

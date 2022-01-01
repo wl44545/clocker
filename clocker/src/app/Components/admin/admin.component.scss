@@ -1,9 +1,34 @@
 @import "src/assets/constans/Colors";
 
+.user{
+  width:90%;
+  min-height:20px;
+  margin-top: 10px;
+  margin-left: 5%;
+  background: $GRAY;
+  clear: both;
+  padding: 10px;
+}
+
+.content{
+  display: inline-block;
+}
+
+.name{
+  float:left;
+  margin-left: 10px;
+}
+
+.type{
+  float:right;
+  margin-right: 10px;
+}
+
 .newUser{
   width:98%;
   padding: 1%;
   margin-top: 10px;
+  margin-bottom: 10px;
   float: left;
   background: $PURPLE;
 }
@@ -25,6 +50,7 @@ input, button, select{
   text-align: center;
   background: $PURPLE;
   margin-top: 10px;
+  margin-bottom: 10px;
   color: $OAPL;
   display: none;
 }

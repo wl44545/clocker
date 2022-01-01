@@ -1,7 +1,9 @@
+@import "src/assets/constans/Colors";
+
 .entry{
   width: 97vw;
   height: 10vh;
-  background-color: #70A0AF;
+  background-color: $BLUE;
   position: relative;
   text-align: center;
   display:flex;
@@ -13,7 +15,7 @@
 .query{
   width: 97vw;
   height: 10vh;
-  background-color: #706993;
+  background-color: $GRAY;
   position: relative;
   text-align: center;
   display:flex;
@@ -25,7 +27,7 @@
 .csv{
   width: 97vw;
   height: 7.5vh;
-  background-color: #706993;
+  background-color: $GRAY;
   position: relative;
   text-align: center;
   display:flex;
@@ -37,5 +39,5 @@
 .icon{
   margin-left: 1vw;
   margin-right: 0.25vw;
-  color: #331E38;
+  color: $PURPLE;
 }

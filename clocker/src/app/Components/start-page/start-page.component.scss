@@ -25,7 +25,7 @@ p {
 }
 .login {
   border-radius: 2vh;
-  background-color: #706993;
+  background-color: $GRAY;
   top: 25vh;
   height: 25vh;
   width: 20vw;
@@ -38,12 +38,12 @@ p {
   align-items:center;
 }
 .login-button{
-  background-color: #331E38;
-  color: #70A0AF;
+  background-color: $PURPLE;
+  color: $BLUE;
   border-radius: 1vh;
 }
 .wrong-login{
-  color: #331E38;
+  color: $PURPLE;
   margin-bottom: 1vh;
 }
 input{

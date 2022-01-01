@@ -1,10 +1,9 @@
-body{
+@import "src/assets/constans/Colors";
 
-}
 .add{
   width: 97vw;
   height: 10vh;
-  background-color: #706993;
+  background-color: $GRAY;
   position: relative;
   text-align: center;
   display:flex;
@@ -16,7 +15,7 @@ body{
 .project{
   width: 97vw;
   height: 10vh;
-  background-color: #70A0AF;
+  background-color: $BLUE;
   position: relative;
   text-align: center;
   display:flex;
@@ -40,10 +39,10 @@ button{
 }
 .panel{
   margin-left: 2vw;
-  color: #331E38;
+  color: $PURPLE;
 }
 .icon{
   margin-left: 1vw;
   margin-right: 0.25vw;
-  color: #331E38;
+  color: $PURPLE;
 }

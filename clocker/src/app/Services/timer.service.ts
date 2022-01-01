@@ -21,15 +21,6 @@ export class TimerService {
       new TimeEntryModelRequest(description, username, start, stop, project, false));
   }
 
-  public addStartEntry(description: string, username: string, start: Date, project: number): Observable<TimeEntryModel> {
-    return this.httpClient.post<TimeEntryModel>(`${environment.apiUrl}/worklog`,
-      new TimeEntryModelRequest(description, username, start, null, project, true));
-  }
-
-  public getActiveEntry(username: string): Observable<TimeEntryModel> {
-    return this.httpClient.get<TimeEntryModel>(`${environment.apiUrl}/worklog?username=${username}&active=true`);
-  }
-
   public editEntry(entry: TimeEntryModel): Observable<TimeEntryModel>{
     return this.httpClient.put<TimeEntryModel>(`${environment.apiUrl}/worklog/${entry.id}`, entry);
   }

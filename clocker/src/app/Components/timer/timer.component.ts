@@ -28,12 +28,6 @@ export class TimerComponent implements OnInit {
   manualStart: Date = new Date();
   manualStop: Date = new Date();
 
-  autoEntry: TimeEntryModel = new TimeEntryModel(0,'','',new Date(),new Date(),0);
-  autoDescription: string = "";
-  autoProject: number = 0;
-  autoStart: Date = new Date();
-  autoStop: Date = new Date();
-
   constructor(private loginService: LoginService,
               private router: Router,
               private timerService: TimerService,
@@ -164,16 +158,12 @@ export class TimerComponent implements OnInit {
     this.entryEdit = false;
   }
 
-  private getActiveEntry(){
-
-  }
-
   public start() {
-
+    this.timerActive = true;
   }
 
   public stop() {
-
+    this.timerActive = false;
   }
 
 }

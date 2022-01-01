@@ -11,160 +11,72 @@
   },
   "clients": [
     {
-      "name": "fdfd",
-      "username": "USER2",
-      "id": 4
-    },
-    {
-      "name": "aaaaa",
-      "username": "USER2",
-      "id": 5
-    },
-    {
-      "name": "aa",
-      "username": "USER2",
-      "id": 6
-    },
-    {
-      "name": "asa",
-      "username": "USERADMIN",
-      "id": 14
-    },
-    {
-      "name": "aa",
-      "username": "USERADMIN",
-      "id": 15
-    },
-    {
-      "name": "vhgfd",
-      "username": "USERADMIN",
-      "id": 16
-    },
-    {
-      "name": "aa",
-      "username": "USERADMIN",
-      "id": 17
-    },
-    {
-      "name": "vvv",
-      "username": "USERADMIN",
-      "id": 18
-    },
-    {
-      "name": "fff",
-      "username": "USERADMIN",
-      "id": 19
-    },
-    {
-      "name": "Klient 2",
+      "name": "Klient1",
       "username": "USER",
-      "id": 21
+      "id": 1
     },
     {
-      "name": "Klient 3",
+      "name": "Klient2",
       "username": "USER",
-      "id": 22
+      "id": 2
     }
   ],
   "projects": [
     {
-      "name": "Projekt 1",
+      "name": "Projekt1",
+      "username": "USER",
+      "client": "1",
+      "id": 1
+    },
+    {
+      "name": "Projekt2",
+      "username": "USER",
+      "client": "2",
+      "id": 2
+    },
+    {
+      "name": "Projekt3",
       "username": "USER",
       "client": 0,
-      "id": 1,
-      "clientName": ""
-    },
-    {
-      "name": "Projekt 2",
-      "username": "USER",
-      "client": 22,
-      "id": 2,
-      "clientName": ""
-    },
-    {
-      "name": "Projekt 3",
-      "username": "USER",
-      "client": 22,
-      "id": 4,
-      "clientName": ""
-    },
-    {
-      "name": "ggg",
-      "username": "USERADMIN",
-      "client": 16,
-      "id": 6
-    },
-    {
-      "name": "nhgfd",
-      "username": "USERADMIN",
-      "client": 14,
-      "id": 7
-    },
-    {
-      "name": "aa",
-      "username": "USER",
-      "client": 0,
-      "id": 8,
-      "clientName": ""
+      "id": 3
     }
   ],
   "worklog": [
     {
-      "id": 2,
-      "description": "test2",
+      "description": "Zadanie1",
       "username": "USER",
-      "start": "2021-12-21T20:00:00",
-      "stop": "2021-12-21T21:55:44",
-      "project": 2
-    },
-    {
-      "id": 4,
-      "description": "test4",
-      "username": "USERADMIN",
-      "start": "2021-12-31T09:00:00",
-      "stop": "2021-12-31T10:00:00",
-      "project": 1
-    },
-    {
-      "description": "coś tam robiłem",
-      "username": "USER",
-      "start": "2022-01-01T15:28:13",
-      "stop": "2022-01-01T19:24:11",
-      "project": "1",
-      "id": 5,
-      "timeDiff": "",
-      "projectName": "",
-      "clientName": "",
-      "client": 0
-    },
-    {
-      "description": "aaa",
-      "username": "USER",
-      "start": "2022-01-01T19:43:03",
-      "stop": "2022-01-01T19:46:06",
-      "project": 0,
-      "id": 6,
-      "timeDiff": "",
-      "projectName": "",
-      "clientName": "",
-      "client": 0
-    },
-    {
-      "description": "aaa",
-      "username": "USER",
-      "start": "2021-12-31T20:39:09",
-      "stop": "2022-01-01T17:38:37",
-      "project": "0",
-      "id": 7
-    },
-    {
-      "description": "aaaa",
-      "username": "USER",
-      "start": "2022-01-01T20:40:35",
-      "stop": "2022-01-01T21:40:37",
+      "start": "2022-01-01T21:17:31",
+      "stop": "2022-01-01T22:17:33",
       "project": 0,
       "active": false,
-      "id": 8
+      "id": 1
+    },
+    {
+      "description": "Zadanie2",
+      "username": "USER",
+      "start": "2021-12-31T23:19:44",
+      "stop": "2022-01-01T21:17:47",
+      "project": "1",
+      "active": false,
+      "id": 2
+    },
+    {
+      "description": "Zadanie3",
+      "username": "USER",
+      "start": "2021-12-27T00:19:56",
+      "stop": "2022-01-01T21:17:59",
+      "project": "2",
+      "active": false,
+      "id": 3
+    },
+    {
+      "description": "Zadanie4",
+      "username": "USER",
+      "start": "2021-12-27T23:21:11",
+      "stop": "2022-01-01T21:18:11",
+      "project": "3",
+      "active": false,
+      "id": 4
     }
   ]
 }

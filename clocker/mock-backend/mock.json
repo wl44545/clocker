@@ -32,7 +32,8 @@
       "name": "Projekt2",
       "username": "USER",
       "client": "2",
-      "id": 2
+      "id": 2,
+      "clientName": ""
     },
     {
       "name": "Projekt3",
@@ -49,7 +50,11 @@
       "stop": "2022-01-01T22:17:33",
       "project": 0,
       "active": false,
-      "id": 1
+      "id": 1,
+      "projectName": "",
+      "client": 0,
+      "clientName": "",
+      "timeDiff": ""
     },
     {
       "description": "Zadanie2",
@@ -58,7 +63,11 @@
       "stop": "2022-01-01T21:17:47",
       "project": "1",
       "active": false,
-      "id": 2
+      "id": 2,
+      "timeDiff": "",
+      "projectName": "",
+      "clientName": "",
+      "client": 1
     },
     {
       "description": "Zadanie3",
@@ -67,7 +76,11 @@
       "stop": "2022-01-01T21:17:59",
       "project": "2",
       "active": false,
-      "id": 3
+      "id": 3,
+      "timeDiff": "",
+      "projectName": "",
+      "clientName": "",
+      "client": 2
     },
     {
       "description": "Zadanie4",
@@ -76,7 +89,20 @@
       "stop": "2022-01-01T21:18:11",
       "project": "3",
       "active": false,
-      "id": 4
+      "id": 4,
+      "timeDiff": "",
+      "projectName": "",
+      "client": 0,
+      "clientName": ""
+    },
+    {
+      "description": "Zadanie5",
+      "username": "USER",
+      "start": "2021-12-06T23:00:23",
+      "stop": "2021-12-08T23:00:27",
+      "project": 0,
+      "active": false,
+      "id": 5
     }
   ]
 }

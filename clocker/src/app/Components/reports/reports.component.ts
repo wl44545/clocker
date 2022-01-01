@@ -87,9 +87,16 @@ export class ReportsComponent implements OnInit {
         seconds = seconds % 60;
         entry.timeDiff = `${hours}:${minutes}:${seconds}`;
       }
-      this.worklogQuery = this.worklog;
+      this.worklogQuery = this.worklog.sort((a, b) => {
+        if ( a.stop < b.stop ){
+          return 1;
+        }
+        if ( a.stop > b.stop ){
+          return -1;
+        }
+        return 0;
+      });
 	  this.getTotalTime();
-    console.log(this.worklogQuery)
     })
   }
 

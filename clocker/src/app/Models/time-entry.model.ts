@@ -10,6 +10,7 @@ export class TimeEntryModel {
   projectName: string = "";
   clientName: string = "";
   timeDiff: string = "";
+  active: boolean = false;
 
   constructor(id: number, description: string, username: string, start: Date, stop: Date, project: number) {
     this.id = id;
@@ -24,14 +25,16 @@ export class TimeEntryModelRequest {
   description: string;
   username: string;
   start: Date;
-  stop: Date;
+  stop: Date | null;
   project: number;
+  active: boolean;
 
-  constructor(description: string, username: string, start: Date, stop: Date, project: number) {
+  constructor(description: string, username: string, start: Date, stop: Date | null, project: number, active: boolean) {
     this.description = description;
     this.username = username;
     this.start = start;
     this.stop = stop;
     this.project = project;
+    this.active = active;
   }
 }

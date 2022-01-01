@@ -6,9 +6,22 @@
 </head>
 <body>
 
-<div class="timer auto">
-
+<div class="timer auto start">
+  <i class="icon far fa-comment-dots"></i>
+  <input type="text" id="autoDescription" placeholder="{{'description' | translate}}" [(ngModel)]="autoDescription" name="autoDescription">
+  <i class="icon fas fa-project-diagram"></i>
+  <select [(ngModel)]="autoProject">
+    <option [value]=0>{{'noProject' | translate}}</option>
+    <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+  </select>
+  <button (click)="start()">{{'start' | translate}}</button>
 </div>
+<div class="timer auto stop">
+
+  <button (click)="stop()">{{'stop' | translate}}</button>
+</div>
+
+
 <div class="timer manual">
   <i class="icon far fa-comment-dots"></i>
   <input type="text" id="manualDescription" placeholder="{{'description' | translate}}" [(ngModel)]="manualDescription" name="manualDescription">

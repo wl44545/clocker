@@ -20,6 +20,7 @@ export class TimerComponent implements OnInit {
   clients: ClientModel[] = [];
   totalTime: string = "";
   entryEdit: boolean = false;
+  timerActive: boolean = false;
 
   manualEntry: TimeEntryModel = new TimeEntryModel(0,'','',new Date(),new Date(),0);
   manualDescription: string = "";
@@ -27,6 +28,11 @@ export class TimerComponent implements OnInit {
   manualStart: Date = new Date();
   manualStop: Date = new Date();
 
+  autoEntry: TimeEntryModel = new TimeEntryModel(0,'','',new Date(),new Date(),0);
+  autoDescription: string = "";
+  autoProject: number = 0;
+  autoStart: Date = new Date();
+  autoStop: Date = new Date();
 
   constructor(private loginService: LoginService,
               private router: Router,
@@ -157,4 +163,17 @@ export class TimerComponent implements OnInit {
     this.manualStop = new Date();
     this.entryEdit = false;
   }
+
+  private getActiveEntry(){
+
+  }
+
+  public start() {
+
+  }
+
+  public stop() {
+
+  }
+
 }

@@ -23,5 +23,7 @@
   "wrongLoginPassword": "Falsches Login oder Passwort!",
   "description": "Bezeichnung",
   "noProject": "Kein Projekt",
-  "noClient": "Kein Kunde"
+  "noClient": "Kein Kunde",
+  "start": "Start",
+  "stop": "Stop"
 }

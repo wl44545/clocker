@@ -23,5 +23,7 @@
   "wrongLoginPassword": "Wrong login or password!",
   "description": "Description",
   "noProject": "No project",
-  "noClient": "No client"
+  "noClient": "No client",
+  "start": "Start",
+  "stop": "Stop"
 }

@@ -23,5 +23,7 @@
   "wrongLoginPassword": "Zły login lub hasło!",
   "description": "Opis",
   "noProject": "Brak projektu",
-  "noClient": "Brak klienta"
+  "noClient": "Brak klienta",
+  "start": "Start",
+  "stop": "Stop"
 }

@@ -7,7 +7,9 @@
 <body>
 
 <div class="add">
+  <i class="icon fas fa-project-diagram"></i>
   <input type="text" id="projectName" placeholder="Nazwa projektu" [(ngModel)]="projectName" name="projectName">
+  <i class="icon far fa-building"></i>
   <select [(ngModel)]="clientId">
     <option [value]=null>Brak</option>
     <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
@@ -17,8 +19,9 @@
 </div>
 
 <div class="project" *ngFor="let project of projects">
+  <i class="icon fas fa-project-diagram"></i>
   {{project.name}}
-  <i *ngIf="project.client" class="far fa-building"></i>
+  <i *ngIf="project.client" class="icon far fa-building"></i>
   {{project.clientName}}
   <div class="panel">
     <i (click)="editProject(project)" class="fas fa-edit"></i>

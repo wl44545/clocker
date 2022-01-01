@@ -21,6 +21,7 @@ export class ReportsComponent implements OnInit {
   clients: ClientModel[] = [];
   queryProject: number = 0;
   queryClient: number = 0;
+  totalTime: string = "";
 
   csvOptions = {
     fieldSeparator: ',',
@@ -79,7 +80,21 @@ export class ReportsComponent implements OnInit {
         entry.timeDiff = `${hours}:${minutes}:${seconds}`;
       }
       this.worklogQuery = this.worklog;
+	  this.getTotalTime();
     })
+  }
+  
+  private getTotalTime(){
+	let ms: number = 0;
+	  for (let entry of this.worklogQuery) {
+		ms += (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
+      }
+	let seconds = ms / 1000;
+	const hours = Math.floor(seconds / 3600);
+	seconds = seconds % 3600;
+	const minutes =  Math.floor(seconds / 60);
+	seconds = seconds % 60;
+	this.totalTime = `${hours}:${minutes}:${seconds}`;
   }
 
   public doQuery() {
@@ -95,6 +110,7 @@ export class ReportsComponent implements OnInit {
         }
       }
     }
+	this.getTotalTime();
   }
 
   public getProjects(){

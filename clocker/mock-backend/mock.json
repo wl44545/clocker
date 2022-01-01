@@ -26,7 +26,8 @@
       "name": "Projekt1",
       "username": "USER",
       "client": "1",
-      "id": 1
+      "id": 1,
+      "clientName": ""
     },
     {
       "name": "Projekt2",

@@ -42,9 +42,8 @@ export class ClientsComponent implements OnInit {
 
   public removeClient(client: ClientModel){
     this.clientService.removeClient(client).subscribe(client => {
-      this.clientName = "";
-      this.clientEdit = false;
       this.getClients();
+      this.clearInput();
     });
   }
 
@@ -61,11 +60,17 @@ export class ClientsComponent implements OnInit {
   }
 
   public saveClient() {
-    this.client.name = this.clientName;
-    this.clientService.editClient(this.client).subscribe(client => {
-      this.clientName = "";
-      this.clientEdit = false;
-      this.getClients();
-    });
+    if(this.clientName != "") {
+      this.client.name = this.clientName;
+      this.clientService.editClient(this.client).subscribe(client => {
+        this.getClients();
+        this.clearInput();
+      });
+    }
+  }
+
+  private clearInput(){
+    this.clientName = "";
+    this.clientEdit = false;
   }
 }

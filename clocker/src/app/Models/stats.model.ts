@@ -10,5 +10,4 @@ export class StatsModel {
     this.monthStats = monthStats;
     this.yearStats = yearStats;
   }
-
 }

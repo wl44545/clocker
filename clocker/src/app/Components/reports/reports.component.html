@@ -5,38 +5,40 @@
   <link rel="stylesheet" href="reports.component.scss">
 </head>
 <body>
-<div class="query">
-  <i class="icon fas fa-project-diagram"></i>
-  <select [(ngModel)]="queryProject" (change)="doQuery()">
-    <option [value]=0>{{'allProjects' | translate}}</option>
-    <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
-  </select>
-  <i class="icon far fa-building"></i>
-  <select [(ngModel)]="queryClient" (change)="doQuery()">
-    <option [value]=0>{{'allClients' | translate}}</option>
-    <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
-  </select>
-</div>
-<div class="entry" *ngFor="let entry of worklogQuery">
-  <i class="icon far fa-comment-dots"></i>
-  {{entry.description}}
-  <i class="icon fas fa-project-diagram"></i>
-  {{entry.projectName}}
-  <i class="icon far fa-building"></i>
-  {{entry.clientName}}
-  <i class="icon far fa-play-circle"></i>
-  {{entry.start}}
-  <i class="icon far fa-stop-circle"></i>
-  {{entry.stop}}
-  <i class="icon fas fa-hourglass-start"></i>
-  {{entry.timeDiff}}
-</div>
-<div class="query">
-	{{'totalTime' | translate}}: {{ totalTime }}
-</div>
-<div class="csv">
-  <i class="icon fas fa-file-csv"></i>
-  <angular2csv [data]="worklogQuery" filename="report" [options]="csvOptions" ></angular2csv>
-</div>
+  <div class="query">
+    <i class="icon fas fa-project-diagram"></i>
+    <select [(ngModel)]="queryProject" (change)="doQuery()">
+      <option [value]=-1>{{'allProjects' | translate}}</option>
+      <option [value]=0>{{'noProject' | translate}}</option>
+      <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+    </select>
+    <i class="icon far fa-building"></i>
+    <select [(ngModel)]="queryClient" (change)="doQuery()">
+      <option [value]=-1>{{'allClients' | translate}}</option>
+      <option [value]=0>{{'noClient' | translate}}</option>
+      <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
+    </select>
+  </div>
+  <div class="entry" *ngFor="let entry of worklogQuery">
+    <i class="icon far fa-comment-dots"></i>
+    {{entry.description}}
+    <i *ngIf="entry.projectName" class="icon fas fa-project-diagram"></i>
+    {{entry.projectName}}
+    <i *ngIf="entry.clientName" class="icon far fa-building"></i>
+    {{entry.clientName}}
+    <i class="icon far fa-play-circle"></i>
+    {{entry.start}}
+    <i class="icon far fa-stop-circle"></i>
+    {{entry.stop}}
+    <i class="icon fas fa-hourglass-start"></i>
+    {{entry.timeDiff}}
+  </div>
+  <div class="query">
+    {{'totalTime' | translate}}: {{ totalTime }}
+  </div>
+  <div class="csv">
+    <i class="icon fas fa-file-csv"></i>
+    <angular2csv [data]="worklogQuery" filename="report" [options]="csvOptions" ></angular2csv>
+  </div>
 </body>
 </html>

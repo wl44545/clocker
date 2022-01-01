@@ -9,7 +9,6 @@ export class ClientModel {
     this.username = username;
   }
 }
-
 export class ClientModelRequest {
   name: string;
   username: string;

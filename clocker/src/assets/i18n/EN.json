@@ -20,6 +20,8 @@
   "username": "User",
   "password": "Password",
   "login": "Log in",
-  "wrongLoginPassword": "Wrong login or password!"
-
+  "wrongLoginPassword": "Wrong login or password!",
+  "description": "Description",
+  "noProject": "No project",
+  "noClient": "No client"
 }

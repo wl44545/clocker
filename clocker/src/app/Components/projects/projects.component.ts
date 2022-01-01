@@ -15,9 +15,9 @@ export class ProjectsComponent implements OnInit {
 
   projectName: string = "";
   projects: ProjectModel[] = [];
-  project: ProjectModel = new ProjectModel(0,'','',null);
+  project: ProjectModel = new ProjectModel(0,'','',0);
   projectEdit: boolean = false;
-  clientId: number|null = null;
+  clientId: number = 0;
   clients: ClientModel[] = [];
 
   constructor(private loginService: LoginService,
@@ -46,19 +46,16 @@ export class ProjectsComponent implements OnInit {
   public addProject(){
     if(this.projectName != "") {
       this.projectsService.addProject(this.projectName,this.clientId, this.loginService.getUsername()).subscribe(project => {
-        this.projectName = "";
-        this.clientId = null;
         this.getProjects();
+        this.clearInput();
       });
     }
   }
 
   public removeProject(project: ProjectModel){
     this.projectsService.removeProject(project).subscribe(project => {
-      this.projectName = "";
-      this.clientId = null;
-      this.projectEdit = false;
       this.getProjects();
+      this.clearInput();
     });
   }
 
@@ -66,7 +63,7 @@ export class ProjectsComponent implements OnInit {
     this.projectsService.getProjects(this.loginService.getUsername()).subscribe(projects => {
       this.projects = projects;
       for(let project of this.projects){
-        if(project.client!=null){
+        if(project.client!=0){
           this.clientsService.getClient(project.client).subscribe(client => {
             project.clientName = client.name;
           })
@@ -89,10 +86,14 @@ export class ProjectsComponent implements OnInit {
     this.project.clientName = "";
     this.project.client = this.clientId;
     this.projectsService.editProject(this.project).subscribe(project => {
-      this.projectName = "";
-      this.clientId = null;
-      this.projectEdit = false;
       this.getProjects();
+      this.clearInput();
     });
+  }
+
+  private clearInput() {
+    this.projectName = "";
+    this.clientId = 0;
+    this.projectEdit = false;
   }
 }

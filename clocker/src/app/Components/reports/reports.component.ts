@@ -19,8 +19,8 @@ export class ReportsComponent implements OnInit {
   worklogQuery: TimeEntryModel[] = [];
   projects: ProjectModel[] = [];
   clients: ClientModel[] = [];
-  queryProject: number = 0;
-  queryClient: number = 0;
+  queryProject: number = -1;
+  queryClient: number = -1;
   totalTime: string = "";
 
   csvOptions = {
@@ -60,16 +60,22 @@ export class ReportsComponent implements OnInit {
     this.timerService.getWorklog(this.loginService.getUsername()).subscribe(worklog => {
       this.worklog = worklog;
       for(let entry of this.worklog){
-        if(entry.project != null){
+        if(entry.project != 0){
           this.projectsService.getProject(entry.project).subscribe(project => {
             entry.projectName = project.name;
-            if(project.client != null){
+            if(project.client != 0){
               this.clientsService.getClient(project.client).subscribe(client => {
                 entry.clientName = client.name;
                 entry.client = client.id;
               })
+            }else{
+              entry.client = 0;
+              entry.clientName = "";
             }
           })
+        }else{
+          entry.project = 0;
+          entry.projectName = "";
         }
         let ms = (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
         let seconds = ms / 1000;
@@ -81,30 +87,31 @@ export class ReportsComponent implements OnInit {
       }
       this.worklogQuery = this.worklog;
 	  this.getTotalTime();
+    console.log(this.worklogQuery)
     })
   }
-  
+
   private getTotalTime(){
-	let ms: number = 0;
-	  for (let entry of this.worklogQuery) {
-		ms += (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
-      }
-	let seconds = ms / 1000;
-	const hours = Math.floor(seconds / 3600);
-	seconds = seconds % 3600;
-	const minutes =  Math.floor(seconds / 60);
-	seconds = seconds % 60;
-	this.totalTime = `${hours}:${minutes}:${seconds}`;
+    let ms: number = 0;
+      for (let entry of this.worklogQuery) {
+      ms += (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
+        }
+    let seconds = ms / 1000;
+    const hours = Math.floor(seconds / 3600);
+    seconds = seconds % 3600;
+    const minutes =  Math.floor(seconds / 60);
+    seconds = seconds % 60;
+    this.totalTime = `${hours}:${minutes}:${seconds}`;
   }
 
   public doQuery() {
-    if(this.queryClient == 0 && this.queryProject == 0){
+    if(this.queryClient == -1 && this.queryProject == -1){
       this.worklogQuery = this.worklog;
     }else{
       this.worklogQuery = [];
       for (let entry of this.worklog) {
-        let query1: boolean = this.queryProject == entry.project || this.queryProject == 0;
-        let query2: boolean = this.queryClient == entry.client || this.queryClient == 0;
+        let query1: boolean = this.queryProject == entry.project || this.queryProject == -1;
+        let query2: boolean = this.queryClient == entry.client || this.queryClient == -1;
         if (query1 && query2) {
           this.worklogQuery.push(entry);
         }

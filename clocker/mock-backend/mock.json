@@ -56,11 +56,6 @@
       "id": 19
     },
     {
-      "name": "Klient 1",
-      "username": "USER",
-      "id": 20
-    },
-    {
       "name": "Klient 2",
       "username": "USER",
       "id": 21
@@ -75,69 +70,83 @@
     {
       "name": "Projekt 1",
       "username": "USER",
-      "client": "20",
+      "client": 0,
       "id": 1,
       "clientName": ""
     },
     {
       "name": "Projekt 2",
       "username": "USER",
-      "client": "22",
+      "client": 22,
       "id": 2,
       "clientName": ""
     },
     {
       "name": "Projekt 3",
       "username": "USER",
-      "client": "22",
+      "client": 22,
       "id": 4,
       "clientName": ""
     },
     {
       "name": "ggg",
       "username": "USERADMIN",
-      "client": "16",
+      "client": 16,
       "id": 6
     },
     {
       "name": "nhgfd",
       "username": "USERADMIN",
-      "client": "14",
+      "client": 14,
       "id": 7
+    },
+    {
+      "name": "aa",
+      "username": "USER",
+      "client": 0,
+      "id": 8,
+      "clientName": ""
     }
   ],
   "worklog": [
     {
-      "id": 1,
-      "description": "test1",
-      "username": "USER",
-      "start": "2020-12-31T09:00:00",
-      "stop": "2020-12-31T10:00:00",
-      "project": 1
-    },
-    {
       "id": 2,
       "description": "test2",
       "username": "USER",
-      "start": "2020-12-31T20:00:00",
-      "stop": "2020-12-31T21:55:44",
+      "start": "2021-12-21T20:00:00",
+      "stop": "2021-12-21T21:55:44",
       "project": 2
-    },
-    {
-      "id": 3,
-      "description": "test3",
-      "username": "USER",
-      "start": "2020-12-31T11:00:00",
-      "stop": "2020-12-31T12:10:00",
-      "project": 1
     },
     {
       "id": 4,
       "description": "test4",
       "username": "USERADMIN",
-      "start": "2020-12-31T09:00:00",
-      "stop": "2020-12-31T10:00:00",
+      "start": "2021-12-31T09:00:00",
+      "stop": "2021-12-31T10:00:00",
       "project": 1
+    },
+    {
+      "description": "coś tam robiłem",
+      "username": "USER",
+      "start": "2022-01-01T15:28:13",
+      "stop": "2022-01-01T19:24:11",
+      "project": "1",
+      "id": 5,
+      "timeDiff": "",
+      "projectName": "",
+      "clientName": "",
+      "client": 22
+    },
+    {
+      "description": "aaa",
+      "username": "USER",
+      "start": "2022-01-01T19:43:03",
+      "stop": "2022-01-01T19:46:06",
+      "project": "2",
+      "id": 6,
+      "timeDiff": "",
+      "projectName": "",
+      "clientName": ""
     }
   ]
 }

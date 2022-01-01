@@ -1,9 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {StatsModel} from "../Models/stats.model";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
-import {ClientModel, ClientModelRequest} from "../Models/client.model";
 import {ProjectModel, ProjectModelRequest} from "../Models/project.model";
 
 @Injectable({
@@ -22,7 +20,7 @@ export class ProjectsService {
     return this.httpClient.get<ProjectModel>(`${environment.apiUrl}/projects/${id}`);
   }
 
-  public addProject(projectName: string, clientId: number|null, username: string): Observable<ProjectModel> {
+  public addProject(projectName: string, clientId: number, username: string): Observable<ProjectModel> {
     return this.httpClient.post<ProjectModel>(`${environment.apiUrl}/projects`, new ProjectModelRequest(projectName, username, clientId));
   }
 

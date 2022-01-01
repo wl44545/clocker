@@ -6,5 +6,4 @@ export class UserModel {
     this.username = username;
     this.role = role;
   }
-
 }

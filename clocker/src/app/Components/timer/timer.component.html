@@ -1,1 +1,50 @@
-<p>timer works!</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="timer.component.scss">
+</head>
+<body>
+
+<div class="timer auto">
+
+</div>
+<div class="timer manual">
+  <i class="icon far fa-comment-dots"></i>
+  <input type="text" id="manualDescription" placeholder="{{'description' | translate}}" [(ngModel)]="manualDescription" name="manualDescription">
+  <i class="icon fas fa-project-diagram"></i>
+  <select [(ngModel)]="manualProject">
+    <option [value]=0>{{'noProject' | translate}}</option>
+    <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+  </select>
+  <i class="icon far fa-play-circle"></i>
+  <input type="datetime-local" id="manualStart" placeholder="{{'start' | translate}}" step=1 [(ngModel)]="manualStart" name="manualStart">
+  <i class="icon far fa-stop-circle"></i>
+  <input type="datetime-local" id="manualStop" placeholder="{{'stop' | translate}}" step=1 [(ngModel)]="manualStop" name="manualStop">
+  <button *ngIf="!entryEdit" (click)="addEntry()">{{'add' | translate}}</button>
+  <button *ngIf="entryEdit" (click)="saveEntry()">{{'save' | translate}}</button>
+</div>
+
+<div class="entry" *ngFor="let entry of worklog">
+  <i class="icon far fa-comment-dots"></i>
+  {{entry.description}}
+  <i *ngIf="entry.projectName" class="icon fas fa-project-diagram"></i>
+  {{entry.projectName}}
+  <i *ngIf="entry.clientName" class="icon far fa-building"></i>
+  {{entry.clientName}}
+  <i class="icon far fa-play-circle"></i>
+  {{entry.start}}
+  <i class="icon far fa-stop-circle"></i>
+  {{entry.stop}}
+  <i class="icon fas fa-hourglass-start"></i>
+  {{entry.timeDiff}}
+  <div class="panel">
+    <i (click)="editEntry(entry)" class="fas fa-edit"></i>
+    <i (click)="removeEntry(entry)" class="fa fa-trash" aria-hidden="true"></i>
+  </div>
+</div>
+<div class="timer">
+  {{'totalTime' | translate}}: {{ totalTime }}
+</div>
+</body>
+</html>

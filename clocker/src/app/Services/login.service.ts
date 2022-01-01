@@ -1,7 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {UserModel} from "../Models/user.model";
-import {StatsModel} from "../Models/stats.model";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {LoginModel} from "../Models/login.model";

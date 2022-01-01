@@ -20,5 +20,8 @@
   "username": "Użytkownik",
   "password": "Hasło",
   "login": "Zaloguj",
-  "wrongLoginPassword": "Zły login lub hasło!"
+  "wrongLoginPassword": "Zły login lub hasło!",
+  "description": "Opis",
+  "noProject": "Brak projektu",
+  "noClient": "Brak klienta"
 }

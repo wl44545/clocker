@@ -1,2 +1,49 @@
 @import "src/assets/constans/Colors";
 
+
+.timer{
+  width: 97vw;
+  height: 10vh;
+  background-color: $GRAY;
+  position: relative;
+  text-align: center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius: 2vh;
+  margin-bottom: 2vh;
+}
+.entry{
+  width: 97vw;
+  height: 10vh;
+  background-color: $BLUE;
+  position: relative;
+  text-align: center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius: 2vh;
+  margin-bottom: 1vh;
+}
+input{
+  width: 20vw;
+  height: 5vh;
+}
+select{
+  width: 17.5vw;
+  height: 5vh;
+  margin-left: 0.5vw;
+}
+button{
+  margin-left: 1vw;
+  height: 5vh;
+}
+.panel{
+  margin-left: 2vw;
+  color: $PURPLE;
+}
+.icon{
+  margin-left: 1vw;
+  margin-right: 0.25vw;
+  color: $PURPLE;
+}

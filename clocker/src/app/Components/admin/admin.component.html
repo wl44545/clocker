@@ -1,0 +1,16 @@
+
+<div class="addUserButton" *ngIf="!show" (click)="toMax()">Nowy użytkownik</div>
+
+<div class="newUser" id="newUser" *ngIf="show">
+  <form>
+    <input type="email">
+    <input type="password">
+    <input type="password">
+    <select>
+      <option value="Admin">Admin</option>
+      <option value="User" selected>User</option>
+    </select>
+    <button type="reset" class="anuluj" style="margin-top: 4%" (click)="toMin()"> Anuluj </button>
+    <button type="submit"> Dodaj </button>
+  </form>
+</div>

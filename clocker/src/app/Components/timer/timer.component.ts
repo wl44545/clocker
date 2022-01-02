@@ -93,6 +93,15 @@ export class TimerComponent implements OnInit {
         }
       }
       this.getTotalTime();
+      this.worklog.sort((a, b) => {
+        if ( a.stop < b.stop ){
+          return 1;
+        }
+        if ( a.stop > b.stop ){
+          return -1;
+        }
+        return 0;
+      });
     })
   }
 

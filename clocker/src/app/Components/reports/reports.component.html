@@ -27,16 +27,16 @@
     <i *ngIf="entry.clientName" class="icon far fa-building"></i>
     {{entry.clientName}}
     <i class="icon far fa-play-circle"></i>
-    {{entry.start}}
+    {{entry.start.toString().replace("T"," ")}}
     <i class="icon far fa-stop-circle"></i>
-    {{entry.stop}}
+    {{entry.stop.toString().replace("T"," ")}}
     <i class="icon fas fa-hourglass-start"></i>
     {{entry.timeDiff}}
   </div>
-  <div class="query">
+  <div *ngIf="totalTime!='0:0:0'" class="query">
     {{'totalTime' | translate}}: {{ totalTime }}
   </div>
-  <div class="csv">
+  <div *ngIf="totalTime!='0:0:0'" class="csv">
     <i class="icon fas fa-file-csv"></i>
     <angular2csv [data]="worklogQuery" filename="report" [options]="csvOptions" ></angular2csv>
   </div>

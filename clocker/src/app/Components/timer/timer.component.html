@@ -34,9 +34,9 @@
     <i *ngIf="entry.clientName" class="icon far fa-building"></i>
     {{entry.clientName}}
     <i class="icon far fa-play-circle"></i>
-    {{entry.start}}
+    {{entry.start.toString().replace("T"," ")}}
     <i class="icon far fa-stop-circle"></i>
-    {{entry.stop}}
+    {{entry.stop.toString().replace("T"," ")}}
     <i class="icon fas fa-hourglass-start"></i>
     {{entry.timeDiff}}
     <div class="panel">
@@ -44,7 +44,7 @@
       <i (click)="removeEntry(entry)" class="fa fa-trash" aria-hidden="true"></i>
     </div>
   </div>
-  <div class="timer">
+  <div *ngIf="totalTime!='0:0:0'" class="timer">
     {{'totalTime' | translate}}: {{ totalTime }}
   </div>
 </body>

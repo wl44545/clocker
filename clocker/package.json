@@ -22,6 +22,7 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "angular2-csv": "^0.2.9",
     "file-saver": "^2.0.5",
+    "moment": "^2.29.1",
     "ngx-translate": "0.0.1-security",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../../Services/login.service";
 import {Router} from "@angular/router";
-import {TimeEntryModel} from "../../Models/time-entry.model";
+import {TimeEntryModel, TimeLocalModelRequest} from "../../Models/time-entry.model";
 import {ProjectModel} from "../../Models/project.model";
 import {ClientModel} from "../../Models/client.model";
 import {TimerService} from "../../Services/timer.service";
 import {ProjectsService} from "../../Services/projects.service";
 import {ClientsService} from "../../Services/clients.service";
+import {formatDate} from '@angular/common';
+
 
 @Component({
   selector: 'app-timer',
@@ -15,6 +17,120 @@ import {ClientsService} from "../../Services/clients.service";
 })
 export class TimerComponent implements OnInit {
 
+  // kontrola czasu na żywo
+
+  update: boolean = false;
+  timerHandler: number = 0;
+
+  localTimeStart: string | null | undefined;
+  localTimeTitle: string = "bierzące zadanie";
+  localClient: number = 0;
+  localProject: number = 0;
+  localTimeInSec: number = 0;
+  localTimeModelId: number | undefined;
+
+  public start() {
+    this.timerActive = true;
+    this.localTimeStart = formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en');
+    this.localTimeInSec = 0;
+    this.timer();
+
+    this.timerService.addEntry(this.localTimeTitle, this.loginService.getUsername(), new Date(), new Date(), 0, true).subscribe( response =>{
+      this.localTimeModelId = response.id;
+    });
+  }
+
+  clearLocal(){
+    this.timerActive = false;
+    clearInterval(this.timerHandler);
+    this.localTimeTitle = "bierzące zadanie";
+    this.localClient = 0;
+    this.localProject = 0;
+    this.localTimeInSec = 0;
+  }
+
+  save(active: boolean){
+    if(this.localTimeModelId){
+      let localTime = null;
+      if (this.localTimeStart != null) {
+        localTime = new TimeLocalModelRequest(
+          this.localTimeTitle,
+          this.loginService.getUsername(),
+          this.localTimeStart,
+          formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en'),
+          this.localProject,
+          active
+        );
+      }
+      console.log(localTime);
+      if(localTime != null){
+        this.timerService.updateActive(this.localTimeModelId, localTime).subscribe(response=>{
+          console.log(response);
+        },
+        error=>{
+          console.log(error);
+        });
+      }
+      return true;
+    }
+    else{
+      this.clearLocal();
+      return false;
+    }
+  }
+
+  public stop() {
+    if(this.save(false)){
+      this.getWorklog();
+      this.clearLocal();
+    }
+
+  }
+
+  saveChange() {
+    this.update = false;
+    this.save(true);
+
+  }
+
+  changeHandler(){
+    this.update = true;
+  }
+
+  timer(){
+    this.timerHandler = setInterval(() => {
+      this.localTimeInSec += 1;
+    },1000)
+  }
+
+  getHour(){
+    let wynik = Math.floor(this.localTimeInSec / 3600).toString();
+    if(wynik.length == 1){
+      return '0' + wynik;
+    }
+    return wynik;
+  }
+
+  getMinute(){
+    let sec = this.localTimeInSec % 3600;
+    let wynik = Math.floor(sec / 60).toString();
+    if(wynik.length == 1){
+      return '0' + wynik;
+    }
+    return wynik;
+  }
+
+  getSecund(){
+    let sec = this.localTimeInSec % 3600;
+    let wynik = Math.floor(sec % 60).toString();
+    if(wynik.length == 1){
+      return '0' + wynik;
+    }
+    return wynik;
+  }
+
+  // reszta
+
   worklog: TimeEntryModel[] = [];
   projects: ProjectModel[] = [];
   clients: ClientModel[] = [];
@@ -22,7 +138,7 @@ export class TimerComponent implements OnInit {
   entryEdit: boolean = false;
   timerActive: boolean = false;
 
-  manualEntry: TimeEntryModel = new TimeEntryModel(0,'','',new Date(),new Date(),0);
+  manualEntry: TimeEntryModel = new TimeEntryModel(0,'','',new Date(),new Date(),0, false);
   manualDescription: string = "";
   manualProject: number = 0;
   manualStart: Date = new Date();
@@ -62,6 +178,9 @@ export class TimerComponent implements OnInit {
     this.timerService.getWorklog(this.loginService.getUsername()).subscribe(worklog => {
       this.worklog = [];
       for(let entry of worklog) {
+        if(entry.active){
+          entry.stop = new Date();
+        }
         if(new Date(entry.stop) > new Date(Date.now() - 7*24*60*60*1000)){
           if (entry.project != 0) {
             this.projectsService.getProject(entry.project).subscribe(project => {
@@ -82,6 +201,7 @@ export class TimerComponent implements OnInit {
             entry.client = 0;
             entry.clientName = "";
           }
+
           let ms = (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
           let seconds = ms / 1000;
           const hours = Math.floor(seconds / 3600);
@@ -89,7 +209,20 @@ export class TimerComponent implements OnInit {
           const minutes = Math.floor(seconds / 60);
           seconds = seconds % 60;
           entry.timeDiff = `${hours}:${minutes}:${seconds}`;
-          this.worklog.push(entry);
+
+          if(entry.active){
+            this.localTimeTitle = entry.description;
+            this.localTimeModelId = entry.id;
+            this.localClient = entry.client;
+            this.localProject = entry.project;
+            this.timerActive = true;
+            this.localTimeInSec = ms / 1000 + 3600;
+            this.localTimeStart = entry.start.toString();
+            this.timer();
+          }
+          else{
+            this.worklog.push(entry);
+          }
         }
       }
       this.getTotalTime();
@@ -136,7 +269,7 @@ export class TimerComponent implements OnInit {
 
   public addEntry() {
     if(this.manualDescription != "" && new Date(this.manualStop) > new Date(this.manualStart)){
-      this.timerService.addEntry(this.manualDescription, this.loginService.getUsername(), this.manualStart, this.manualStop, this.manualProject).subscribe(entry => {
+      this.timerService.addEntry(this.manualDescription, this.loginService.getUsername(), this.manualStart, this.manualStop, this.manualProject, false).subscribe(entry => {
         this.getWorklog();
         this.clearInput();
       })
@@ -166,13 +299,4 @@ export class TimerComponent implements OnInit {
     this.manualStop = new Date();
     this.entryEdit = false;
   }
-
-  public start() {
-    this.timerActive = true;
-  }
-
-  public stop() {
-    this.timerActive = false;
-  }
-
 }

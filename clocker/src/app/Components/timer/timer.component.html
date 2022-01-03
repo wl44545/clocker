@@ -9,6 +9,21 @@
     <button (click)="start()">{{'start' | translate}}</button>
   </div>
   <div *ngIf="timerActive" class="timer auto stop">
+
+    <label>{{getHour()}}</label>
+    <label>:</label>
+    <label>{{getMinute()}}</label>
+    <label>:</label>
+    <label style="margin-right: 10px;">{{getSecund()}}</label>
+
+    <input type="text" [(ngModel)]="localTimeTitle" [value]="localTimeTitle" (change)="changeHandler()"/>
+
+    <select [(ngModel)]="localProject" (change)="changeHandler()">
+      <option [value]=0>{{'noProject' | translate}}</option>
+      <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+    </select>
+
+    <button (click)="saveChange()" *ngIf="update">Zatwierdź zmiany</button>
     <button (click)="stop()">{{'stop' | translate}}</button>
   </div>
   <div class="timer manual">

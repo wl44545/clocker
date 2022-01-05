@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {APPROUTES} from "../assets/constans/AppRoutes";
+import {APPROUTES} from "../assets/constants/AppRoutes";
 import {StartPageComponent} from "./Components/start-page/start-page.component";
 import {AdminComponent} from "./Components/admin/admin.component";
 import {TimerComponent} from "./Components/timer/timer.component";

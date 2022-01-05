@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {APPROUTES} from "../assets/constans/AppRoutes";
+import {APPROUTES} from "../assets/constants/AppRoutes";
 import {TranslateService} from "@ngx-translate/core";
 import {LoginService} from "./Services/login.service";
 import {LanguageService} from "./Services/language.service";

@@ -10,7 +10,7 @@
       "id": 1,
       "username": "a",
       "password": "a",
-      "role": "ADMIN"
+      "role": "USERADMIN"
     },
     {
       "id": 2,
@@ -22,7 +22,7 @@
       "id": 3,
       "username": "testowy",
       "password": "a",
-      "role": "USERADMIN"
+      "role": "USER"
     },
     {
       "username": "admin",
@@ -139,6 +139,45 @@
       "stop": "2022-01-03T22:21:08",
       "project": "0",
       "id": 6
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bierzące zadanie",
+      "username": "USERADMIN",
+      "start": "2022-01-03T22:45:30",
+      "stop": "2022-01-03T22:45:32",
+      "project": 0,
+      "id": 7
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bierzące zadanie",
+      "username": "USERADMIN",
+      "start": "2022-01-03T22:45:48",
+      "stop": "2022-01-03T22:45:50",
+      "project": 0,
+      "id": 8
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bierzące zadanie",
+      "username": "USERADMIN",
+      "start": "2022-01-03T22:45:57",
+      "stop": "2022-01-04T01:46:00",
+      "project": 0,
+      "id": 9
     }
   ]
 }

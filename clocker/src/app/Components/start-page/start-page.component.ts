@@ -4,7 +4,7 @@ import {StatsService} from "../../Services/stats.service";
 import {StatsModel} from "../../Models/stats.model";
 import {UserModel} from "../../Models/user.model";
 import {Router} from "@angular/router";
-import {APPROUTES} from "../../../assets/constans/AppRoutes";
+import {APPROUTES} from "../../../assets/constants/AppRoutes";
 
 @Component({
   selector: 'app-start-page',

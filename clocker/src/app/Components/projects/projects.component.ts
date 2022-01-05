@@ -5,6 +5,7 @@ import {ProjectModel} from "../../Models/project.model";
 import {ProjectsService} from "../../Services/projects.service";
 import {ClientModel} from "../../Models/client.model";
 import {ClientsService} from "../../Services/clients.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-projects',
@@ -23,7 +24,8 @@ export class ProjectsComponent implements OnInit {
   constructor(private loginService: LoginService,
               private router: Router,
               private projectsService: ProjectsService,
-              private clientsService: ClientsService) { }
+              private clientsService: ClientsService,
+              private translateService:TranslateService) { }
 
   ngOnInit(): void {
     this.checkPermission();
@@ -40,7 +42,11 @@ export class ProjectsComponent implements OnInit {
   public getClients(){
     this.clientsService.getClients(this.loginService.getUsername()).subscribe(clients => {
       this.clients = clients;
-    })
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
+    });
   }
 
   public addProject(){
@@ -48,6 +54,10 @@ export class ProjectsComponent implements OnInit {
       this.projectsService.addProject(this.projectName,this.clientId, this.loginService.getUsername()).subscribe(project => {
         this.getProjects();
         this.clearInput();
+      },() => {
+        this.translateService.get('serverError').subscribe((text: string) => {
+          window.alert(text);
+        });
       });
     }
   }
@@ -56,6 +66,10 @@ export class ProjectsComponent implements OnInit {
     this.projectsService.removeProject(project).subscribe(project => {
       this.getProjects();
       this.clearInput();
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
     });
   }
 
@@ -71,7 +85,11 @@ export class ProjectsComponent implements OnInit {
           project.clientName = "";
         }
       }
-    })
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
+    });
   }
 
   public editProject(project: ProjectModel){
@@ -88,6 +106,10 @@ export class ProjectsComponent implements OnInit {
     this.projectsService.editProject(this.project).subscribe(project => {
       this.getProjects();
       this.clearInput();
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
     });
   }
 

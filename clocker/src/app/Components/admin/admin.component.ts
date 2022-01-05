@@ -3,6 +3,7 @@ import {LoginService} from "../../Services/login.service";
 import {Router} from "@angular/router";
 import {UserModel, UserModelRequest} from "../../Models/user.model";
 import {UserService} from "../../Services/user.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-admin',
@@ -26,7 +27,9 @@ export class AdminComponent implements OnInit {
 
 
   constructor(private loginService: LoginService,
-              private router: Router, private userService: UserService) {
+              private router: Router,
+              private userService: UserService,
+              private translateService: TranslateService) {
     this.getUsers();
   }
 
@@ -69,11 +72,11 @@ export class AdminComponent implements OnInit {
   getUsers(){
     this.userService.getUsers().subscribe((response) =>{
       this.users = response;
-      },
-      (error => {
-        console.log(error);
-      })
-    );
+      },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
+    });
   }
 
   remove(user: UserModel, role: string){
@@ -96,6 +99,10 @@ export class AdminComponent implements OnInit {
 
     this.userService.updateRole(user).subscribe((user)=> {
       this.userService.getUsers();
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
     });
   }
 
@@ -120,7 +127,11 @@ export class AdminComponent implements OnInit {
     this.userService.addUser(user).subscribe((response) => {
       this.getUsers();
       console.log(response);
-     });
+     },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
+    });
     this.newPassword = "";
     this.newEmail = "";
   }

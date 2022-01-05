@@ -25,5 +25,6 @@
   "noProject": "No project",
   "noClient": "No client",
   "start": "Start",
-  "stop": "Stop"
+  "stop": "Stop",
+  "serverError": "There was a problem connecting to the server :("
 }

@@ -7,6 +7,7 @@ import {ProjectsService} from "../../Services/projects.service";
 import {ClientsService} from "../../Services/clients.service";
 import {ProjectModel} from "../../Models/project.model";
 import {ClientModel} from "../../Models/client.model";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-reports',
@@ -41,7 +42,8 @@ export class ReportsComponent implements OnInit {
               private router: Router,
               private timerService: TimerService,
               private projectsService: ProjectsService,
-              private clientsService: ClientsService) { }
+              private clientsService: ClientsService,
+              private translateService: TranslateService) { }
 
   ngOnInit(): void {
     this.checkPermission();
@@ -72,7 +74,11 @@ export class ReportsComponent implements OnInit {
               entry.client = 0;
               entry.clientName = "";
             }
-          })
+          },() => {
+            this.translateService.get('serverError').subscribe((text: string) => {
+              window.alert(text);
+            });
+          });
         }else{
           entry.project = 0;
           entry.projectName = "";
@@ -132,11 +138,19 @@ export class ReportsComponent implements OnInit {
   public getProjects(){
     this.projectsService.getProjects(this.loginService.getUsername()).subscribe(projects => {
       this.projects = projects;
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
     });
   }
   public getClients(){
     this.clientsService.getClients(this.loginService.getUsername()).subscribe(clients => {
       this.clients = clients;
-    })
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
+    });
   }
 }

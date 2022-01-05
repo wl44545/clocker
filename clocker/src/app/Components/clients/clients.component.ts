@@ -3,6 +3,8 @@ import {LoginService} from "../../Services/login.service";
 import {Router} from "@angular/router";
 import {ClientsService} from "../../Services/clients.service";
 import {ClientModel} from "../../Models/client.model";
+import {HttpErrorResponse} from "@angular/common/http";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-clients',
@@ -18,7 +20,8 @@ export class ClientsComponent implements OnInit {
 
   constructor(private loginService: LoginService,
               private router: Router,
-              private clientService: ClientsService) { }
+              private clientService: ClientsService,
+              private translateService: TranslateService) { }
 
   ngOnInit(): void {
     this.checkPermission();
@@ -36,6 +39,10 @@ export class ClientsComponent implements OnInit {
       this.clientService.addClient(this.clientName, this.loginService.getUsername()).subscribe(client => {
         this.clientName = "";
         this.getClients();
+      },() => {
+        this.translateService.get('serverError').subscribe((text: string) => {
+          window.alert(text);
+        });
       });
     }
   }
@@ -50,7 +57,11 @@ export class ClientsComponent implements OnInit {
   public getClients(){
     this.clientService.getClients(this.loginService.getUsername()).subscribe(clients => {
       this.clients = clients;
-    })
+    },() => {
+        this.translateService.get('serverError').subscribe((text:string) => {
+          window.alert(text);
+        });
+      })
   }
 
   public editClient(client: ClientModel){
@@ -65,6 +76,10 @@ export class ClientsComponent implements OnInit {
       this.clientService.editClient(this.client).subscribe(client => {
         this.getClients();
         this.clearInput();
+      },() => {
+        this.translateService.get('serverError').subscribe((text: string) => {
+          window.alert(text);
+        });
       });
     }
   }

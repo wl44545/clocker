@@ -8,6 +8,7 @@ import {TimerService} from "../../Services/timer.service";
 import {ProjectsService} from "../../Services/projects.service";
 import {ClientsService} from "../../Services/clients.service";
 import {formatDate} from '@angular/common';
+import {TranslateService} from "@ngx-translate/core";
 
 
 @Component({
@@ -37,6 +38,10 @@ export class TimerComponent implements OnInit {
 
     this.timerService.addEntry(this.localTimeTitle, this.loginService.getUsername(), new Date(), new Date(), 0, true).subscribe( response =>{
       this.localTimeModelId = response.id;
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
     });
   }
 
@@ -66,9 +71,10 @@ export class TimerComponent implements OnInit {
       if(localTime != null){
         this.timerService.updateActive(this.localTimeModelId, localTime).subscribe(response=>{
           console.log(response);
-        },
-        error=>{
-          console.log(error);
+        },() => {
+          this.translateService.get('serverError').subscribe((text: string) => {
+            window.alert(text);
+          });
         });
       }
       return true;
@@ -148,7 +154,8 @@ export class TimerComponent implements OnInit {
               private router: Router,
               private timerService: TimerService,
               private projectsService: ProjectsService,
-              private clientsService: ClientsService) { }
+              private clientsService: ClientsService,
+              private translateService: TranslateService) { }
 
   ngOnInit(): void {
     this.checkPermission();
@@ -166,12 +173,20 @@ export class TimerComponent implements OnInit {
   public getProjects(){
     this.projectsService.getProjects(this.loginService.getUsername()).subscribe(projects => {
       this.projects = projects;
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
     });
   }
   public getClients(){
     this.clientsService.getClients(this.loginService.getUsername()).subscribe(clients => {
       this.clients = clients;
-    })
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
+    });
   }
 
   private getWorklog(){
@@ -235,7 +250,11 @@ export class TimerComponent implements OnInit {
         }
         return 0;
       });
-    })
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
+    });
   }
 
   private getTotalTime(){
@@ -264,6 +283,10 @@ export class TimerComponent implements OnInit {
     this.timerService.removeEntry(entry).subscribe(entry => {
       this.getWorklog();
       this.clearInput();
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
     });
   }
 
@@ -272,7 +295,11 @@ export class TimerComponent implements OnInit {
       this.timerService.addEntry(this.manualDescription, this.loginService.getUsername(), this.manualStart, this.manualStop, this.manualProject, false).subscribe(entry => {
         this.getWorklog();
         this.clearInput();
-      })
+      },() => {
+        this.translateService.get('serverError').subscribe((text: string) => {
+          window.alert(text);
+        });
+      });
     }
   }
 
@@ -288,7 +315,11 @@ export class TimerComponent implements OnInit {
       this.timerService.editEntry(this.manualEntry).subscribe(entry => {
         this.getWorklog();
         this.clearInput();
-      })
+      },() => {
+        this.translateService.get('serverError').subscribe((text: string) => {
+          window.alert(text);
+        });
+      });
     }
   }
 

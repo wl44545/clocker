@@ -5,6 +5,7 @@ import {StatsModel} from "../../Models/stats.model";
 import {UserModel} from "../../Models/user.model";
 import {Router} from "@angular/router";
 import {APPROUTES} from "../../../assets/constants/AppRoutes";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-start-page',
@@ -24,7 +25,8 @@ export class StartPageComponent implements OnInit {
 
   constructor(public loginService: LoginService,
               private statsService: StatsService,
-              private router: Router) { }
+              private router: Router,
+              private translateService: TranslateService) { }
 
   ngOnInit(): void {
     this.loadStats();
@@ -76,6 +78,10 @@ export class StartPageComponent implements OnInit {
       this.weekStats = stats.weekStats;
       this.monthStats = stats.monthStats;
       this.yearStats = stats.yearStats;
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
     });
   }
 }

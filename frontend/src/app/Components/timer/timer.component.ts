@@ -36,7 +36,7 @@ export class TimerComponent implements OnInit {
     this.localTimeInSec = 0;
     this.timer();
 
-    this.timerService.addEntry(this.localTimeTitle, this.loginService.getUsername(), new Date(), new Date(), 0, true).subscribe( response =>{
+    this.timerService.addEntry(this.localTimeTitle, this.loginService.getUserID(), new Date(), new Date(), 0, true).subscribe( response =>{
       this.localTimeModelId = response.id;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
@@ -60,7 +60,7 @@ export class TimerComponent implements OnInit {
       if (this.localTimeStart != null) {
         localTime = new TimeLocalModelRequest(
           this.localTimeTitle,
-          this.loginService.getUsername(),
+          this.loginService.getUserID(),
           this.localTimeStart,
           formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en'),
           this.localProject,
@@ -144,7 +144,7 @@ export class TimerComponent implements OnInit {
   entryEdit: boolean = false;
   timerActive: boolean = false;
 
-  manualEntry: TimeEntryModel = new TimeEntryModel(0,'','',new Date(),new Date(),0, false);
+  manualEntry: TimeEntryModel = new TimeEntryModel(0,'',0,new Date(),new Date(),0, false);
   manualDescription: string = "";
   manualProject: number = 0;
   manualStart: Date = new Date();
@@ -171,7 +171,7 @@ export class TimerComponent implements OnInit {
   }
 
   public getProjects(){
-    this.projectsService.getProjects(this.loginService.getUsername()).subscribe(projects => {
+    this.projectsService.getProjects(this.loginService.getUserID()).subscribe(projects => {
       this.projects = projects;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
@@ -180,7 +180,7 @@ export class TimerComponent implements OnInit {
     });
   }
   public getClients(){
-    this.clientsService.getClients(this.loginService.getUsername()).subscribe(clients => {
+    this.clientsService.getClients(this.loginService.getUserID()).subscribe(clients => {
       this.clients = clients;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
@@ -190,7 +190,7 @@ export class TimerComponent implements OnInit {
   }
 
   private getWorklog(){
-    this.timerService.getWorklog(this.loginService.getUsername()).subscribe(worklog => {
+    this.timerService.getWorklog(this.loginService.getUserID()).subscribe(worklog => {
       this.worklog = [];
       for(let entry of worklog) {
         if(entry.active){
@@ -292,7 +292,7 @@ export class TimerComponent implements OnInit {
 
   public addEntry() {
     if(this.manualDescription != "" && new Date(this.manualStop) > new Date(this.manualStart)){
-      this.timerService.addEntry(this.manualDescription, this.loginService.getUsername(), this.manualStart, this.manualStop, this.manualProject, false).subscribe(entry => {
+      this.timerService.addEntry(this.manualDescription, this.loginService.getUserID(), this.manualStart, this.manualStop, this.manualProject, false).subscribe(entry => {
         this.getWorklog();
         this.clearInput();
       },() => {

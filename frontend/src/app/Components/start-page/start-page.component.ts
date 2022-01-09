@@ -46,18 +46,21 @@ export class StartPageComponent implements OnInit {
       this.router.navigateByUrl('/timer').then();
       localStorage.setItem("USERNAME", "USER");
       localStorage.setItem("ROLE", "USER");
+      localStorage.setItem("USERID", "1");
       this.wrongLogin = false;
     }
     if(this.username == "ua" && this.password == "ua"){
       this.router.navigateByUrl('/timer').then();
       localStorage.setItem("USERNAME", "USERADMIN");
       localStorage.setItem("ROLE", "USERADMIN");
+      localStorage.setItem("USERID", "3");
       this.wrongLogin = false;
     }
     else if(this.username == "a" && this.password == "a"){
       this.router.navigateByUrl('/admin').then();
       localStorage.setItem("USERNAME", "ADMIN");
       localStorage.setItem("ROLE", "ADMIN");
+      localStorage.setItem("USERID", "2");
       this.wrongLogin = false;
     }
     else{

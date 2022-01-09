@@ -15,7 +15,7 @@ export class ClientsComponent implements OnInit {
 
   clientName: string = "";
   clients: ClientModel[] = [];
-  client: ClientModel = new ClientModel(0,'','');
+  client: ClientModel = new ClientModel(0,'',0);
   clientEdit: boolean = false;
 
   constructor(private loginService: LoginService,
@@ -36,7 +36,7 @@ export class ClientsComponent implements OnInit {
 
   public addClient(){
     if(this.clientName != "") {
-      this.clientService.addClient(this.clientName, this.loginService.getUsername()).subscribe(client => {
+      this.clientService.addClient(this.clientName, this.loginService.getUserID()).subscribe(client => {
         this.clientName = "";
         this.getClients();
       },() => {
@@ -55,7 +55,7 @@ export class ClientsComponent implements OnInit {
   }
 
   public getClients(){
-    this.clientService.getClients(this.loginService.getUsername()).subscribe(clients => {
+    this.clientService.getClients(this.loginService.getUserID()).subscribe(clients => {
       this.clients = clients;
     },() => {
         this.translateService.get('serverError').subscribe((text:string) => {

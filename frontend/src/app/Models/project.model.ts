@@ -1,25 +1,26 @@
 export class ProjectModel {
   id: number;
   name: string;
-  username: string;
+  user: number;
   client: number;
+
   clientName: string = "";
 
-  constructor(id: number, name: string, username: string, client: number) {
+  constructor(id: number, name: string, user: number, client: number) {
     this.id = id;
     this.name = name;
-    this.username = username;
+    this.user = user;
     this.client = client;
   }
 }
 export class ProjectModelRequest {
   name: string;
-  username: string;
+  user: number;
   client: number;
 
-  constructor(name: string, username: string, client: number) {
+  constructor(name: string, user: number, client: number) {
     this.name = name;
-    this.username = username;
+    this.user = user;
     this.client = client;
   }
 }

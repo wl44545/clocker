@@ -22,6 +22,7 @@ export class LoginService {
   public logout() {
     localStorage.removeItem("ROLE");
     localStorage.removeItem("USERNAME");
+    localStorage.removeItem("USERID");
     this.router.navigateByUrl("/").then();
   }
 
@@ -33,8 +34,12 @@ export class LoginService {
     return localStorage.getItem("USERNAME") || "GUEST";
   }
 
+  public getUserID(): number{
+    return parseInt(localStorage.getItem("USERID") || "0");
+  }
+
   public isLogged(): boolean{
-    return this.getRole() != "GUEST" && this.getUsername() != "GUEST";
+    return this.getRole() != "GUEST" && this.getUsername() != "GUEST" && this.getUserID() != 0;
   }
 
   public isUser(): boolean{

@@ -34,48 +34,65 @@
   "clients": [
     {
       "name": "Klient1",
-      "username": "USER",
+      "user": 1,
       "id": 1
     },
     {
       "name": "Klient2",
-      "username": "USER",
+      "user": 1,
       "id": 2
+    },
+    {
+      "name": "aaa",
+      "user": 2,
+      "id": 3
     }
   ],
   "projects": [
     {
       "name": "Projekt1",
-      "username": "USER",
+      "user": 1,
       "client": "1",
       "id": 1,
       "clientName": ""
     },
     {
       "name": "Projekt2",
-      "username": "USER",
+      "user": 1,
       "client": "2",
       "id": 2,
       "clientName": ""
     },
     {
       "name": "Projekt3",
-      "username": "USER",
+      "user": 1,
       "client": 0,
       "id": 3
     },
     {
       "name": "aaa",
-      "username": "USER",
+      "user": 1,
       "client": "1",
       "id": 4,
       "clientName": ""
+    },
+    {
+      "name": "uuuuuuuu",
+      "user": 1,
+      "client": 0,
+      "id": 5
+    },
+    {
+      "name": "bbb",
+      "user": 2,
+      "client": "3",
+      "id": 6
     }
   ],
   "worklog": [
     {
       "description": "Zadanie1",
-      "username": "USER",
+      "user": 1,
       "start": "2022-01-01T21:17:31",
       "stop": "2022-01-01T22:17:33",
       "project": 0,
@@ -88,7 +105,7 @@
     },
     {
       "description": "Zadanie2",
-      "username": "USER",
+      "user": 1,
       "start": "2021-12-31T23:19:44",
       "stop": "2022-01-01T21:17:47",
       "project": "1",
@@ -101,7 +118,7 @@
     },
     {
       "description": "Zadanie3",
-      "username": "USER",
+      "user": 1,
       "start": "2021-12-27T00:19:56",
       "stop": "2022-01-01T21:17:59",
       "project": "2",
@@ -114,7 +131,7 @@
     },
     {
       "description": "Zadanie4",
-      "username": "USER",
+      "user": 1,
       "start": "2021-12-27T23:21:11",
       "stop": "2022-01-01T21:18:11",
       "project": "3",
@@ -127,7 +144,7 @@
     },
     {
       "description": "Zadanie5",
-      "username": "USER",
+      "user": 1,
       "start": "2021-12-06T23:00:23",
       "stop": "2021-12-08T23:00:27",
       "project": 0,
@@ -141,7 +158,7 @@
       "timeDiff": "",
       "active": false,
       "description": "zmiana",
-      "username": "USER",
+      "user": 1,
       "start": "2022-01-03T20:25:37.327Z",
       "stop": "2022-01-05T23:09:02",
       "project": 0,
@@ -154,7 +171,7 @@
       "timeDiff": "",
       "active": false,
       "description": "bierzące zadanie",
-      "username": "USERADMIN",
+      "user": 1,
       "start": "2022-01-03T22:45:30",
       "stop": "2022-01-03T22:45:32",
       "project": 0,
@@ -167,7 +184,7 @@
       "timeDiff": "",
       "active": false,
       "description": "bierzące zadanie",
-      "username": "USERADMIN",
+      "user": 1,
       "start": "2022-01-03T22:45:48",
       "stop": "2022-01-03T22:45:50",
       "project": 0,
@@ -180,7 +197,7 @@
       "timeDiff": "",
       "active": false,
       "description": "bierzące zadanie",
-      "username": "USERADMIN",
+      "user": 1,
       "start": "2022-01-03T22:45:57",
       "stop": "2022-01-04T01:46:00",
       "project": 0,
@@ -188,12 +205,25 @@
     },
     {
       "description": "bierzące zadanie",
-      "username": "USER",
+      "user": 1,
       "start": "2022-01-05T22:09:05.861Z",
       "stop": "2022-01-05T22:09:05.861Z",
       "project": 0,
       "active": true,
       "id": 10
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bierzące zadanie",
+      "user": 2,
+      "start": "2022-01-09T16:34:42",
+      "stop": "2022-01-09T16:34:46",
+      "project": "6",
+      "id": 11
     }
   ]
 }

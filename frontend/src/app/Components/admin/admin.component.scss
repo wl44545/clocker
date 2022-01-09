@@ -1,0 +1,125 @@
+@import "src/assets/constants/Colors";
+
+.error{
+  width:98%;
+  padding: 1%;
+  margin-top: 10px;
+  float: left;
+  color: red;
+  clear: both;
+  padding: 10px;
+}
+
+.user{
+  width:98%;
+  padding: 1%;
+  margin-top: 10px;
+  min-height: 30px;
+  margin-bottom: 10px;
+  background: $GRAY;
+  clear: both;
+  padding: 10px;
+}
+
+.content{
+  display: inline-block;
+}
+
+.name{
+  float:left;
+  margin-left: 10px;
+  color:$OAPL
+}
+
+.type{
+  float:right;
+  margin-right: 10px;
+  padding: 5px;
+  min-width: 80px;
+  border-radius: 3px;
+  text-align: center;
+  font-weight: bolder;
+  background: $OAPL;
+}
+
+.type_bad{
+  border: solid 2px red;
+  color: red;
+}
+
+.type_ok{
+  border: solid 2px green;
+  color: green;
+}
+
+button:hover{
+  opacity: 0.5;
+}
+
+.newUser{
+  width:98%;
+  padding: 1%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: left;
+  background: $PURPLE;
+}
+
+input, button, select{
+  height:35px;
+  float:left;
+  margin-left: 1%;
+  width: 20%;
+}
+
+.addUserButton{
+  width:98%;
+  padding: 1%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: left;
+  border-radius: 3px;
+  height:40px;
+  font-size: 30px;
+  text-align: center;
+  background: $PURPLE;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: $OAPL;
+  display: none;
+}
+
+button{
+  width: 10%;
+  height:35px;
+  float:right;
+}
+
+.anuluj{
+  display: none;
+}
+
+@media (max-width: 1020px){
+  .addUserButton{
+    display: block;
+  }
+
+  input, select{
+    width: 90%;
+    float: left;
+    margin-left: 5%;
+    margin-top: 1%;
+  }
+
+  button{
+    width: 90%;
+    float: left;
+    margin-left: 5%;
+    margin-top: 1%;
+  }
+
+  .anuluj{
+    display: block;
+  }
+
+}

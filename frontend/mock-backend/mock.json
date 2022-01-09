@@ -1,0 +1,199 @@
+{
+  "stats": {
+    "dayStats": 1,
+    "weekStats": 2,
+    "monthStats": 3,
+    "yearStats": 4
+  },
+  "login": [
+    {
+      "id": 1,
+      "username": "a",
+      "password": "a",
+      "role": "USERADMIN"
+    },
+    {
+      "id": 2,
+      "username": "u",
+      "password": "u",
+      "role": "USER"
+    },
+    {
+      "id": 3,
+      "username": "testowy",
+      "password": "a",
+      "role": "USER"
+    },
+    {
+      "username": "admin",
+      "role": "USER",
+      "password": "admin",
+      "id": 4
+    }
+  ],
+  "clients": [
+    {
+      "name": "Klient1",
+      "username": "USER",
+      "id": 1
+    },
+    {
+      "name": "Klient2",
+      "username": "USER",
+      "id": 2
+    }
+  ],
+  "projects": [
+    {
+      "name": "Projekt1",
+      "username": "USER",
+      "client": "1",
+      "id": 1,
+      "clientName": ""
+    },
+    {
+      "name": "Projekt2",
+      "username": "USER",
+      "client": "2",
+      "id": 2,
+      "clientName": ""
+    },
+    {
+      "name": "Projekt3",
+      "username": "USER",
+      "client": 0,
+      "id": 3
+    },
+    {
+      "name": "aaa",
+      "username": "USER",
+      "client": "1",
+      "id": 4,
+      "clientName": ""
+    }
+  ],
+  "worklog": [
+    {
+      "description": "Zadanie1",
+      "username": "USER",
+      "start": "2022-01-01T21:17:31",
+      "stop": "2022-01-01T22:17:33",
+      "project": 0,
+      "active": false,
+      "id": 1,
+      "projectName": "",
+      "client": 0,
+      "clientName": "",
+      "timeDiff": ""
+    },
+    {
+      "description": "Zadanie2",
+      "username": "USER",
+      "start": "2021-12-31T23:19:44",
+      "stop": "2022-01-01T21:17:47",
+      "project": "1",
+      "active": false,
+      "id": 2,
+      "timeDiff": "",
+      "projectName": "",
+      "clientName": "",
+      "client": 1
+    },
+    {
+      "description": "Zadanie3",
+      "username": "USER",
+      "start": "2021-12-27T00:19:56",
+      "stop": "2022-01-01T21:17:59",
+      "project": "2",
+      "active": false,
+      "id": 3,
+      "timeDiff": "",
+      "projectName": "",
+      "clientName": "",
+      "client": 2
+    },
+    {
+      "description": "Zadanie4",
+      "username": "USER",
+      "start": "2021-12-27T23:21:11",
+      "stop": "2022-01-01T21:18:11",
+      "project": "3",
+      "active": false,
+      "id": 4,
+      "timeDiff": "",
+      "projectName": "",
+      "client": 0,
+      "clientName": ""
+    },
+    {
+      "description": "Zadanie5",
+      "username": "USER",
+      "start": "2021-12-06T23:00:23",
+      "stop": "2021-12-08T23:00:27",
+      "project": 0,
+      "active": false,
+      "id": 5
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "zmiana",
+      "username": "USER",
+      "start": "2022-01-03T20:25:37.327Z",
+      "stop": "2022-01-05T23:09:02",
+      "project": 0,
+      "id": 6
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bierzące zadanie",
+      "username": "USERADMIN",
+      "start": "2022-01-03T22:45:30",
+      "stop": "2022-01-03T22:45:32",
+      "project": 0,
+      "id": 7
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bierzące zadanie",
+      "username": "USERADMIN",
+      "start": "2022-01-03T22:45:48",
+      "stop": "2022-01-03T22:45:50",
+      "project": 0,
+      "id": 8
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bierzące zadanie",
+      "username": "USERADMIN",
+      "start": "2022-01-03T22:45:57",
+      "stop": "2022-01-04T01:46:00",
+      "project": 0,
+      "id": 9
+    },
+    {
+      "description": "bierzące zadanie",
+      "username": "USER",
+      "start": "2022-01-05T22:09:05.861Z",
+      "stop": "2022-01-05T22:09:05.861Z",
+      "project": 0,
+      "active": true,
+      "id": 10
+    }
+  ]
+}

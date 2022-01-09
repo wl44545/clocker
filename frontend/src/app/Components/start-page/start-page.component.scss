@@ -1,0 +1,58 @@
+@import "src/assets/constants/Colors";
+
+p {
+  font-size: 40px;
+  text-align: center;
+  color: $GRAY;
+}
+* {
+  box-sizing: border-box;
+}
+.column {
+  float: left;
+  padding: 10px;
+}
+.left {
+  width: 60%;
+}
+.right {
+  width: 40%;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.login {
+  border-radius: 2vh;
+  background-color: $GRAY;
+  top: 25vh;
+  height: 25vh;
+  width: 20vw;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.login-button{
+  background-color: $PURPLE;
+  color: $BLUE;
+  border-radius: 1vh;
+}
+.wrong-login{
+  color: $PURPLE;
+  margin-bottom: 1vh;
+}
+input{
+  width: 15vw;
+  height: 5vh;
+  margin-bottom: 1vh;
+}
+button{
+  width: 5vw;
+  height: 5vh;
+  font-size: 2vh;
+}

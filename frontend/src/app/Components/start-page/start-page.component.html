@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="start-page.component.scss">
+</head>
+<body>
+  <div class="row">
+    <div class="column left">
+      <p>{{'statsHeader' | translate}}</p>
+      <p>{{dayStats}} {{ 'statsDay' | translate}}</p>
+      <p>{{weekStats}} {{ 'statsWeek' | translate}}</p>
+      <p>{{monthStats}} {{ 'statsMonth' | translate}}</p>
+      <p>{{yearStats}} {{ 'statsYear' | translate}}</p>
+    </div>
+    <div class="column right" *ngIf="!loginService.isLogged()">
+      <div class="login">
+        <form>
+        <div class="wrong-login" *ngIf="wrongLogin">
+          {{ 'wrongLoginPassword' | translate}}
+        </div>
+        <div>
+          <input type="email" id="username" placeholder="{{ 'username' | translate}}" [(ngModel)]="username" name="username">
+        </div>
+        <div>
+          <input type="password" id="password" placeholder="{{ 'password' | translate}}"[(ngModel)]="password" name="password">
+        </div>
+        <div>
+          <button class="login-button" (click)="login()">{{ 'login' | translate}}</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

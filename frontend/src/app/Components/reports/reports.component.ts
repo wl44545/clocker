@@ -59,7 +59,7 @@ export class ReportsComponent implements OnInit {
   }
 
   private getWorklog(){
-    this.timerService.getWorklog(this.loginService.getUsername()).subscribe(worklog => {
+    this.timerService.getWorklog(this.loginService.getUserID()).subscribe(worklog => {
       this.worklog = worklog;
       for(let entry of this.worklog){
         if(entry.project != 0){
@@ -136,7 +136,7 @@ export class ReportsComponent implements OnInit {
   }
 
   public getProjects(){
-    this.projectsService.getProjects(this.loginService.getUsername()).subscribe(projects => {
+    this.projectsService.getProjects(this.loginService.getUserID()).subscribe(projects => {
       this.projects = projects;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
@@ -145,7 +145,7 @@ export class ReportsComponent implements OnInit {
     });
   }
   public getClients(){
-    this.clientsService.getClients(this.loginService.getUsername()).subscribe(clients => {
+    this.clientsService.getClients(this.loginService.getUserID()).subscribe(clients => {
       this.clients = clients;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {

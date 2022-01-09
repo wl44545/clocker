@@ -13,13 +13,13 @@ export class TimerService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public getWorklog(username: string): Observable<TimeEntryModel[]> {
-    return this.httpClient.get<TimeEntryModel[]>(`${environment.apiUrl}/worklog?username=${username}`);
+  public getWorklog(user: number): Observable<TimeEntryModel[]> {
+    return this.httpClient.get<TimeEntryModel[]>(`${environment.apiUrl}/worklog?user=${user}`);
   }
 
-  public addEntry(description: string, username: string, start: Date, stop: Date, project: number, active: boolean): Observable<TimeEntryModel> {
+  public addEntry(description: string, user: number, start: Date, stop: Date, project: number, active: boolean): Observable<TimeEntryModel> {
     return this.httpClient.post<TimeEntryModel>(`${environment.apiUrl}/worklog`,
-      new TimeEntryModelRequest(description, username, start, stop, project, active));
+      new TimeEntryModelRequest(description, user, start, stop, project, active));
   }
 
   public editEntry(entry: TimeEntryModel): Observable<TimeEntryModel>{

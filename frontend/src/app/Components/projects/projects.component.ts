@@ -16,7 +16,7 @@ export class ProjectsComponent implements OnInit {
 
   projectName: string = "";
   projects: ProjectModel[] = [];
-  project: ProjectModel = new ProjectModel(0,'','',0);
+  project: ProjectModel = new ProjectModel(0,'',0,0);
   projectEdit: boolean = false;
   clientId: number = 0;
   clients: ClientModel[] = [];
@@ -40,7 +40,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   public getClients(){
-    this.clientsService.getClients(this.loginService.getUsername()).subscribe(clients => {
+    this.clientsService.getClients(this.loginService.getUserID()).subscribe(clients => {
       this.clients = clients;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
@@ -51,7 +51,7 @@ export class ProjectsComponent implements OnInit {
 
   public addProject(){
     if(this.projectName != "") {
-      this.projectsService.addProject(this.projectName,this.clientId, this.loginService.getUsername()).subscribe(project => {
+      this.projectsService.addProject(this.projectName,this.clientId, this.loginService.getUserID()).subscribe(project => {
         this.getProjects();
         this.clearInput();
       },() => {
@@ -74,7 +74,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   public getProjects(){
-    this.projectsService.getProjects(this.loginService.getUsername()).subscribe(projects => {
+    this.projectsService.getProjects(this.loginService.getUserID()).subscribe(projects => {
       this.projects = projects;
       for(let project of this.projects){
         if(project.client!=0){

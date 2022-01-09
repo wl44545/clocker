@@ -1,21 +1,22 @@
 export class TimeEntryModel {
   id: number;
   description: string;
-  username: string;
+  user: number;
   start: Date;
   stop: Date;
   project: number;
-
   client: number = 0;
+  active: boolean = false;
+
   projectName: string = "";
   clientName: string = "";
   timeDiff: string = "";
-  active: boolean = false;
 
-  constructor(id: number, description: string, username: string, start: Date, stop: Date, project: number, active: boolean) {
+
+  constructor(id: number, description: string, user: number, start: Date, stop: Date, project: number, active: boolean) {
     this.id = id;
     this.description = description;
-    this.username = username;
+    this.user = user;
     this.start = start;
     this.stop = stop;
     this.project = project;
@@ -24,15 +25,15 @@ export class TimeEntryModel {
 }
 export class TimeEntryModelRequest {
   description: string;
-  username: string;
+  user: number;
   start: Date;
   stop: Date | null;
   project: number;
   active: boolean;
 
-  constructor(description: string, username: string, start: Date, stop: Date | null, project: number, active: boolean) {
+  constructor(description: string, user: number, start: Date, stop: Date | null, project: number, active: boolean) {
     this.description = description;
-    this.username = username;
+    this.user = user;
     this.start = start;
     this.stop = stop;
     this.project = project;
@@ -42,7 +43,7 @@ export class TimeEntryModelRequest {
 
 export class TimeLocalModelRequest{
   description: string;
-  username: string;
+  user: number;
   start: string;
   stop: string;
   project: number;
@@ -52,9 +53,9 @@ export class TimeLocalModelRequest{
   timeDiff: string = "";
   active: boolean = false;
 
-  constructor(description: string, username: string, start: string, stop: string, project: number, active: boolean) {
+  constructor(description: string, user: number, start: string, stop: string, project: number, active: boolean) {
     this.description = description;
-    this.username = username;
+    this.user = user;
     this.start = start;
     this.stop = stop;
     this.project = project;

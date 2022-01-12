@@ -6,6 +6,7 @@ import {UserModel} from "../../Models/user.model";
 import {Router} from "@angular/router";
 import {APPROUTES} from "../../../assets/constants/AppRoutes";
 import {TranslateService} from "@ngx-translate/core";
+import {ComponentService} from "../../Services/component.service";
 
 @Component({
   selector: 'app-start-page',
@@ -26,10 +27,12 @@ export class StartPageComponent implements OnInit {
   constructor(public loginService: LoginService,
               private statsService: StatsService,
               private router: Router,
-              private translateService: TranslateService) { }
+              private translateService: TranslateService,
+              private componentService:ComponentService) { }
 
   ngOnInit(): void {
     this.loadStats();
+    this.componentService.setComponent('StartPageComponent');
   }
 
   public login(){

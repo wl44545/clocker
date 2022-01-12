@@ -8,6 +8,7 @@ import {ClientsService} from "../../Services/clients.service";
 import {ProjectModel} from "../../Models/project.model";
 import {ClientModel} from "../../Models/client.model";
 import {TranslateService} from "@ngx-translate/core";
+import {ComponentService} from "../../Services/component.service";
 
 @Component({
   selector: 'app-reports',
@@ -43,13 +44,15 @@ export class ReportsComponent implements OnInit {
               private timerService: TimerService,
               private projectsService: ProjectsService,
               private clientsService: ClientsService,
-              private translateService: TranslateService) { }
+              private translateService: TranslateService,
+              private componentService:ComponentService) { }
 
   ngOnInit(): void {
     this.checkPermission();
     this.getWorklog();
     this.getProjects();
     this.getClients();
+    this.componentService.setComponent('ReportsComponent');
   }
 
   private checkPermission(){

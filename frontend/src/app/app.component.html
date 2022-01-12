@@ -4,6 +4,11 @@
     <i class="fas fa-bars"></i>
   </label>
   <label class="logo">Clocker</label>
+
+  <div *ngIf="getComponent() && getTime()">
+    >
+  </div>
+
   <ul>
     <li *ngIf="loginService.isAdmin()"><a routerLink="/{{appRoutes.ADMIN}}">{{ 'users' | translate}}</a></li>
     <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.TIMER}}">{{ 'timer' | translate}}</a></li>

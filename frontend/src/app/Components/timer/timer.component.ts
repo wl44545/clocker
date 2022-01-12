@@ -9,6 +9,7 @@ import {ProjectsService} from "../../Services/projects.service";
 import {ClientsService} from "../../Services/clients.service";
 import {formatDate} from '@angular/common';
 import {TranslateService} from "@ngx-translate/core";
+import {ComponentService} from "../../Services/component.service";
 
 
 @Component({
@@ -89,6 +90,7 @@ export class TimerComponent implements OnInit {
     if(this.save(false)){
       this.getWorklog();
       this.clearLocal();
+      this.componentService.setTime(false);
     }
 
   }
@@ -104,6 +106,7 @@ export class TimerComponent implements OnInit {
   }
 
   timer(){
+    this.componentService.setTime(true);
     this.timerHandler = setInterval(() => {
       this.localTimeInSec += 1;
     },1000)
@@ -155,13 +158,15 @@ export class TimerComponent implements OnInit {
               private timerService: TimerService,
               private projectsService: ProjectsService,
               private clientsService: ClientsService,
-              private translateService: TranslateService) { }
+              private translateService: TranslateService,
+              private componentService:ComponentService) { }
 
   ngOnInit(): void {
     this.checkPermission();
     this.getWorklog();
     this.getProjects();
     this.getClients();
+    this.componentService.setComponent('TimerComponent');
   }
 
   private checkPermission(){

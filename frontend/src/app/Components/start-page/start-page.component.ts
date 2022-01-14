@@ -33,40 +33,7 @@ export class StartPageComponent implements OnInit {
   }
 
   public login(){
-    /*this.loginService.login(this.username, this.password).subscribe(user => {
-      if(user == null){
-        this.wrongLogin = true;
-      }else{
-        localStorage.setItem("USERNAME", user.username);
-        localStorage.setItem("ROLE", user.role);
-      }
-    });*/
-    //TODO: REMOVE BELOW
-    if(this.username == "u" && this.password == "u"){
-      this.router.navigateByUrl('/timer').then();
-      localStorage.setItem("USERNAME", "USER");
-      localStorage.setItem("ROLE", "USER");
-      localStorage.setItem("USERID", "1");
-      this.wrongLogin = false;
-    }
-    if(this.username == "ua" && this.password == "ua"){
-      this.router.navigateByUrl('/timer').then();
-      localStorage.setItem("USERNAME", "USERADMIN");
-      localStorage.setItem("ROLE", "USERADMIN");
-      localStorage.setItem("USERID", "3");
-      this.wrongLogin = false;
-    }
-    else if(this.username == "a" && this.password == "a"){
-      this.router.navigateByUrl('/admin').then();
-      localStorage.setItem("USERNAME", "ADMIN");
-      localStorage.setItem("ROLE", "ADMIN");
-      localStorage.setItem("USERID", "2");
-      this.wrongLogin = false;
-    }
-    else{
-      this.wrongLogin = true;
-    }
-    //TODO: REMOVE ABOVE
+    this.wrongLogin = !this.loginService.login(this.username, this.password);
     this.clearLoginForm();
   }
 

@@ -17,6 +17,7 @@ import { UsersComponent } from './Components/users/users.component';
 import {Angular2CsvModule} from "angular2-csv";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
 
 @NgModule({
   declarations: [
@@ -44,8 +45,10 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
         })
     ],
   providers: [
+    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     LoginService,
-    StatsService
+    StatsService,
+    JwtHelperService
   ],
   bootstrap: [AppComponent]
 })

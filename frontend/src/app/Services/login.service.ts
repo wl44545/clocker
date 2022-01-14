@@ -21,15 +21,33 @@ export class LoginService {
   }
 
   public login(username: string, password: string): boolean {
-    /*this.httpClient.post<LoginResponseModel>(`${environment.apiUrl}/login`, new LoginRequestModel(username, password)).subscribe(response => {
+   /* this.httpClient.post<LoginResponseModel>(`${environment.apiUrl}/login`, new LoginRequestModel(username, password)).subscribe(response => {
       if(response.token != null && this.isJWTValid(response.token) && this.isJWTPayloadOk(response.token)){
           localStorage.setItem("TOKEN", response.token);
+          if(this.isUser()){
+            this.router.navigateByUrl("/timer").then();
+          }
+          else if(this.isAdmin()){
+            this.router.navigateByUrl("/admin").then();
+          }
+          else{
+            this.router.navigateByUrl("/").then();
+          }
           return true;
         }
     });
     return false;*/
     if(username != "" && this.isJWTValid(username) && this.isJWTPayloadOk(username)){
       localStorage.setItem("TOKEN", username);
+      if(this.isUser()){
+        this.router.navigateByUrl("/timer").then();
+      }
+      else if(this.isAdmin()){
+        this.router.navigateByUrl("/admin").then();
+      }
+      else{
+        this.router.navigateByUrl("/").then();
+      }
       return true;
     }
     return false;

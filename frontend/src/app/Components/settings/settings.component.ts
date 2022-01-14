@@ -3,11 +3,11 @@ import {LoginService} from "../../Services/login.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss']
 })
-export class AdminComponent implements OnInit {
+export class SettingsComponent implements OnInit {
 
   constructor(public loginService: LoginService,
               public router: Router) { }

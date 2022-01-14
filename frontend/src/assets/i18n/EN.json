@@ -26,5 +26,8 @@
   "noClient": "No client",
   "start": "Start",
   "stop": "Stop",
-  "serverError": "There was a problem connecting to the server :("
+  "serverError": "There was a problem connecting to the server :(",
+  "adminPanel": "Admin",
+  "settings": "Settings"
+
 }

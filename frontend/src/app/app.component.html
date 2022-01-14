@@ -11,7 +11,9 @@
 <!--    <i *ngIf="loginService.isUser()" class="fas fa-user-shield"></i>-->
   </label>
   <ul>
-    <li *ngIf="loginService.isAdmin()"><a routerLink="/{{appRoutes.ADMIN}}">{{ 'users' | translate}}</a></li>
+    <li *ngIf="loginService.isAdmin()"><a routerLink="/{{appRoutes.ADMIN}}">{{ 'adminPanel' | translate}}</a></li>
+    <li *ngIf="loginService.isAdmin()"><a routerLink="/{{appRoutes.USERS}}">{{ 'users' | translate}}</a></li>
+    <li *ngIf="loginService.isAdmin()"><a routerLink="/{{appRoutes.SETTINGS}}">{{ 'settings' | translate}}</a></li>
     <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.TIMER}}">{{ 'timer' | translate}}</a></li>
     <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.PROJECTS}}">{{ 'projects' | translate}}</a></li>
     <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.CLIENTS}}">{{ 'clients' | translate}}</a></li>

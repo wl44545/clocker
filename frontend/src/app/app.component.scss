@@ -14,9 +14,9 @@ nav{
 }
 .welcome{
   color: $BLUE;
-  font-size: 3vh;
-  line-height: 80px;
-  float: left;
+}
+.icon{
+  margin-right: 0.25vw;
 }
 label.logo{
   margin-left: 4vw;
@@ -63,11 +63,8 @@ a.active,a:hover{
 }
 
 
-@media (max-width: 1020px){
-  .welcome{
-    font-size: 20px;
-    padding-left: 50px;
-  }
+@media (max-width: 1000px){
+
   label.logo{
     font-size: 30px;
     padding-left: 50px;
@@ -75,9 +72,9 @@ a.active,a:hover{
   nav ul li a{
     font-size: 16px;
   }
-}
 
-@media (max-width: 858px){
+//}
+//@media (max-width: 858px){
 
   .checkbtn{
     display: block;

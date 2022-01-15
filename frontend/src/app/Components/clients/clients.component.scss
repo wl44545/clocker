@@ -25,7 +25,7 @@
   margin-bottom: 1vh;
 }
 input{
-  width: 30vw;
+  width: 50%;
   height: 5vh;
 }
 button{
@@ -40,4 +40,42 @@ button{
   margin-left: 1vw;
   margin-right: 0.25vw;
   color: $PURPLE;
+}
+
+@media (max-width: 1000px){
+  .client{
+    display: block;
+    width: auto;
+    height: auto;
+    background-color: $BLUE;
+    padding: 1vh 1vw;
+    text-align: center;
+    justify-content:center;
+    align-items:center;
+  }
+  .add{
+    display: block;
+    width: auto;
+    height: auto;
+    background-color: $GRAY;
+    padding: 1vh 1vw;
+    text-align: center;
+    justify-content:center;
+    align-items:center;
+  }
+  .field{
+    display: block;
+    padding: 1vh 1vw;
+  }
+  .icon{
+    display: inline;
+  }
+  input{
+    width: 75%;
+    height: 3.5vh;
+  }
+  button{
+    margin-left: 1vw;
+    height: 3.5vh;
+  }
 }

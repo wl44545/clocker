@@ -6,15 +6,19 @@
 </head>
 <body>
   <div class="add">
-    <i class="icon far fa-building"></i>
-    <input type="text" id="clientName" placeholder="{{ 'clientName' | translate}}" [(ngModel)]="clientName" name="clientName">
-    <button *ngIf="!clientEdit" (click)="addClient()">{{ 'add' | translate}}</button>
-    <button *ngIf="clientEdit" (click)="saveClient()">{{ 'save' | translate}}</button>
+      <i class="icon far fa-building"></i>
+      <input type="text" id="clientName" placeholder="{{ 'clientName' | translate}}" [(ngModel)]="clientName" name="clientName">
+      <button *ngIf="!clientEdit" (click)="addClient()">{{ 'add' | translate}}</button>
+      <button *ngIf="clientEdit" (click)="saveClient()">{{ 'save' | translate}}</button>
   </div>
+
+
   <div class="client" *ngFor="let client of clients">
-    <i class="icon far fa-building"></i>
+    <div class="field">
+      <i class="icon far fa-building"></i>
       {{client.name}}
-    <div class="panel">
+    </div>
+    <div class="panel field">
       <i (click)="editClient(client)" class="fas fa-edit"></i>
       <i (click)="removeClient(client)" class="fa fa-trash" aria-hidden="true"></i>
     </div>

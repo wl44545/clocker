@@ -42,18 +42,30 @@
     <button *ngIf="entryEdit" (click)="saveEntry()">{{'save' | translate}}</button>
   </div>
   <div class="entry" *ngFor="let entry of worklog">
-    <i class="icon far fa-comment-dots"></i>
-    {{entry.description}}
-    <i *ngIf="entry.projectName" class="icon fas fa-project-diagram"></i>
-    {{entry.projectName}}
-    <i *ngIf="entry.clientName" class="icon far fa-building"></i>
-    {{entry.clientName}}
-    <i class="icon far fa-play-circle"></i>
-    {{entry.start.toString().replace("T"," ")}}
-    <i class="icon far fa-stop-circle"></i>
-    {{entry.stop.toString().replace("T"," ")}}
-    <i class="icon fas fa-hourglass-start"></i>
-    {{entry.timeDiff}}
+    <div class="element">
+      <i class="icon far fa-comment-dots marg"></i>
+      {{entry.description}}
+    </div>
+    <div class="element">
+      <i *ngIf="entry.projectName" class="icon fas fa-project-diagram"></i>
+      {{entry.projectName}}
+    </div>
+    <div class="element">
+      <i *ngIf="entry.clientName" class="icon far fa-building"></i>
+      {{entry.clientName}}
+    </div>
+    <div class="element">
+      <i class="icon far fa-play-circle"></i>
+      {{entry.start.toString().replace("T"," ")}}
+    </div>
+    <div class="element">
+      <i class="icon far fa-stop-circle"></i>
+      {{entry.stop.toString().replace("T"," ")}}
+    </div>
+    <div class="element">
+      <i class="icon fas fa-hourglass-start"></i>
+      {{entry.timeDiff}}
+    </div>
     <div class="panel">
       <i (click)="editEntry(entry)" class="fas fa-edit"></i>
       <i (click)="removeEntry(entry)" class="fa fa-trash" aria-hidden="true"></i>

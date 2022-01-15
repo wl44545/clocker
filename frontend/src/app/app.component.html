@@ -1,24 +1,58 @@
 <nav>
-  <input type="checkbox" id="check">
+  <input type="checkbox" id="check" [(ngModel)]="select">
   <label for="check" class="checkbtn">
     <i class="fas fa-bars"></i>
   </label>
   <label class="logo">Clocker</label>
 
-  <div *ngIf="getComponent() && getTime()">
-    >
-  </div>
+  <a routerLink="/{{appRoutes.TIMER}}" *ngIf="timeControl && !getComponent('TimerComponent')">
+    <div class="actualTimer">
+      <img class="actualIcon" src="../assets/icons/timer.png"/>
+      {{getHour()}}{{getMinute()}}{{getSecund()}}
+    </div>
+  </a>
 
   <ul>
-    <li *ngIf="loginService.isAdmin()"><a routerLink="/{{appRoutes.ADMIN}}">{{ 'users' | translate}}</a></li>
-    <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.TIMER}}">{{ 'timer' | translate}}</a></li>
-    <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.PROJECTS}}">{{ 'projects' | translate}}</a></li>
-    <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.CLIENTS}}">{{ 'clients' | translate}}</a></li>
-    <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.REPORTS}}">{{ 'reports' | translate}}</a></li>
-    <li *ngIf="loginService.isLogged()" (click)="loginService.logout()"><a href="#">{{ 'logout' | translate}}</a></li>
+    <li *ngIf="loginService.isAdmin()" (click)="hideMenu()">
+      <a routerLink="/{{appRoutes.ADMIN}}">
+        <p  [ngClass]="{'active': getComponent('AdminComponent')}">
+          {{ 'users' | translate}}
+        </p>
+      </a>
+    </li>
+    <li *ngIf="loginService.isUser()" (click)="hideMenu()">
+      <a routerLink="/{{appRoutes.TIMER}}">
+        <p  [ngClass]="{'active': getComponent('TimerComponent')}">
+          {{ 'timer' | translate}}
+        </p>
+      </a>
+    </li>
+    <li *ngIf="loginService.isUser()" (click)="hideMenu()">
+      <a routerLink="/{{appRoutes.PROJECTS}}">
+        <p  [ngClass]="{'active': getComponent('ProjectsComponent')}">
+          {{ 'projects' | translate}}
+        </p>
+      </a>
+    </li>
+    <li *ngIf="loginService.isUser()" (click)="hideMenu()">
+      <a routerLink="/{{appRoutes.CLIENTS}}">
+        <p  [ngClass]="{'active': getComponent('ClientsComponent')}">
+          {{ 'clients' | translate}}
+        </p>
+      </a>
+    </li>
+    <li *ngIf="loginService.isUser()" (click)="hideMenu()">
+      <a routerLink="/{{appRoutes.REPORTS}}">
+        <p  [ngClass]="{'active': getComponent('ReportsComponent')}">
+          {{ 'reports' | translate}}
+        </p>
+      </a>
+    </li>
+    <li *ngIf="loginService.isLogged()" (click)="logout()"><a href="#">{{ 'logout' | translate}}</a></li>
     <li><img class="flag" (click)="switchLang('PL')" src="../assets/icons/PL.png" alt="PL"/></li>
     <li><img class="flag" (click)="switchLang('EN')" src="../assets/icons/EN.png" alt="EN"/></li>
     <li><img class="flag" (click)="switchLang('DE')" src="../assets/icons/DE.png" alt="DE"/></li>
   </ul>
 </nav>
+
 <router-outlet></router-outlet>

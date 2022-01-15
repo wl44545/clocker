@@ -10,6 +10,7 @@ import {ClientsService} from "../../Services/clients.service";
 import {formatDate} from '@angular/common';
 import {TranslateService} from "@ngx-translate/core";
 import {ComponentService} from "../../Services/component.service";
+import {AppComponent} from "../../app.component";
 
 
 @Component({
@@ -31,9 +32,19 @@ export class TimerComponent implements OnInit {
   localTimeInSec: number = 0;
   localTimeModelId: number | undefined;
 
+  private withoutMicrosec(value:string){
+    let index = value.indexOf('.');
+    if(index > 0){
+      return value.slice(0,index);
+    }
+    return value;
+}
+
   public start() {
+    console.log('start');
     this.timerActive = true;
-    this.localTimeStart = formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en');
+    this.localTimeStart = this.withoutMicrosec(formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en'));
+
     this.localTimeInSec = 0;
     this.timer();
 
@@ -87,10 +98,11 @@ export class TimerComponent implements OnInit {
   }
 
   public stop() {
+    console.log('stop');
     if(this.save(false)){
       this.getWorklog();
       this.clearLocal();
-      this.componentService.setTime(false);
+      this.appComponent.stop();
     }
 
   }
@@ -106,7 +118,9 @@ export class TimerComponent implements OnInit {
   }
 
   timer(){
-    this.componentService.setTime(true);
+    if (this.localTimeStart != null) {
+      this.appComponent.start(this.localTimeInSec);
+    }
     this.timerHandler = setInterval(() => {
       this.localTimeInSec += 1;
     },1000)
@@ -159,7 +173,8 @@ export class TimerComponent implements OnInit {
               private projectsService: ProjectsService,
               private clientsService: ClientsService,
               private translateService: TranslateService,
-              private componentService:ComponentService) { }
+              private componentService:ComponentService,
+              private appComponent:AppComponent) { }
 
   ngOnInit(): void {
     this.checkPermission();
@@ -184,6 +199,7 @@ export class TimerComponent implements OnInit {
       });
     });
   }
+
   public getClients(){
     this.clientsService.getClients(this.loginService.getUserID()).subscribe(clients => {
       this.clients = clients;
@@ -236,8 +252,9 @@ export class TimerComponent implements OnInit {
             this.localClient = entry.client;
             this.localProject = entry.project;
             this.timerActive = true;
-            this.localTimeInSec = ms / 1000 + 3600;
-            this.localTimeStart = entry.start.toString();
+            this.localTimeInSec = ms / 1000;
+
+            this.localTimeStart = this.withoutMicrosec(entry.start.toString());
             this.timer();
           }
           else{

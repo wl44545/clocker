@@ -14,9 +14,11 @@ p {
 }
 .left {
   width: 60%;
+  height:80vh;
 }
 .right {
   width: 40%;
+  height: 80vh;
 }
 .row:after {
   content: "";
@@ -52,7 +54,40 @@ input{
   margin-bottom: 1vh;
 }
 button{
-  width: 5vw;
+  width: 15vw;
   height: 5vh;
   font-size: 2vh;
+}
+
+@media (max-width: 1300px){
+  .login{
+    top: 10vh;
+  }
+}
+
+@media (max-width: 858px){
+  .left{
+    width: 100vw;
+    height: 40vh;
+  }
+
+  .right{
+    width: 100vw;
+    height: 50vh;
+  }
+
+  .login{
+    min-width:50%;
+    z-index: -1;
+  }
+
+  input, button{
+    width: 20vh;
+  }
+}
+
+@media (max-width: 700px){
+  p{
+    font-size: 30px;
+  }
 }

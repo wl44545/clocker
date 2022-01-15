@@ -14,6 +14,12 @@ export class AppComponent implements OnInit{
   title = 'clocker';
   appRoutes = APPROUTES;
 
+  timerHandler: number = 0;
+  localTimeInSec: number = 0;
+  timeControl: boolean = false;
+
+  select: boolean = false;
+
   constructor(public loginService: LoginService,
               public translateService: TranslateService,
               private languageService: LanguageService,
@@ -25,20 +31,82 @@ export class AppComponent implements OnInit{
     this.languageService.getCurrentLanguage();
   }
 
+  hideMenu(){
+    this.select = false;
+  }
+
   switchLang(language: string) {
     this.languageService.setCurrentLanguage(language);
+    this.hideMenu();
   }
 
-  getTime(){
-    return this.componentService.getTime();
+  getComponent(component: string){
+    return (component === this.componentService.getComponent());
   }
 
-  getComponent(){
-    let component:string = this.componentService.getComponent();
+  logout(){
+    this.hideMenu();
+    this.clearLocal();
+    this.loginService.logout();
+  }
 
-    if(component != 'TimerComponent' && component != 'AdminComponent' && component != 'StartPageComponent'){
-      return true;
+  timer(){
+    this.timerHandler = setInterval(() => {
+      this.localTimeInSec += 1;
+    },1000)
+  }
+
+  getHour(){
+    let wynik = Math.floor(this.localTimeInSec / 3600).toString();
+    if(wynik.length == 1){
+      if(wynik == '0'){
+        return "    ";
+      }
+      wynik = '0' + wynik;
     }
-    return false;
+    wynik = wynik + ':';
+    return wynik;
+  }
+
+  getMinute(){
+    let sec = this.localTimeInSec % 3600;
+    let wynik = Math.floor(sec / 60).toString();
+    if(wynik.length == 1){
+      wynik = '0' + wynik;
+    }
+    wynik = wynik + ':';
+    return wynik;
+  }
+
+  getSecund(){
+    let sec = this.localTimeInSec % 3600;
+    let wynik = Math.floor(sec % 60).toString();
+    if(wynik.length == 1){
+      return '0' + wynik;
+    }
+    return wynik;
+  }
+
+  start(time: number){
+    if(this.timeControl){
+      return;
+    }
+
+    this.timeControl = true;
+    this.localTimeInSec = time;
+
+    this.timerHandler = setInterval(() => {
+      this.localTimeInSec += 1;
+    },1000)
+  }
+
+  clearLocal(){
+    this.timeControl = false;
+    clearInterval(this.timerHandler);
+    this.localTimeInSec = 0;
+  }
+
+  stop(){
+    this.clearLocal();
   }
 }

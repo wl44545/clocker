@@ -14,7 +14,7 @@
       <p>{{yearStats}} {{ 'statsYear' | translate}}</p>
     </div>
     <div class="column right" *ngIf="!loginService.isLogged()">
-      <div class="login">
+      <div class="login" id="login">
         <form>
         <div class="wrong-login" *ngIf="wrongLogin">
           {{ 'wrongLoginPassword' | translate}}

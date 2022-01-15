@@ -22,23 +22,54 @@ label.logo{
   font-weight: bold;
   float: left;
 }
+
 nav ul{
   float: right;
   margin-right: 20px;
 }
+
 nav ul li{
   display: inline-block;
   line-height: 80px;
   margin: 0 5px;
 }
 
+.active{
+  color: $BLUE;
+  font-weight: bolder;
+}
+
 nav ul li a{
   color: $OAPL;
   font-size: 17px;
-  padding: 7px 13px;
   border-radius: 3px;
   text-transform: uppercase;
 }
+
+.actualTimer{
+  margin-top: 25px;
+  padding: 6px;
+  float:left;
+  font-size: 20px;
+  z-index: 1;
+  color: white;
+  display: flex;
+  align-items: center;
+  border: 1px $OAPL solid;
+  border-radius: 3px;
+}
+
+.actualTimer:hover{
+  padding: 5px;
+  border: 2px $OAPL solid;
+}
+
+.actualIcon{
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+}
+
 a.active,a:hover{
   background: $GRAY;
   transition: .5s;
@@ -53,10 +84,10 @@ a.active,a:hover{
   cursor: pointer;
   display: none;
 }
+
 #check{
   display: none;
 }
-
 
 @media (max-width: 1020px){
 
@@ -64,6 +95,7 @@ a.active,a:hover{
     font-size: 30px;
     padding-left: 50px;
   }
+
   nav ul li a{
     font-size: 16px;
   }
@@ -71,9 +103,14 @@ a.active,a:hover{
 
 @media (max-width: 858px){
 
+  .actualTimer{
+    display: none;
+  }
+
   .checkbtn{
     display: block;
   }
+
   ul{
     position: fixed;
     width: 100%;
@@ -84,22 +121,27 @@ a.active,a:hover{
     text-align: center;
     transition: all .5s;
   }
+
   nav ul li{
     display: block;
     margin: 50px 0;
     line-height: 30px;
   }
+
   nav ul li a{
     font-size: 20px;
   }
+
   a:hover,a.active{
     background: none;
     color: $GRAY;
   }
+
   #check:checked ~ ul{
     left: 0;
   }
 }
+
 .flag{
   width: 1.25vw;
   height: 1.25vw;

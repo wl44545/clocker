@@ -1,5 +1,13 @@
 @import "src/assets/constants/Colors";
 
+.marg{
+  margin:5px;
+}
+
+.element{
+  width: 20%;
+}
+
 label{
   padding: 2px;
   float: left;
@@ -22,9 +30,9 @@ label{
   height: 10vh;
   background-color: $BLUE;
   position: relative;
-  text-align: center;
+  //text-align: center;
   display:flex;
-  justify-content:center;
+  //justify-content:center;
   align-items:center;
   border-radius: 2vh;
   margin-bottom: 1vh;

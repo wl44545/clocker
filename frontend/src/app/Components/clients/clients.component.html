@@ -11,8 +11,6 @@
       <button *ngIf="!clientEdit" (click)="addClient()">{{ 'add' | translate}}</button>
       <button *ngIf="clientEdit" (click)="saveClient()">{{ 'save' | translate}}</button>
   </div>
-
-
   <div class="client" *ngFor="let client of clients">
     <div class="field">
       <i class="icon far fa-building"></i>

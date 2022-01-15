@@ -6,25 +6,37 @@
 </head>
 <body>
   <div class="add">
+    <div class="field">
     <i class="icon fas fa-project-diagram"></i>
     <input type="text" id="projectName" placeholder="{{'projectName' | translate}}" [(ngModel)]="projectName" name="projectName">
+    </div>
+      <div class="field">
     <i class="icon far fa-building"></i>
     <select [(ngModel)]="clientId">
       <option [value]=0>{{'noClient' | translate}}</option>
       <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
     </select>
+      </div>
+        <div class="field">
     <button *ngIf="!projectEdit" (click)="addProject()">{{'add' | translate}}</button>
     <button *ngIf="projectEdit" (click)="saveProject()">{{'save' | translate}}</button>
+        </div>
+
   </div>
   <div class="project" *ngFor="let project of projects">
-    <i class="icon fas fa-project-diagram"></i>
-    {{project.name}}
-    <i *ngIf="project.clientName" class="icon far fa-building"></i>
-    {{project.clientName}}
-    <div class="panel">
+    <div class="field">
+      <i class="icon fas fa-project-diagram"></i>
+      {{project.name}}
+    </div>
+    <div class="field">
+      <i *ngIf="project.clientName" class="icon far fa-building"></i>
+      {{project.clientName}}
+    </div>
+    <div class="field panel">
       <i (click)="editProject(project)" class="fas fa-edit"></i>
       <i (click)="removeProject(project)" class="fa fa-trash" aria-hidden="true"></i>
     </div>
+
   </div>
 </body>
 </html>

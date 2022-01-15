@@ -28,6 +28,9 @@
   "stop": "Stop",
   "serverError": "Es gab ein Problem mit der Verbindung zum Server :(",
   "adminPanel": "Admin",
-  "settings": "Einstellungen"
-
+  "settings": "Einstellungen",
+  "defaultLanguage": "Standardsprache",
+  "PL": "Polnisch",
+  "EN": "Englisch",
+  "DE": "Deutsch"
 }

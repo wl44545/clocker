@@ -17,11 +17,13 @@ body{
   align-items:center;
   border-radius: 2vh;
   margin-bottom: 1vh;
-
   color: $PURPLE;
   font-size: 3vh;
-  font-weight: bold;
+  //font-weight: bold;
   text-transform: uppercase;
+}
 
-
+a.active,a:hover{
+  background: $OAPL;
+  transition: .5s;
 }

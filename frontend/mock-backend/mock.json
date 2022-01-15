@@ -1,4 +1,22 @@
 {
+  "settings": {
+    "languages": [
+      {
+        "code": "PL",
+        "name": "Polish"
+      },
+      {
+        "code": "EN",
+        "name": "English"
+      },
+      {
+        "code": "DE",
+        "name": "German"
+      }
+    ],
+    "language": "DE",
+    "timerDays": 200
+  },
   "stats": {
     "dayStats": 1,
     "weekStats": 2,
@@ -259,15 +277,15 @@
       "id": 12
     },
     {
-      "client": 0,
+      "client": 5,
       "projectName": "",
       "clientName": "",
       "timeDiff": "",
       "active": false,
       "description": "jhgfdsdfghj",
       "user": "432",
-      "start": "2022-01-14T23:45:03",
-      "stop": "2022-01-14T23:45:07",
+      "start": "2022-01-12T23:45:03",
+      "stop": "2022-01-12T23:45:07",
       "project": "7",
       "id": 13
     }

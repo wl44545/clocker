@@ -1,31 +1,37 @@
 @import "src/assets/constants/Colors";
 
+body{
+  padding: 2vh 2vw;
+}
+
 .option{
-  width: 50vw;
-  height: 10vh;
-  background-color: $BLUE;
+  margin: 0 auto;
+  padding: 10px 10px;
   position: relative;
+  width: 50vw;
+  height: 7.5vh;
+  background-color: $BLUE;
   text-align: center;
   display:flex;
   justify-content:center;
   align-items:center;
   border-radius: 2vh;
   margin-bottom: 1vh;
+  color: $PURPLE;
+}
+.label{
+  font-size: 3vh;
+  margin-right: 1vw;
+}
+select{
+  width: 20vw;
+  height: 5vh;
 }
 input{
-  width: 30vw;
+  width: 20vw;
   height: 5vh;
 }
 button{
   margin-left: 1vw;
   height: 5vh;
-}
-.panel{
-  margin-left: 2vw;
-  color: $PURPLE;
-}
-.icon{
-  margin-left: 1vw;
-  margin-right: 0.25vw;
-  color: $PURPLE;
 }

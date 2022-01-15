@@ -3,6 +3,8 @@ import {APPROUTES} from "../assets/constants/AppRoutes";
 import {TranslateService} from "@ngx-translate/core";
 import {LoginService} from "./Services/login.service";
 import {LanguageService} from "./Services/language.service";
+import {SettingsModel} from "./Models/settings.model";
+import {SettingsService} from "./Services/settings.service";
 
 @Component({
   selector: 'app-root',
@@ -15,15 +17,27 @@ export class AppComponent implements OnInit{
 
   constructor(public loginService: LoginService,
               public translateService: TranslateService,
-              private languageService: LanguageService) {}
+              private languageService: LanguageService,
+              private settingsService: SettingsService) {}
 
   ngOnInit(): void {
-    this.translateService.addLangs(['EN','PL','DE']);
-    this.translateService.setDefaultLang('EN');
+    this.setLanguages();
     this.languageService.getCurrentLanguage();
  }
 
-  switchLang(language: string) {
+  public switchLang(language: string) {
     this.languageService.setCurrentLanguage(language);
  }
+
+ private setLanguages(){
+   let languages: string[] = [];
+   this.settingsService.getSettings().subscribe(settings => {
+     settings.languages.forEach(language => {
+       languages.push(language.code);
+     });
+     this.translateService.addLangs(languages);
+     this.translateService.setDefaultLang(settings.language);
+   });
+ }
+
 }

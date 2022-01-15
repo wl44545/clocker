@@ -28,5 +28,13 @@
   "stop": "Stop",
   "serverError": "Wystąpił problem z połączeniem z serwerem :(",
   "adminPanel": "Admin",
-  "settings": "Ustawienia"
+  "settings": "Ustawienia",
+  "defaultLanguage": "Domyślny język",
+  "PL": "Polski",
+  "EN": "Angielski",
+  "DE": "Niemiecki",
+  "timerDays": "Dni w timerze",
+  "settingsSaved": "Zapisano ustawienia",
+  "settingsSaveError": "Wystąpił błąd podczas zapisywania ustawień"
+
 }

@@ -9,6 +9,7 @@ import {ProjectsService} from "../../Services/projects.service";
 import {ClientsService} from "../../Services/clients.service";
 import {formatDate} from '@angular/common';
 import {TranslateService} from "@ngx-translate/core";
+import {SettingsService} from "../../Services/settings.service";
 
 
 @Component({
@@ -155,7 +156,8 @@ export class TimerComponent implements OnInit {
               private timerService: TimerService,
               private projectsService: ProjectsService,
               private clientsService: ClientsService,
-              private translateService: TranslateService) { }
+              private translateService: TranslateService,
+              private settingsService: SettingsService) { }
 
   ngOnInit(): void {
     this.checkPermission();
@@ -190,69 +192,71 @@ export class TimerComponent implements OnInit {
   }
 
   private getWorklog(){
-    this.timerService.getWorklog(this.loginService.getUserID()).subscribe(worklog => {
-      this.worklog = [];
-      for(let entry of worklog) {
-        if(entry.active){
-          entry.stop = new Date();
-        }
-        if(new Date(entry.stop) > new Date(Date.now() - 7*24*60*60*1000)){
-          if (entry.project != 0) {
-            this.projectsService.getProject(entry.project).subscribe(project => {
-              entry.projectName = project.name;
-              if (project.client != 0) {
-                this.clientsService.getClient(project.client).subscribe(client => {
-                  entry.clientName = client.name;
-                  entry.client = client.id;
-                })
-              }else{
-                entry.client = 0;
-                entry.clientName = "";
-              }
-            })
-          }else{
-            entry.project = 0;
-            entry.projectName = "";
-            entry.client = 0;
-            entry.clientName = "";
-          }
-
-          let ms = (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
-          let seconds = ms / 1000;
-          const hours = Math.floor(seconds / 3600);
-          seconds = seconds % 3600;
-          const minutes = Math.floor(seconds / 60);
-          seconds = seconds % 60;
-          entry.timeDiff = `${hours}:${minutes}:${seconds}`;
-
+    this.settingsService.getSettings().subscribe(settings => {
+      this.timerService.getWorklog(this.loginService.getUserID()).subscribe(worklog => {
+        this.worklog = [];
+        for(let entry of worklog) {
           if(entry.active){
-            this.localTimeTitle = entry.description;
-            this.localTimeModelId = entry.id;
-            this.localClient = entry.client;
-            this.localProject = entry.project;
-            this.timerActive = true;
-            this.localTimeInSec = ms / 1000 + 3600;
-            this.localTimeStart = entry.start.toString();
-            this.timer();
+            entry.stop = new Date();
           }
-          else{
-            this.worklog.push(entry);
+          if(new Date(entry.stop) > new Date(Date.now() - settings.timerDays*24*60*60*1000)){
+            if (entry.project != 0) {
+              this.projectsService.getProject(entry.project).subscribe(project => {
+                entry.projectName = project.name;
+                if (project.client != 0) {
+                  this.clientsService.getClient(project.client).subscribe(client => {
+                    entry.clientName = client.name;
+                    entry.client = client.id;
+                  })
+                }else{
+                  entry.client = 0;
+                  entry.clientName = "";
+                }
+              })
+            }else{
+              entry.project = 0;
+              entry.projectName = "";
+              entry.client = 0;
+              entry.clientName = "";
+            }
+
+            let ms = (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
+            let seconds = ms / 1000;
+            const hours = Math.floor(seconds / 3600);
+            seconds = seconds % 3600;
+            const minutes = Math.floor(seconds / 60);
+            seconds = seconds % 60;
+            entry.timeDiff = `${hours}:${minutes}:${seconds}`;
+
+            if(entry.active){
+              this.localTimeTitle = entry.description;
+              this.localTimeModelId = entry.id;
+              this.localClient = entry.client;
+              this.localProject = entry.project;
+              this.timerActive = true;
+              this.localTimeInSec = ms / 1000 + 3600;
+              this.localTimeStart = entry.start.toString();
+              this.timer();
+            }
+            else{
+              this.worklog.push(entry);
+            }
           }
         }
-      }
-      this.getTotalTime();
-      this.worklog.sort((a, b) => {
-        if ( a.stop < b.stop ){
-          return 1;
-        }
-        if ( a.stop > b.stop ){
-          return -1;
-        }
-        return 0;
-      });
-    },() => {
-      this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        this.getTotalTime();
+        this.worklog.sort((a, b) => {
+          if ( a.stop < b.stop ){
+            return 1;
+          }
+          if ( a.stop > b.stop ){
+            return -1;
+          }
+          return 0;
+        });
+      },() => {
+        this.translateService.get('serverError').subscribe((text: string) => {
+          window.alert(text);
+        });
       });
     });
   }

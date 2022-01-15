@@ -28,6 +28,9 @@
   "stop": "Stop",
   "serverError": "There was a problem connecting to the server :(",
   "adminPanel": "Admin",
-  "settings": "Settings"
-
+  "settings": "Settings",
+  "defaultLanguage": "Default language",
+  "PL": "Polish",
+  "EN": "English",
+  "DE": "German"
 }

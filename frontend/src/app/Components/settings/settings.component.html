@@ -6,6 +6,21 @@
 </head>
 <body>
 
+<div class="option">
+  <div class="label"> {{ 'defaultLanguage' | translate}}:</div>
+  <select [(ngModel)]="settings.language">
+    <option *ngFor="let language of settings.languages" [value]="language.code">{{ language.code | translate }}</option>
+  </select>
+</div>
+
+<div class="option">
+  <div class="label"> {{ 'timerDays' | translate}}:</div>
+  <input type="number" [(ngModel)]="settings.timerDays">
+</div>
+
+<div class="option">
+  <button (click)="save()">{{ 'save' | translate}}</button>
+</div>
 
 
 </body>

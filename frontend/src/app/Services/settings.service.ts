@@ -17,12 +17,12 @@ export class SettingsService {
   }
 
   public getSettings(): Observable<SettingsModel> {
-    //return this.httpClient.get<SettingsModel>("../assets/mock_settings.json");
-    return this.httpClient.get<SettingsModel>(`${environment.apiUrl}/settings`);
+    //return this.httpClient.get<SettingsModel>("../assets/mock_settings.json", this.loginService.getAuthorizedOptions());
+    return this.httpClient.get<SettingsModel>(`${environment.apiUrl}/settings`, this.loginService.getAuthorizedOptions());
   }
 
   public setSettings(settings: SettingsModel): Observable<SettingsModel> {
-    return this.httpClient.post<SettingsModel>(`${environment.apiUrl}/settings`, settings);
+    return this.httpClient.post<SettingsModel>(`${environment.apiUrl}/settings`, settings, this.loginService.getAuthorizedOptions());
   }
 
 }

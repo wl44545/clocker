@@ -14,6 +14,7 @@ import {SettingsService} from "./Services/settings.service";
 export class AppComponent implements OnInit{
   title = 'clocker';
   appRoutes = APPROUTES;
+  isNavOpen: boolean = false;
 
   constructor(public loginService: LoginService,
               public translateService: TranslateService,

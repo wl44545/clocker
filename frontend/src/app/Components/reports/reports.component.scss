@@ -41,6 +41,11 @@
   margin-right: 0.25vw;
   color: $PURPLE;
 }
+select{
+  width: 17.5vw;
+  height: 5vh;
+  margin-left: 0.5vw;
+}
 
 @media (max-width: 700px){
   .entry{

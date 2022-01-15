@@ -35,7 +35,9 @@ button{
   margin-left: 1vw;
   height: 5vh;
 }
-
+.save{
+  background-color: $GRAY;
+}
 
 @media (max-width: 700px){
   .option{

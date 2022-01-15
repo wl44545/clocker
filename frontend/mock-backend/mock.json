@@ -15,7 +15,7 @@
       }
     ],
     "language": "PL",
-    "timerDays": 7
+    "timerDays": 100
   },
   "stats": {
     "dayStats": 1,
@@ -383,6 +383,24 @@
       "stop": "2022-01-15T05:11:32",
       "project": 0,
       "id": 19
+    },
+    {
+      "description": "aaa",
+      "user": "30",
+      "start": "2022-01-14T07:31:03",
+      "stop": "2022-01-14T12:31:05",
+      "project": "8",
+      "active": false,
+      "id": 20
+    },
+    {
+      "description": "bierzące zadanie",
+      "user": "30",
+      "start": "2022-01-15T06:31:20.362Z",
+      "stop": "2022-01-15T06:31:20.362Z",
+      "project": 0,
+      "active": true,
+      "id": 21
     }
   ]
 }

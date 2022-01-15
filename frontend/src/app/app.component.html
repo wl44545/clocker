@@ -5,7 +5,7 @@
   </label>
   <label class="logo">Clocker</label>
   <ul (click)="isNavOpen = !isNavOpen">
-    <li *ngIf="loginService.isLogged()" class="welcome" style="margin-right: 2vw;"><i class="icon fas fa-user-circle"></i>{{this.loginService.getUsername()}}</li>
+    <li *ngIf="loginService.isLogged()" class="welcome username"><i class="icon fas fa-user-circle"></i>{{this.loginService.getUsername()}}</li>
     <li *ngIf="loginService.isAdmin()"><a routerLink="/{{appRoutes.ADMIN}}">{{ 'adminPanel' | translate}}</a></li>
     <li *ngIf="loginService.isAdmin()"><a routerLink="/{{appRoutes.USERS}}">{{ 'users' | translate}}</a></li>
     <li *ngIf="loginService.isAdmin()"><a routerLink="/{{appRoutes.SETTINGS}}">{{ 'settings' | translate}}</a></li>

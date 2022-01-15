@@ -4,14 +4,7 @@
     <i class="fas fa-bars"></i>
   </label>
   <label class="logo">Clocker</label>
-<!--  <label class="welcome" *ngIf="loginService.isLogged()">-->
-<!--    <i class="fas fa-user-circle"></i>-->
-<!--    {{this.loginService.getUsername()}}-->
-<!--&lt;!&ndash;    <i *ngIf="loginService.isAdmin()" class="fas fa-user-cog"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;    <i *ngIf="loginService.isUser()" class="fas fa-user-shield"></i>&ndash;&gt;-->
-<!--  </label>-->
   <ul>
-
     <li *ngIf="loginService.isLogged()" class="welcome"><i class="icon fas fa-user-circle"></i>{{this.loginService.getUsername()}}</li>
     <li *ngIf="loginService.isAdmin()"><a routerLink="/{{appRoutes.ADMIN}}">{{ 'adminPanel' | translate}}</a></li>
     <li *ngIf="loginService.isAdmin()"><a routerLink="/{{appRoutes.USERS}}">{{ 'users' | translate}}</a></li>
@@ -21,9 +14,11 @@
     <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.CLIENTS}}">{{ 'clients' | translate}}</a></li>
     <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.REPORTS}}">{{ 'reports' | translate}}</a></li>
     <li *ngIf="loginService.isLogged()" (click)="loginService.logout()"><a href="#">{{ 'logout' | translate}}</a></li>
-    <li><img class="flag" (click)="switchLang('PL')" src="../assets/icons/PL.png" alt="PL"/></li>
-    <li><img class="flag" (click)="switchLang('EN')" src="../assets/icons/EN.png" alt="EN"/></li>
-    <li><img class="flag" (click)="switchLang('DE')" src="../assets/icons/DE.png" alt="DE"/></li>
+    <li>
+      <img class="flag" (click)="switchLang('PL')" src="../assets/icons/PL.png" alt="PL"/>
+      <img class="flag" (click)="switchLang('EN')" src="../assets/icons/EN.png" alt="EN"/>
+      <img class="flag" (click)="switchLang('DE')" src="../assets/icons/DE.png" alt="DE"/>
+    </li>
   </ul>
 </nav>
 <router-outlet></router-outlet>

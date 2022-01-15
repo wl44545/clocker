@@ -12,7 +12,7 @@
     </div>
   </a>
 
-  <ul>
+  <ul >
     <li *ngIf="loginService.isAdmin()" (click)="hideMenu()">
       <a routerLink="/{{appRoutes.ADMIN}}">
         <p  [ngClass]="{'active': getComponent('AdminComponent')}">

@@ -120,6 +120,7 @@ a.active,a:hover{
     left: -110%;
     text-align: center;
     transition: all .5s;
+    z-index: 1;
   }
 
   nav ul li{

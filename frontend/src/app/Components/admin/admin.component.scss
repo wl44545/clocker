@@ -27,3 +27,11 @@ a.active,a:hover{
   background: $OAPL;
   transition: .5s;
 }
+
+@media (max-width: 700px){
+
+  .option{
+    width: 75%;
+  }
+
+}

@@ -14,8 +14,8 @@
         "name": "German"
       }
     ],
-    "language": "DE",
-    "timerDays": 200
+    "language": "PL",
+    "timerDays": 7
   },
   "stats": {
     "dayStats": 1,
@@ -251,15 +251,15 @@
       "id": 10
     },
     {
-      "client": 0,
+      "client": 3,
       "projectName": "",
       "clientName": "",
       "timeDiff": "",
       "active": false,
       "description": "bierzące zadanie",
       "user": 2,
-      "start": "2022-01-09T16:34:42",
-      "stop": "2022-01-09T16:34:46",
+      "start": "2021-12-10T16:34:42",
+      "stop": "2021-12-11T16:34:46",
       "project": "6",
       "id": 11
     },
@@ -288,6 +288,58 @@
       "stop": "2022-01-12T23:45:07",
       "project": "7",
       "id": 13
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bierzące zadanie",
+      "user": "432",
+      "start": "2022-01-15T03:45:23",
+      "stop": "2022-01-15T03:45:24",
+      "project": 0,
+      "id": 14
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bierzące zadanie",
+      "user": "3",
+      "start": "2022-01-10T03:48:13",
+      "stop": "2022-01-10T03:48:15",
+      "project": 0,
+      "id": 15
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bierzące zadanie",
+      "user": "3",
+      "start": "2022-01-13T03:48:16",
+      "stop": "2022-01-13T03:48:17",
+      "project": 0,
+      "id": 16
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bierzące zadanie",
+      "user": "3",
+      "start": "2022-01-15T03:48:18",
+      "stop": "2022-01-15T03:48:19",
+      "project": 0,
+      "id": 17
     }
   ]
 }

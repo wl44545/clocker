@@ -32,5 +32,8 @@
   "defaultLanguage": "Default language",
   "PL": "Polish",
   "EN": "English",
-  "DE": "German"
+  "DE": "German",
+  "timerDays": "How many days in the timer history",
+  "settingsSaved": "Settings saved",
+  "settingsSaveError": "An error occurred while saving the settings"
 }

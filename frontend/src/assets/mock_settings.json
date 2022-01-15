@@ -1,0 +1,18 @@
+{
+  "languages": [
+    {
+      "code": "PL",
+      "name": "Polish"
+    },
+    {
+      "code": "EN",
+      "name": "English"
+    },
+    {
+      "code": "DE",
+      "name": "German"
+    }
+  ],
+  "language": "DE",
+  "timerDays": 200
+}

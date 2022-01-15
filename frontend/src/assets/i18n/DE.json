@@ -32,5 +32,8 @@
   "defaultLanguage": "Standardsprache",
   "PL": "Polnisch",
   "EN": "Englisch",
-  "DE": "Deutsch"
+  "DE": "Deutsch",
+  "timerDays": "Wie viele Tage ist der Verlauf",
+  "settingsSaved": "Einstellungen gespeichert",
+  "settingsSaveError": "Beim Speichern der Einstellungen ist ein Fehler aufgetreten"
 }

@@ -25,12 +25,6 @@
   },
   "login": [
     {
-      "id": 1,
-      "username": "a",
-      "password": "a",
-      "role": "USERADMIN"
-    },
-    {
       "id": 2,
       "username": "u",
       "password": "u",
@@ -47,6 +41,12 @@
       "role": "USER",
       "password": "admin",
       "id": 4
+    },
+    {
+      "username": "sss",
+      "role": "ADMIN",
+      "password": "sss",
+      "id": 5
     }
   ],
   "clients": [
@@ -791,7 +791,7 @@
       "clientName": "",
       "timeDiff": "",
       "active": false,
-      "description": "",
+      "description": "test descr",
       "user": "2033",
       "start": "2022-01-16T17:28:29",
       "stop": "2022-01-16T18:38:59",

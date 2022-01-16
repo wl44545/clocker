@@ -5,6 +5,7 @@ import {UserModel, UserModelRequest} from "../../Models/user.model";
 import {UserService} from "../../Services/user.service";
 import {TranslateService} from "@ngx-translate/core";
 import {ComponentService} from "../../Services/component.service";
+import {ProjectModel} from "../../Models/project.model";
 
 @Component({
   selector: 'app-users',
@@ -18,7 +19,7 @@ export class UsersComponent implements OnInit {
   firstshow: boolean = true;
   show: boolean = true;
   users: UserModel[] = [];
-  role: string[] = ['Admin', 'User', 'UserAdmin'];
+  role: string[] = ['ADMIN', 'USER', 'USERADMIN'];
   error: boolean = false;
   komunikat: string = "";
 
@@ -117,8 +118,7 @@ export class UsersComponent implements OnInit {
       this.newEmail = "";
       return;
     }
-
-    if(this.users.filter((item)=>{item.username == this.newEmail})){
+    if( this.users.filter(user => user.username == this.newEmail).length > 0 ){
       this.komunikat = "Użytkownik o takiej nazwie już istnieje, edytuj jego role.";
       this.error = true;
       this.newPassword = "";
@@ -129,7 +129,6 @@ export class UsersComponent implements OnInit {
     let user: UserModelRequest = new UserModelRequest(this.newEmail, this.newRole, this.newPassword);
     this.userService.addUser(user).subscribe((response) => {
       this.getUsers();
-      console.log(response);
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
         window.alert(text);
@@ -142,4 +141,15 @@ export class UsersComponent implements OnInit {
   exitError() {
     this.error = false;
   }
+
+  public removeUser(user: UserModel){
+    this.userService.removeUser(user).subscribe(user => {
+      this.getUsers();
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
+    });
+  }
+
 }

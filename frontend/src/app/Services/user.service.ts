@@ -24,4 +24,9 @@ export class UserService{
   public addUser(user:UserModelRequest): Observable<UserModel>{
     return this.httpClient.post<UserModel>(`${environment.apiUrl}/login`, user, this.loginService.getAuthorizedOptions());
   }
+
+  public removeUser(user:UserModel): Observable<UserModel>{
+    return this.httpClient.delete<UserModel>(`${environment.apiUrl}/login/${user.id}`, this.loginService.getAuthorizedOptions());
+  }
+
 }

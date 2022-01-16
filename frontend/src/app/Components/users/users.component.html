@@ -34,4 +34,8 @@
   <div class="content type type_bad"
        *ngIf="user.role != 'ADMIN' && user.role != 'USERADMIN'"
        (click)="add(user,'ADMIN')">Admin</div>
+  <div class="content type"
+       (click)="removeUser(user)">
+    <i class="fa fa-trash" aria-hidden="true"></i></div>
+
 </div>

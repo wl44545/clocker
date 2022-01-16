@@ -167,19 +167,19 @@ export class ReportsComponent implements OnInit {
           query2 = this.queryClient == entry.client;
         }
         let query3: boolean = true;
-        if(this.queryStartFrom != this.dateNull){
+        if(this.queryStartFrom && this.queryStartFrom != this.dateNull){
           query3 = new Date(entry.start) >= new Date(this.queryStartFrom);
         }
         let query4: boolean = true;
-        if(this.queryStartTo != this.dateNull){
+        if(this.queryStartTo && this.queryStartTo != this.dateNull){
           query4 = new Date(entry.start) <= new Date(this.queryStartTo);
         }
         let query5: boolean = true;
-        if(this.queryStopFrom != this.dateNull){
+        if(this.queryStopFrom && this.queryStopFrom != this.dateNull){
           query5 = new Date(entry.stop) >= new Date(this.queryStopFrom);
         }
         let query6: boolean = true;
-        if(this.queryStopTo != this.dateNull){
+        if(this.queryStopTo && this.queryStopTo != this.dateNull){
           query6 = new Date(entry.stop) <= new Date(this.queryStopTo);
         }
 

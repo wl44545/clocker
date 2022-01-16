@@ -815,12 +815,16 @@
       "id": 54
     },
     {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
       "description": "",
       "user": "2033",
-      "start": "2022-01-16T19:49:13.715Z",
-      "stop": "2022-01-16T19:49:13.715Z",
+      "start": "2022-01-16T19:49:13",
+      "stop": "2022-01-16T21:01:22",
       "project": 0,
-      "active": true,
       "id": 55
     }
   ]

@@ -40,7 +40,7 @@
 
   <div class="entry" *ngFor="let entry of worklogQuery">
     <div class="field">
-      <i class="icon far fa-comment-dots"></i>
+      <i *ngIf="entry.description" class="icon far fa-comment-dots"></i>
       {{entry.description}}
     </div>
     <div class="field">

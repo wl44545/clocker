@@ -39,9 +39,9 @@ export class AccountComponent implements OnInit {
     }
   }
 
-  private getHash(input: string){
+  private getHash(input: string): string{
     const md5 = new Md5();
-    return md5.appendStr(input).end();
+    return md5.appendStr(input).end().toString();
   }
 
   public changePassword(){
@@ -52,7 +52,7 @@ export class AccountComponent implements OnInit {
     }else{
       this.userService.getUser(this.loginService.getUserID()).subscribe(user => {
         if(this.getHash(this.oldPassword) == user.password){
-          let user = new UserModel(this.loginService.getUserID(), this.loginService.getUsername(), this.loginService.getRole(), this.getHash(this.newPassword).toString());
+          let user = new UserModel(this.loginService.getUserID(), this.loginService.getUsername(), this.loginService.getRole(), this.getHash(this.newPassword));
           this.userService.updateUser(user).subscribe(user => {
             this.loginService.logout();
           },() => {

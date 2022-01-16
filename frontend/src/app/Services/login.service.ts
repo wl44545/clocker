@@ -132,9 +132,9 @@ export class LoginService {
     };
   }
 
-  private getHash(input: string){
+  private getHash(input: string): string{
     const md5 = new Md5();
-    return md5.appendStr(input).end();
+    return md5.appendStr(input).end().toString();
   }
 
 }

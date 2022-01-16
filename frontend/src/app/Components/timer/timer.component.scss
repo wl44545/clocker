@@ -33,8 +33,14 @@ input{
   width: 20vw;
   height: 5vh;
 }
+input.cal{
+  width: 15vw;
+}
+select.proj{
+  width: 15vw;
+}
 select{
-  width: 17.5vw;
+  width: 20vw;
   height: 5vh;
   margin-left: 0.5vw;
 }
@@ -75,7 +81,7 @@ button.stopButton{
 }
 
 
-@media (max-width: 1205px){
+@media (max-width: 1200px){
   .entry{
     display: block;
     width: auto;
@@ -112,6 +118,12 @@ button.stopButton{
     width: 75%;
   }
   input{
+    width: 75%;
+  }
+  input.cal{
+    width: 75%;
+  }
+  select.proj{
     width: 75%;
   }
 

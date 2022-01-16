@@ -9,7 +9,9 @@ import {ProjectsService} from "../../Services/projects.service";
 import {ClientsService} from "../../Services/clients.service";
 import {formatDate} from '@angular/common';
 import {TranslateService} from "@ngx-translate/core";
-
+import {SettingsService} from "../../Services/settings.service";
+import {ComponentService} from "../../Services/component.service";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-timer',
@@ -24,17 +26,28 @@ export class TimerComponent implements OnInit {
   timerHandler: number = 0;
 
   localTimeStart: string | null | undefined;
-  localTimeTitle: string = "bierzące zadanie";
+  localTimeTitle: string = "";
   localClient: number = 0;
   localProject: number = 0;
   localTimeInSec: number = 0;
   localTimeModelId: number | undefined;
 
+  private withoutMilliseconds(value:string){
+    let index = value.indexOf('.');
+    if(index > 0){
+      return value.slice(0,index);
+    }
+    return value;
+  }
+
+
   public start() {
+    console.log('start');
     this.timerActive = true;
-    this.localTimeStart = formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en');
+    this.localTimeStart = this.withoutMilliseconds(formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en'));
     this.localTimeInSec = 0;
     this.timer();
+
 
     this.timerService.addEntry(this.localTimeTitle, this.loginService.getUserID(), new Date(), new Date(), 0, true).subscribe( response =>{
       this.localTimeModelId = response.id;
@@ -48,7 +61,7 @@ export class TimerComponent implements OnInit {
   clearLocal(){
     this.timerActive = false;
     clearInterval(this.timerHandler);
-    this.localTimeTitle = "bierzące zadanie";
+    this.localTimeTitle = "";
     this.localClient = 0;
     this.localProject = 0;
     this.localTimeInSec = 0;
@@ -86,9 +99,11 @@ export class TimerComponent implements OnInit {
   }
 
   public stop() {
+    console.log('stop');
     if(this.save(false)){
       this.getWorklog();
       this.clearLocal();
+      this.appComponent.stop();
     }
 
   }
@@ -104,6 +119,9 @@ export class TimerComponent implements OnInit {
   }
 
   timer(){
+    if (this.localTimeStart != null) {
+      this.appComponent.start(this.localTimeInSec);
+    }
     this.timerHandler = setInterval(() => {
       this.localTimeInSec += 1;
     },1000)
@@ -126,7 +144,7 @@ export class TimerComponent implements OnInit {
     return wynik;
   }
 
-  getSecund(){
+  getSecond(){
     let sec = this.localTimeInSec % 3600;
     let wynik = Math.floor(sec % 60).toString();
     if(wynik.length == 1){
@@ -134,8 +152,6 @@ export class TimerComponent implements OnInit {
     }
     return wynik;
   }
-
-  // reszta
 
   worklog: TimeEntryModel[] = [];
   projects: ProjectModel[] = [];
@@ -155,13 +171,17 @@ export class TimerComponent implements OnInit {
               private timerService: TimerService,
               private projectsService: ProjectsService,
               private clientsService: ClientsService,
-              private translateService: TranslateService) { }
+              private translateService: TranslateService,
+              private settingsService: SettingsService,
+              private componentService: ComponentService,
+              private appComponent: AppComponent) { }
 
   ngOnInit(): void {
     this.checkPermission();
     this.getWorklog();
     this.getProjects();
     this.getClients();
+    this.componentService.setComponent('TimerComponent');
   }
 
   private checkPermission(){
@@ -190,65 +210,83 @@ export class TimerComponent implements OnInit {
   }
 
   private getWorklog(){
-    this.timerService.getWorklog(this.loginService.getUserID()).subscribe(worklog => {
-      this.worklog = [];
-      for(let entry of worklog) {
-        if(entry.active){
-          entry.stop = new Date();
-        }
-        if(new Date(entry.stop) > new Date(Date.now() - 7*24*60*60*1000)){
-          if (entry.project != 0) {
-            this.projectsService.getProject(entry.project).subscribe(project => {
-              entry.projectName = project.name;
-              if (project.client != 0) {
-                this.clientsService.getClient(project.client).subscribe(client => {
-                  entry.clientName = client.name;
-                  entry.client = client.id;
-                })
-              }else{
-                entry.client = 0;
-                entry.clientName = "";
-              }
-            })
-          }else{
-            entry.project = 0;
-            entry.projectName = "";
-            entry.client = 0;
-            entry.clientName = "";
-          }
-
-          let ms = (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
-          let seconds = ms / 1000;
-          const hours = Math.floor(seconds / 3600);
-          seconds = seconds % 3600;
-          const minutes = Math.floor(seconds / 60);
-          seconds = seconds % 60;
-          entry.timeDiff = `${hours}:${minutes}:${seconds}`;
-
+    this.settingsService.getSettings().subscribe(settings => {
+      this.timerService.getWorklog(this.loginService.getUserID()).subscribe(worklog => {
+        this.worklog = [];
+        for(let entry of worklog) {
           if(entry.active){
-            this.localTimeTitle = entry.description;
-            this.localTimeModelId = entry.id;
-            this.localClient = entry.client;
-            this.localProject = entry.project;
-            this.timerActive = true;
-            this.localTimeInSec = ms / 1000 + 3600;
-            this.localTimeStart = entry.start.toString();
-            this.timer();
+            entry.stop = new Date();
           }
-          else{
-            this.worklog.push(entry);
+          if(new Date(entry.stop) > new Date(Date.now() - settings.timerDays*24*60*60*1000)){
+            if (entry.project != 0) {
+              this.projectsService.getProject(entry.project).subscribe(project => {
+                entry.projectName = project.name;
+                if (project.client != 0) {
+                  this.clientsService.getClient(project.client).subscribe(client => {
+                    entry.clientName = client.name;
+                    entry.client = client.id;
+                  })
+                }else{
+                  entry.client = 0;
+                  entry.clientName = "";
+                }
+              })
+            }else{
+              entry.project = 0;
+              entry.projectName = "";
+              entry.client = 0;
+              entry.clientName = "";
+            }
+
+            let ms = (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
+            let seconds = ms / 1000;
+            let hours = Math.floor(seconds / 3600);
+            seconds = seconds % 3600;
+            let minutes = Math.floor(seconds / 60);
+            seconds = seconds % 60;
+            let h = hours.toString();
+            let m = minutes.toString();
+            let s = seconds.toString();
+            if(hours < 10){
+              h = '0' + h;
+            }
+            if(minutes < 10){
+              m = '0' + m;
+            }
+            if(seconds < 10){
+              s = '0' + s;
+            }
+            entry.timeDiff = `${h}:${m}:${s}`;
+
+            if(entry.active){
+              this.localTimeTitle = entry.description;
+              this.localTimeModelId = entry.id;
+              this.localClient = entry.client;
+              this.localProject = entry.project;
+              this.timerActive = true;
+              this.localTimeInSec = ms / 1000;
+              this.localTimeStart = this.withoutMilliseconds(entry.start.toString());
+              this.timer();
+            }
+            else{
+              this.worklog.push(entry);
+            }
           }
         }
-      }
-      this.getTotalTime();
-      this.worklog.sort((a, b) => {
-        if ( a.stop < b.stop ){
-          return 1;
-        }
-        if ( a.stop > b.stop ){
-          return -1;
-        }
-        return 0;
+        this.getTotalTime();
+        this.worklog.sort((a, b) => {
+          if ( a.stop < b.stop ){
+            return 1;
+          }
+          if ( a.stop > b.stop ){
+            return -1;
+          }
+          return 0;
+        });
+      },() => {
+        this.translateService.get('serverError').subscribe((text: string) => {
+          window.alert(text);
+        });
       });
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
@@ -263,11 +301,23 @@ export class TimerComponent implements OnInit {
       ms += (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
     }
     let seconds = ms / 1000;
-    const hours = Math.floor(seconds / 3600);
+    let hours = Math.floor(seconds / 3600);
     seconds = seconds % 3600;
-    const minutes =  Math.floor(seconds / 60);
+    let minutes =  Math.floor(seconds / 60);
     seconds = seconds % 60;
-    this.totalTime = `${hours}:${minutes}:${seconds}`;
+    let h = hours.toString();
+    let m = minutes.toString();
+    let s = seconds.toString();
+    if(hours < 10){
+      h = '0' + h;
+    }
+    if(minutes < 10){
+      m = '0' + m;
+    }
+    if(seconds < 10){
+      s = '0' + s;
+    }
+    this.totalTime = `${h}:${m}:${s}`;
   }
 
   public editEntry(entry: TimeEntryModel) {
@@ -304,7 +354,8 @@ export class TimerComponent implements OnInit {
   }
 
   public saveEntry() {
-    if(this.manualDescription != "" && new Date(this.manualStop) > new Date(this.manualStart)){
+    // if(this.manualDescription != "" && new Date(this.manualStop) > new Date(this.manualStart)){
+    if(new Date(this.manualStop) > new Date(this.manualStart)){
       this.manualEntry.description = this.manualDescription;
       this.manualEntry.project = this.manualProject;
       this.manualEntry.start = this.manualStart;

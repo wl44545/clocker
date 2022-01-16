@@ -1,0 +1,83 @@
+@import "src/assets/constants/Colors";
+
+.hi{
+  margin: 0 auto;
+  padding: 15px;
+  position: relative;
+  width: 40vw;
+  height: auto;
+  background-color: $GRAY;
+  text-align: center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius: 2vh;
+  margin-bottom: 1vh;
+  margin-top: 2vh;
+  color: $PURPLE;
+  font-size: 4vh;
+  font-weight: bold;
+}
+
+.option{
+  margin: 0 auto;
+  padding: 15px;
+  position: relative;
+  width: 35vw;
+  height: auto;
+  background-color: $BLUE;
+  text-align: center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius: 2vh;
+  margin-bottom: 1vh;
+  color: $PURPLE;
+  font-size: 3vh;
+}
+
+.value{
+  margin: 0 auto;
+  padding: 15px;
+  position: relative;
+  width: 30vw;
+  height: auto;
+  background-color: $BLUE;
+  text-align: center;
+  display:block;
+  justify-content:center;
+  align-items:center;
+  border-radius: 2vh;
+  margin-bottom: 1vh;
+  color: $PURPLE;
+  font-size: 3vh;
+}
+
+a{
+  color: $PURPLE;
+  font-size: 15px;
+  padding: 2.5px 2.5px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+a:hover{
+  background: $OAPL;
+  transition: .25s;
+}
+button{
+  margin: 5px;
+}
+input{
+  width: 70%;
+}
+
+@media (max-width: 500px){
+
+  .option{
+    width: 95%;
+  }
+  .hi{
+    width: 95%;
+  }
+
+}

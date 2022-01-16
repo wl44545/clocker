@@ -33,8 +33,14 @@ input{
   width: 20vw;
   height: 5vh;
 }
+input.cal{
+  width: 15vw;
+}
+select.proj{
+  width: 15vw;
+}
 select{
-  width: 17.5vw;
+  width: 20vw;
   height: 5vh;
   margin-left: 0.5vw;
 }
@@ -42,12 +48,83 @@ button{
   margin-left: 1vw;
   height: 5vh;
 }
+button.startButton{
+  background-color: lightgreen;
+  width: auto;
+  height: auto;
+  border: solid 5px lightgreen;
+  border-radius: 5px;
+  font-size: 15px;
+}
+button.stopButton{
+  background-color: indianred;
+  width: auto;
+  height: auto;
+  border: solid 5px indianred;
+  border-radius: 5px;
+  font-size: 15px;
+}
 .panel{
   margin-left: 2vw;
   color: $PURPLE;
 }
 .icon{
-  margin-left: 1vw;
-  margin-right: 0.25vw;
+  margin-left: 15px;
+  margin-right: 5px;
   color: $PURPLE;
+}
+.timeSpent{
+  color: $PURPLE;
+  font-weight: bolder;
+  font-size: 25px;
+  margin-right: 15px;
+}
+
+
+@media (max-width: 1200px){
+  .entry{
+    display: block;
+    width: auto;
+    height: auto;
+    background-color: $BLUE;
+    padding: 15px;
+    text-align: center;
+    justify-content:center;
+    align-items:center;
+  }
+  .timer{
+    display: block;
+    width: auto;
+    height: auto;
+    background-color: $GRAY;
+    padding: 15px;
+    text-align: center;
+    justify-content:center;
+    align-items:center;
+  }
+  .field{
+    display: block;
+    margin-bottom: 1vh;
+  }
+  .csv{
+    width: auto;
+    height: auto;
+    padding: 1vh 1vw;
+  }
+  .icon{
+    display: inline;
+  }
+  select{
+    width: 75%;
+  }
+  input{
+    width: 75%;
+  }
+  input.cal{
+    width: 75%;
+  }
+  select.proj{
+    width: 75%;
+  }
+
 }

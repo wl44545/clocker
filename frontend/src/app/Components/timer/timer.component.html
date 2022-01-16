@@ -6,60 +6,90 @@
 </head>
 <body>
   <div *ngIf="!timerActive" class="timer auto start">
-    <button (click)="start()">{{'start' | translate}}</button>
+    <button class="startButton" (click)="start()">{{'startTiming' | translate}}</button>
   </div>
   <div *ngIf="timerActive" class="timer auto stop">
 
-    <label>{{getHour()}}</label>
-    <label>:</label>
-    <label>{{getMinute()}}</label>
-    <label>:</label>
-    <label style="margin-right: 10px;">{{getSecund()}}</label>
+    <div class="field timeSpent">
+      <i class="icon fas fa-stopwatch"></i>{{getHour()}}:{{getMinute()}}:{{getSecond()}}
+    </div>
 
-    <input type="text" [(ngModel)]="localTimeTitle" [value]="localTimeTitle" (change)="changeHandler()"/>
+    <div class="field">
+      <i class="icon far fa-comment-dots"></i>
+      <input type="text"  placeholder="{{'description' | translate}}" [(ngModel)]="localTimeTitle" [value]="localTimeTitle" (change)="changeHandler()"/>
+    </div>
 
-    <select [(ngModel)]="localProject" (change)="changeHandler()">
-      <option [value]=0>{{'noProject' | translate}}</option>
-      <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
-    </select>
+    <div class="field">
+      <i class="icon fas fa-project-diagram"></i>
+      <select [(ngModel)]="localProject" (change)="changeHandler()">
+        <option [value]=0>{{'noProject' | translate}}</option>
+        <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+      </select>
+    </div>
 
-    <button (click)="saveChange()" *ngIf="update">Zatwierdź zmiany</button>
-    <button (click)="stop()">{{'stop' | translate}}</button>
+    <div class="field">
+      <button (click)="saveChange()" *ngIf="update">{{'save' | translate}}</button>
+      <button class="stopButton" (click)="stop()">{{'stopTiming' | translate}}</button>
+    </div>
+
   </div>
+
   <div class="timer manual">
+    <div class="field">
     <i class="icon far fa-comment-dots"></i>
     <input type="text" id="manualDescription" placeholder="{{'description' | translate}}" [(ngModel)]="manualDescription" name="manualDescription">
+    </div>
+    <div class="field">
     <i class="icon fas fa-project-diagram"></i>
-    <select [(ngModel)]="manualProject">
+    <select class="proj" [(ngModel)]="manualProject">
       <option [value]=0>{{'noProject' | translate}}</option>
       <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
     </select>
+    </div>
+    <div class="field">
     <i class="icon far fa-play-circle"></i>
-    <input type="datetime-local" id="manualStart" placeholder="{{'start' | translate}}" step=1 [(ngModel)]="manualStart" name="manualStart">
+    <input class="cal" type="datetime-local" id="manualStart" placeholder="{{'start' | translate}}" step=1 [(ngModel)]="manualStart" name="manualStart">
+    </div>
+    <div class="field">
     <i class="icon far fa-stop-circle"></i>
-    <input type="datetime-local" id="manualStop" placeholder="{{'stop' | translate}}" step=1 [(ngModel)]="manualStop" name="manualStop">
+    <input class="cal" type="datetime-local" id="manualStop" placeholder="{{'stop' | translate}}" step=1 [(ngModel)]="manualStop" name="manualStop">
+    </div>
+    <div class="field">
     <button *ngIf="!entryEdit" (click)="addEntry()">{{'add' | translate}}</button>
     <button *ngIf="entryEdit" (click)="saveEntry()">{{'save' | translate}}</button>
+    </div>
   </div>
   <div class="entry" *ngFor="let entry of worklog">
-    <i class="icon far fa-comment-dots"></i>
-    {{entry.description}}
+    <div class="field">
+      <i *ngIf="entry.description" class="icon far fa-comment-dots"></i>
+      {{entry.description}}
+    </div>
+    <div class="field">
     <i *ngIf="entry.projectName" class="icon fas fa-project-diagram"></i>
     {{entry.projectName}}
+    </div>
+    <div class="field">
     <i *ngIf="entry.clientName" class="icon far fa-building"></i>
     {{entry.clientName}}
+    </div>
+    <div class="field">
     <i class="icon far fa-play-circle"></i>
     {{entry.start.toString().replace("T"," ")}}
-    <i class="icon far fa-stop-circle"></i>
+    </div>
+    <div class="field">
+      <i class="icon far fa-stop-circle"></i>
     {{entry.stop.toString().replace("T"," ")}}
+    </div>
+    <div class="field">
     <i class="icon fas fa-hourglass-start"></i>
     {{entry.timeDiff}}
-    <div class="panel">
+    </div>
+    <div class="panel field">
       <i (click)="editEntry(entry)" class="fas fa-edit"></i>
       <i (click)="removeEntry(entry)" class="fa fa-trash" aria-hidden="true"></i>
     </div>
   </div>
-  <div *ngIf="totalTime!='0:0:0'" class="timer">
+  <div *ngIf="totalTime!='00:00:00'" class="timer">
     {{'totalTime' | translate}}: {{ totalTime }}
   </div>
 </body>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="settings.component.scss">
+</head>
+<body>
+
+<div class="option field">
+  <div class="label"> {{ 'defaultLanguage' | translate}}:</div>
+  <select [(ngModel)]="settings.language">
+    <option *ngFor="let language of settings.languages" [value]="language.code">{{ language.code | translate }}</option>
+  </select>
+</div>
+
+<div class="option field">
+  <div class="label"> {{ 'timerDays' | translate}}:</div>
+  <input type="number" [(ngModel)]="settings.timerDays">
+</div>
+
+<div class="option save">
+  <button (click)="save()">{{ 'save' | translate}}</button>
+</div>
+
+
+</body>
+</html>

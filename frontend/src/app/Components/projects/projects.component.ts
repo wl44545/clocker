@@ -6,6 +6,7 @@ import {ProjectsService} from "../../Services/projects.service";
 import {ClientModel} from "../../Models/client.model";
 import {ClientsService} from "../../Services/clients.service";
 import {TranslateService} from "@ngx-translate/core";
+import {ComponentService} from "../../Services/component.service";
 
 @Component({
   selector: 'app-projects',
@@ -25,12 +26,14 @@ export class ProjectsComponent implements OnInit {
               private router: Router,
               private projectsService: ProjectsService,
               private clientsService: ClientsService,
-              private translateService:TranslateService) { }
+              private translateService:TranslateService,
+              private componentService: ComponentService) { }
 
   ngOnInit(): void {
     this.checkPermission();
     this.getProjects();
     this.getClients();
+    this.componentService.setComponent('ProjectsComponent');
   }
 
   private checkPermission(){

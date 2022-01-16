@@ -1,125 +1,37 @@
 @import "src/assets/constants/Colors";
 
-.error{
-  width:98%;
-  padding: 1%;
-  margin-top: 10px;
-  float: left;
-  color: red;
-  clear: both;
+body{
+  padding: 2vh 2vw;
+}
+
+.option{
+  margin: 0 auto;
   padding: 10px;
-}
-
-.user{
-  width:98%;
-  padding: 1%;
-  margin-top: 10px;
-  min-height: 30px;
-  margin-bottom: 10px;
-  background: $GRAY;
-  clear: both;
-  padding: 10px;
-}
-
-.content{
-  display: inline-block;
-}
-
-.name{
-  float:left;
-  margin-left: 10px;
-  color:$OAPL
-}
-
-.type{
-  float:right;
-  margin-right: 10px;
-  padding: 5px;
-  min-width: 80px;
-  border-radius: 3px;
+  position: relative;
+  width: 30vw;
+  height: 7.5vh;
+  background-color: $BLUE;
   text-align: center;
-  font-weight: bolder;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius: 2vh;
+  margin-bottom: 1vh;
+  color: $PURPLE;
+  font-size: 3vh;
+  //font-weight: bold;
+  text-transform: uppercase;
+}
+
+a.active,a:hover{
   background: $OAPL;
+  transition: .5s;
 }
 
-.type_bad{
-  border: solid 2px red;
-  color: red;
-}
+@media (max-width: 500px){
 
-.type_ok{
-  border: solid 2px green;
-  color: green;
-}
-
-button:hover{
-  opacity: 0.5;
-}
-
-.newUser{
-  width:98%;
-  padding: 1%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  float: left;
-  background: $PURPLE;
-}
-
-input, button, select{
-  height:35px;
-  float:left;
-  margin-left: 1%;
-  width: 20%;
-}
-
-.addUserButton{
-  width:98%;
-  padding: 1%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  float: left;
-  border-radius: 3px;
-  height:40px;
-  font-size: 30px;
-  text-align: center;
-  background: $PURPLE;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  color: $OAPL;
-  display: none;
-}
-
-button{
-  width: 10%;
-  height:35px;
-  float:right;
-}
-
-.anuluj{
-  display: none;
-}
-
-@media (max-width: 1020px){
-  .addUserButton{
-    display: block;
-  }
-
-  input, select{
-    width: 90%;
-    float: left;
-    margin-left: 5%;
-    margin-top: 1%;
-  }
-
-  button{
-    width: 90%;
-    float: left;
-    margin-left: 5%;
-    margin-top: 1%;
-  }
-
-  .anuluj{
-    display: block;
+  .option{
+    width: 75%;
   }
 
 }

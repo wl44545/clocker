@@ -1,19 +1,25 @@
-<nav>
-  <input type="checkbox" id="check">
+<nav (resize)="isNavOpen=false">
+  <input type="checkbox" id="check" [(ngModel)]="isNavOpen">
   <label for="check" class="checkbtn">
     <i class="fas fa-bars"></i>
   </label>
   <label class="logo">Clocker</label>
-  <ul>
-    <li *ngIf="loginService.isAdmin()"><a routerLink="/{{appRoutes.ADMIN}}">{{ 'users' | translate}}</a></li>
-    <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.TIMER}}">{{ 'timer' | translate}}</a></li>
-    <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.PROJECTS}}">{{ 'projects' | translate}}</a></li>
-    <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.CLIENTS}}">{{ 'clients' | translate}}</a></li>
-    <li *ngIf="loginService.isUser()"><a routerLink="/{{appRoutes.REPORTS}}">{{ 'reports' | translate}}</a></li>
-    <li *ngIf="loginService.isLogged()" (click)="loginService.logout()"><a href="#">{{ 'logout' | translate}}</a></li>
-    <li><img class="flag" (click)="switchLang('PL')" src="../assets/icons/PL.png" alt="PL"/></li>
-    <li><img class="flag" (click)="switchLang('EN')" src="../assets/icons/EN.png" alt="EN"/></li>
-    <li><img class="flag" (click)="switchLang('DE')" src="../assets/icons/DE.png" alt="DE"/></li>
+  <ul (click)="isNavOpen = !isNavOpen">
+    <li *ngIf="timeControl && !getComponent('TimerComponent') && loginService.isUser()" (click)="goToTimer()" class="actualTimer"><i class="icon fas fa-stopwatch"></i>{{getHour()}}{{getMinute()}}{{getSecond()}}</li>
+    <li *ngIf="loginService.isAdmin()" [ngClass]="{'active': getComponent('AdminComponent')}"><a routerLink="/{{appRoutes.ADMIN}}">{{ 'adminPanel' | translate}}</a></li>
+    <li *ngIf="loginService.isAdmin()" [ngClass]="{'active': getComponent('UsersComponent')}"><a routerLink="/{{appRoutes.USERS}}">{{ 'users' | translate}}</a></li>
+    <li *ngIf="loginService.isAdmin()" [ngClass]="{'active': getComponent('SettingsComponent')}"><a routerLink="/{{appRoutes.SETTINGS}}">{{ 'settings' | translate}}</a></li>
+    <li *ngIf="loginService.isUser()" [ngClass]="{'active': getComponent('TimerComponent')}"><a routerLink="/{{appRoutes.TIMER}}">{{ 'timer' | translate}}</a></li>
+    <li *ngIf="loginService.isUser()" [ngClass]="{'active': getComponent('ProjectsComponent')}"><a routerLink="/{{appRoutes.PROJECTS}}">{{ 'projects' | translate}}</a></li>
+    <li *ngIf="loginService.isUser()" [ngClass]="{'active': getComponent('ClientsComponent')}"><a routerLink="/{{appRoutes.CLIENTS}}">{{ 'clients' | translate}}</a></li>
+    <li *ngIf="loginService.isUser()" [ngClass]="{'active': getComponent('ReportsComponent')}"><a routerLink="/{{appRoutes.REPORTS}}">{{ 'reports' | translate}}</a></li>
+    <li *ngIf="loginService.isLogged()" [ngClass]="{'active': getComponent('AccountComponent')}"><a routerLink="/{{appRoutes.ACCOUNT}}">{{ 'account' | translate}}</a></li>
+    <li *ngIf="loginService.isLogged()" (click)="logout()"><a href="#">{{ 'logout' | translate}}</a></li>
+    <li class="langs">
+      <img class="flag" (click)="switchLang('PL')" src="../assets/icons/PL.png" alt="PL"/>
+      <img class="flag" (click)="switchLang('EN')" src="../assets/icons/EN.png" alt="EN"/>
+      <img class="flag" (click)="switchLang('DE')" src="../assets/icons/DE.png" alt="DE"/>
+    </li>
   </ul>
 </nav>
 <router-outlet></router-outlet>

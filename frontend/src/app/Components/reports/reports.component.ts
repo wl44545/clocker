@@ -8,6 +8,7 @@ import {ClientsService} from "../../Services/clients.service";
 import {ProjectModel} from "../../Models/project.model";
 import {ClientModel} from "../../Models/client.model";
 import {TranslateService} from "@ngx-translate/core";
+import {ComponentService} from "../../Services/component.service";
 
 @Component({
   selector: 'app-reports',
@@ -22,6 +23,12 @@ export class ReportsComponent implements OnInit {
   clients: ClientModel[] = [];
   queryProject: number = -1;
   queryClient: number = -1;
+
+  dateNull: Date = new Date("0000-01-01T00:00:00");
+  queryStartFrom: Date = this.dateNull;
+  queryStartTo: Date = this.dateNull;
+  queryStopFrom: Date = this.dateNull;
+  queryStopTo: Date = this.dateNull;
   totalTime: string = "";
 
   csvOptions = {
@@ -43,13 +50,15 @@ export class ReportsComponent implements OnInit {
               private timerService: TimerService,
               private projectsService: ProjectsService,
               private clientsService: ClientsService,
-              private translateService: TranslateService) { }
+              private translateService: TranslateService,
+              private componentService: ComponentService) { }
 
   ngOnInit(): void {
     this.checkPermission();
     this.getWorklog();
     this.getProjects();
     this.getClients();
+    this.componentService.setComponent('ReportsComponent');
   }
 
   private checkPermission(){
@@ -87,11 +96,23 @@ export class ReportsComponent implements OnInit {
         }
         let ms = (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
         let seconds = ms / 1000;
-        const hours = Math.floor(seconds / 3600);
+        let hours = Math.floor(seconds / 3600);
         seconds = seconds % 3600;
-        const minutes =  Math.floor(seconds / 60);
+        let minutes =  Math.floor(seconds / 60);
         seconds = seconds % 60;
-        entry.timeDiff = `${hours}:${minutes}:${seconds}`;
+        let h = hours.toString();
+        let m = minutes.toString();
+        let s = seconds.toString();
+        if(hours < 10){
+          h = '0' + h;
+        }
+        if(minutes < 10){
+          m = '0' + m;
+        }
+        if(seconds < 10){
+          s = '0' + s;
+        }
+        entry.timeDiff = `${h}:${m}:${s}`;
       }
       this.worklogQuery = this.worklog.sort((a, b) => {
         if ( a.stop < b.stop ){
@@ -112,27 +133,62 @@ export class ReportsComponent implements OnInit {
       ms += (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
         }
     let seconds = ms / 1000;
-    const hours = Math.floor(seconds / 3600);
+    let hours = Math.floor(seconds / 3600);
     seconds = seconds % 3600;
-    const minutes =  Math.floor(seconds / 60);
+    let minutes =  Math.floor(seconds / 60);
     seconds = seconds % 60;
-    this.totalTime = `${hours}:${minutes}:${seconds}`;
+    let h = hours.toString();
+    let m = minutes.toString();
+    let s = seconds.toString();
+    if(hours < 10){
+      h = '0' + h;
+    }
+    if(minutes < 10){
+      m = '0' + m;
+    }
+    if(seconds < 10){
+      s = '0' + s;
+    }
+    this.totalTime = `${h}:${m}:${s}`;
   }
 
   public doQuery() {
-    if(this.queryClient == -1 && this.queryProject == -1){
+    if(this.queryClient == -1 && this.queryProject == -1 && !this.queryStartFrom && !this.queryStartTo && !this.queryStopFrom && !this.queryStopTo){
       this.worklogQuery = this.worklog;
     }else{
       this.worklogQuery = [];
       for (let entry of this.worklog) {
-        let query1: boolean = this.queryProject == entry.project || this.queryProject == -1;
-        let query2: boolean = this.queryClient == entry.client || this.queryClient == -1;
-        if (query1 && query2) {
+        let query1: boolean = true;
+        if(this.queryProject != -1){
+          query1 = this.queryProject == entry.project;
+        }
+        let query2: boolean = true;
+        if(this.queryClient != -1){
+          query2 = this.queryClient == entry.client;
+        }
+        let query3: boolean = true;
+        if(this.queryStartFrom && this.queryStartFrom != this.dateNull){
+          query3 = new Date(entry.start) >= new Date(this.queryStartFrom);
+        }
+        let query4: boolean = true;
+        if(this.queryStartTo && this.queryStartTo != this.dateNull){
+          query4 = new Date(entry.start) <= new Date(this.queryStartTo);
+        }
+        let query5: boolean = true;
+        if(this.queryStopFrom && this.queryStopFrom != this.dateNull){
+          query5 = new Date(entry.stop) >= new Date(this.queryStopFrom);
+        }
+        let query6: boolean = true;
+        if(this.queryStopTo && this.queryStopTo != this.dateNull){
+          query6 = new Date(entry.stop) <= new Date(this.queryStopTo);
+        }
+
+        if (query1 && query2 && query3 && query4 && query5 && query6) {
           this.worklogQuery.push(entry);
         }
       }
     }
-	this.getTotalTime();
+    this.getTotalTime();
   }
 
   public getProjects(){

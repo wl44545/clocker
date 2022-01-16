@@ -1,49 +1,46 @@
 @import "src/assets/constants/Colors";
 
-.add{
-  width: 97vw;
-  height: 10vh;
-  background-color: $GRAY;
-  position: relative;
-  text-align: center;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border-radius: 2vh;
-  margin-bottom: 2vh;
+body{
+  padding: 2vh 2vw;
 }
-.client{
-  width: 97vw;
-  height: 10vh;
-  background-color: $BLUE;
+
+.option{
+  margin: 0 auto;
+  padding: 10px 10px;
   position: relative;
+  width: 50vw;
+  height: 7.5vh;
+  background-color: $BLUE;
   text-align: center;
   display:flex;
   justify-content:center;
   align-items:center;
   border-radius: 2vh;
   margin-bottom: 1vh;
+  color: $PURPLE;
+}
+.label{
+  font-size: 20px;
+  margin-right: 1vw;
+}
+select{
+  width: 20vw;
+  height: 5vh;
 }
 input{
-  width: 50%;
+  width: 20vw;
   height: 5vh;
 }
 button{
   margin-left: 1vw;
   height: 5vh;
 }
-.panel{
-  margin-left: 2vw;
-  color: $PURPLE;
-}
-.icon{
-  margin-left: 1vw;
-  margin-right: 0.25vw;
-  color: $PURPLE;
+.save{
+  background-color: $GRAY;
 }
 
-@media (max-width: 500px){
-  .client{
+@media (max-width: 900px){
+  .option{
     display: block;
     width: auto;
     height: auto;
@@ -53,29 +50,30 @@ button{
     justify-content:center;
     align-items:center;
   }
-  .add{
-    display: block;
-    width: auto;
-    height: auto;
-    background-color: $GRAY;
-    padding: 1vh 1vw;
-    text-align: center;
-    justify-content:center;
-    align-items:center;
-  }
   .field{
     display: block;
     padding: 1vh 1vw;
+  }
+  .label{
+    font-size: 20px;
+    margin-right: 1vw;
   }
   .icon{
     display: inline;
   }
   input{
     width: 75%;
+    height: 3vh;
+  }
+  select{
+    width: 75%;
     height: 3.5vh;
   }
   button{
     margin-left: 1vw;
     height: 3.5vh;
+  }
+  .save{
+    background-color: $GRAY;
   }
 }

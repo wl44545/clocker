@@ -5,6 +5,7 @@ import {ClientsService} from "../../Services/clients.service";
 import {ClientModel} from "../../Models/client.model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {TranslateService} from "@ngx-translate/core";
+import {ComponentService} from "../../Services/component.service";
 
 @Component({
   selector: 'app-clients',
@@ -21,11 +22,13 @@ export class ClientsComponent implements OnInit {
   constructor(private loginService: LoginService,
               private router: Router,
               private clientService: ClientsService,
-              private translateService: TranslateService) { }
+              private translateService: TranslateService,
+              private componentService: ComponentService) { }
 
   ngOnInit(): void {
     this.checkPermission();
     this.getClients();
+    this.componentService.setComponent('ClientsComponent');
   }
 
   private checkPermission(){

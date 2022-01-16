@@ -1,45 +1,95 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {UserModel} from "../Models/user.model";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
-import {LoginModel} from "../Models/login.model";
+import {LoginRequestModel, LoginResponseModel} from "../Models/login.model";
 import {Router} from "@angular/router";
+import { JwtHelperService } from "@auth0/angular-jwt";
+import {Md5} from "ts-md5";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
+  private token: string = "";
+
   constructor(private httpClient: HttpClient,
-              private router: Router) {
+              private router: Router,
+              private jwtService: JwtHelperService) {
   }
 
-  public login(username: string, password: string): Observable<UserModel> {
-    return this.httpClient.post<UserModel>(`${environment.apiUrl}/login`, new LoginModel(username, password));
+  public login(username: string, password: string): boolean {
+  /* this.httpClient.post<LoginResponseModel>(`${environment.apiUrl}/login`, new LoginRequestModel(username, this.getHash(password).toString())).subscribe(response => {
+      if(response.token != null && this.isJWTValid(response.token) && this.isJWTPayloadOk(response.token)){
+          localStorage.setItem("TOKEN", response.token);
+          if(this.isUser()){
+            this.router.navigateByUrl("/timer").then();
+          }
+          else if(this.isAdmin()){
+            this.router.navigateByUrl("/admin").then();
+          }
+          else{
+            this.router.navigateByUrl("/").then();
+          }
+          return true;
+        }
+    });
+    return false;*/
+
+    if(username != "" && this.isJWTValid(username) && this.isJWTPayloadOk(username)){
+      localStorage.setItem("TOKEN", username);
+      if(this.isUser()){
+        this.router.navigateByUrl("/timer").then();
+      }
+      else if(this.isAdmin()){
+        this.router.navigateByUrl("/admin").then();
+      }
+      else{
+        this.router.navigateByUrl("/").then();
+      }
+      return true;
+    }
+    return false;
   }
 
   public logout() {
-    localStorage.removeItem("ROLE");
-    localStorage.removeItem("USERNAME");
-    localStorage.removeItem("USERID");
+    /*this.httpClient.post(`${environment.apiUrl}/logout`, null, this.getAuthorizedOptions()).subscribe(() => {
+      localStorage.removeItem("TOKEN");
+      this.router.navigateByUrl("/").then();
+    });*/
+    localStorage.removeItem("TOKEN");
     this.router.navigateByUrl("/").then();
   }
 
-  public getRole(): string{
-    return localStorage.getItem("ROLE") || "GUEST";
+  public getUserID(): number {
+    if(this.decodeJWT() != null){
+      return this.decodeJWT()['user_id'];
+    }else{
+      return 0;
+    }
   }
 
-  public getUsername(): string{
-    return localStorage.getItem("USERNAME") || "GUEST";
+  public getUsername(): string {
+    if(this.decodeJWT() != null){
+      return this.decodeJWT()['user_name'];
+    }else{
+      return "GUEST";
+    }
   }
 
-  public getUserID(): number{
-    return parseInt(localStorage.getItem("USERID") || "0");
+  public getRole(): string {
+    if(this.decodeJWT() != null){
+      return this.decodeJWT()['user_role'];
+    }else{
+      return "GUEST";
+    }
   }
 
   public isLogged(): boolean{
-    return this.getRole() != "GUEST" && this.getUsername() != "GUEST" && this.getUserID() != 0;
+    return localStorage.getItem("TOKEN") != null;
   }
 
   public isUser(): boolean{
@@ -48,6 +98,43 @@ export class LoginService {
 
   public isAdmin(): boolean{
     return this.getRole() == "ADMIN" || this.getRole() == "USERADMIN";
+  }
+
+
+  private isJWTPayloadOk(token: string): boolean {
+    const userIdExists = this.jwtService.decodeToken(token)['user_id'] != null;
+    const userNameExists = this.jwtService.decodeToken(token)['user_name'] != null;
+    const userRoleExists = this.jwtService.decodeToken(token)['user_role'] != null;
+    return userIdExists && userNameExists && userRoleExists;
+  }
+
+  private isJWTValid(token: string): boolean {
+    const isExpired = this.jwtService.isTokenExpired(token);
+    return !isExpired;
+  }
+
+  private loadToken() {
+    this.token = localStorage.getItem("TOKEN") || "";
+    return this.token;
+  }
+
+  private decodeJWT() {
+    this.loadToken();
+    return this.jwtService.decodeToken(this.token);
+  }
+
+  public getAuthorizedOptions(){
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.loadToken()}`
+      })
+    };
+  }
+
+  private getHash(input: string): string{
+    const md5 = new Md5();
+    return md5.appendStr(input).end().toString();
   }
 
 }

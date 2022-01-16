@@ -1,4 +1,22 @@
 {
+  "settings": {
+    "languages": [
+      {
+        "code": "PL",
+        "name": "Polish"
+      },
+      {
+        "code": "EN",
+        "name": "English"
+      },
+      {
+        "code": "DE",
+        "name": "German"
+      }
+    ],
+    "language": "PL",
+    "timerDays": 5
+  },
   "stats": {
     "dayStats": 1,
     "weekStats": 2,
@@ -7,22 +25,10 @@
   },
   "login": [
     {
-      "id": 1,
-      "username": "a",
-      "password": "a",
-      "role": "USERADMIN"
-    },
-    {
-      "id": 2,
-      "username": "u",
-      "password": "u",
-      "role": "USER"
-    },
-    {
-      "id": 3,
-      "username": "testowy",
-      "password": "a",
-      "role": "USER"
+      "username": "user",
+      "role": "USER",
+      "password": "4a7d1ed414474e4033ac29ccb8653d9b",
+      "id": 3
     },
     {
       "username": "admin",
@@ -46,6 +52,16 @@
       "name": "aaa",
       "user": 2,
       "id": 3
+    },
+    {
+      "name": "AAA",
+      "user": "2033",
+      "id": 4
+    },
+    {
+      "name": "KKK",
+      "user": "666",
+      "id": 5
     }
   ],
   "projects": [
@@ -87,6 +103,18 @@
       "user": 2,
       "client": "3",
       "id": 6
+    },
+    {
+      "name": "BBB",
+      "user": "2033",
+      "client": "4",
+      "id": 7
+    },
+    {
+      "name": "PPP",
+      "user": "666",
+      "client": "5",
+      "id": 8
     }
   ],
   "worklog": [
@@ -224,6 +252,583 @@
       "stop": "2022-01-09T16:34:46",
       "project": "6",
       "id": 11
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bierzące zadanie",
+      "user": "2023",
+      "start": "2022-01-16T09:32:52",
+      "stop": "2022-01-16T10:43:44",
+      "project": 0,
+      "id": 12
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bierzące zadanie",
+      "user": "2023",
+      "start": "2022-01-16T09:33:24",
+      "stop": "2022-01-16T10:43:42",
+      "project": 0,
+      "id": 13
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "biezące zadanie",
+      "user": "2023",
+      "start": "2022-01-16T09:35:01",
+      "stop": "2022-01-16T10:40:17",
+      "project": 0,
+      "id": 14
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "biezące zadanie",
+      "user": "2023",
+      "start": "2022-01-16T09:43:49",
+      "stop": "2022-01-16T10:44:00",
+      "project": 0,
+      "id": 15
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "biezące zadanie",
+      "user": "2032",
+      "start": "2022-01-16T09:48:43",
+      "stop": "2022-01-16T10:48:55",
+      "project": 0,
+      "id": 16
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "biezące zadanie",
+      "user": "2032",
+      "start": "2022-01-16T09:49:19",
+      "stop": "2022-01-16T10:50:48",
+      "project": 0,
+      "id": 17
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bieżące zadanie",
+      "user": "2032",
+      "start": "2022-01-16T09:50:49",
+      "stop": "2022-01-16T10:52:22",
+      "project": 0,
+      "id": 18
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bieżące zadanie",
+      "user": "2032",
+      "start": "2022-01-16T09:52:22",
+      "stop": "2022-01-16T10:53:08",
+      "project": 0,
+      "id": 19
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "biezące zadanie",
+      "user": "2032",
+      "start": "2022-01-16T09:54:06",
+      "stop": "2022-01-16T10:55:03",
+      "project": 0,
+      "id": 20
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bieżące zadanie",
+      "user": "2032",
+      "start": "2022-01-16T09:55:04",
+      "stop": "2022-01-16T10:58:09",
+      "project": 0,
+      "id": 21
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "bieżące zadanie",
+      "user": "2032",
+      "start": "2022-01-14T09:58:10",
+      "stop": "2022-01-16T11:00:11",
+      "project": 0,
+      "id": 22
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "AAAAAAAA",
+      "user": "2032",
+      "start": "2022-01-10T10:00:12",
+      "stop": "2022-01-11T12:14:36",
+      "project": 0,
+      "id": 23
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "aa",
+      "user": "2032",
+      "start": "2022-01-16T11:14:39",
+      "stop": "2022-01-16T17:59:33",
+      "project": 0,
+      "id": 24
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "taski na ai",
+      "user": "2033",
+      "start": "2022-01-16T12:26:24",
+      "stop": "2022-01-16T12:27:01",
+      "project": "7",
+      "id": 25
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "biezące zadanie",
+      "user": "2033",
+      "start": "2022-01-16T12:29:21",
+      "stop": "2022-01-16T12:35:20",
+      "project": "7",
+      "id": 26
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "biezące zadanie",
+      "user": "2033",
+      "start": "2022-01-16T11:39:44",
+      "stop": "2022-01-16T13:16:33",
+      "project": 0,
+      "id": 27
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "",
+      "user": "2033",
+      "start": "2022-01-16T12:16:37",
+      "stop": "2022-01-16T13:18:27",
+      "project": "7",
+      "id": 28
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "zadanko na aplikacje",
+      "user": "2033",
+      "start": "2022-01-16T12:19:05",
+      "stop": "2022-01-16T13:22:39",
+      "project": "7",
+      "id": 29
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "",
+      "user": "2033",
+      "start": "2022-01-16T13:27:15",
+      "stop": "2022-01-16T13:27:16",
+      "project": 0,
+      "id": 30
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "",
+      "user": "2033",
+      "start": "2022-01-16T13:27:30",
+      "stop": "2022-01-16T13:27:31",
+      "project": 0,
+      "id": 31
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "",
+      "user": "2033",
+      "start": "2022-01-16T13:28:15",
+      "stop": "2022-01-16T13:28:16",
+      "project": 0,
+      "id": 32
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "sss",
+      "user": "2033",
+      "start": "2022-01-16T13:28:18",
+      "stop": "2022-01-16T13:28:23",
+      "project": 0,
+      "id": 33
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "qqqqqqqwwwww",
+      "user": "2033",
+      "start": "2022-01-16T12:29:00",
+      "stop": "2022-01-16T13:29:19",
+      "project": 0,
+      "id": 34
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "ll",
+      "user": "2033",
+      "start": "2022-01-16T13:29:55",
+      "stop": "2022-01-16T13:30:00",
+      "project": 0,
+      "id": 35
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "",
+      "user": "2033",
+      "start": "2022-01-16T13:34:46",
+      "stop": "2022-01-16T13:34:49",
+      "project": 0,
+      "id": 36
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "",
+      "user": "2033",
+      "start": "2022-01-16T12:34:50",
+      "stop": "2022-01-16T13:35:11",
+      "project": 0,
+      "id": 37
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "",
+      "user": "2033",
+      "start": "2022-01-16T13:35:20",
+      "stop": "2022-01-16T13:35:21",
+      "project": 0,
+      "id": 38
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "pp",
+      "user": "2033",
+      "start": "2022-01-16T12:35:23",
+      "stop": "2022-01-16T13:40:32",
+      "project": "7",
+      "id": 39
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "fffff",
+      "user": "2033",
+      "start": "2022-01-16T12:40:41",
+      "stop": "2022-01-16T13:40:57",
+      "project": 0,
+      "id": 40
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "22",
+      "user": "2033",
+      "start": "2022-01-16T13:41:07",
+      "stop": "2022-01-16T13:41:14",
+      "project": 0,
+      "id": 41
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "2222",
+      "user": "2033",
+      "start": "2022-01-16T13:41:17",
+      "stop": "2022-01-16T13:41:32",
+      "project": 0,
+      "id": 42
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "test",
+      "user": "2033",
+      "start": "2022-01-16T12:49:03",
+      "stop": "2022-01-16T13:56:49",
+      "project": 0,
+      "id": 43
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "test",
+      "user": "2033",
+      "start": "2022-01-16T12:58:05",
+      "stop": "2022-01-16T14:32:19",
+      "project": 0,
+      "id": 44
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "",
+      "user": "2033",
+      "start": "2022-01-16T13:32:22",
+      "stop": "2022-01-16T18:01:05",
+      "project": 0,
+      "id": 45
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "done ",
+      "user": "2033",
+      "start": "2022-01-16T17:01:17",
+      "stop": "2022-01-16T18:01:42",
+      "project": 0,
+      "id": 46
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "dd",
+      "user": "2033",
+      "start": "2022-01-16T17:03:12",
+      "stop": "2022-01-16T18:03:38",
+      "project": 0,
+      "id": 47
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "test",
+      "user": "666",
+      "start": "2022-01-16T18:09:38",
+      "stop": "2022-01-16T18:09:43",
+      "project": 0,
+      "id": 48
+    },
+    {
+      "description": "manual",
+      "user": "666",
+      "start": "2022-01-15T18:09:51",
+      "stop": "2022-01-15T20:13:01",
+      "project": "8",
+      "active": false,
+      "id": 49,
+      "projectName": "",
+      "client": 0,
+      "clientName": "",
+      "timeDiff": ""
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "",
+      "user": "666",
+      "start": "2022-01-16T17:12:48",
+      "stop": "2022-01-16T18:24:29",
+      "project": 0,
+      "id": 50
+    },
+    {
+      "description": "mmm",
+      "user": "666",
+      "start": "2022-01-16T17:22:20",
+      "stop": "2022-01-16T18:22:52",
+      "project": 0,
+      "active": false,
+      "id": 51,
+      "projectName": "",
+      "client": 0,
+      "clientName": "",
+      "timeDiff": ""
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "test descr",
+      "user": "2033",
+      "start": "2022-01-16T17:28:29",
+      "stop": "2022-01-16T18:38:59",
+      "project": 0,
+      "id": 52
+    },
+    {
+      "description": "ppp",
+      "user": "2033",
+      "start": "2022-01-10T19:40:06",
+      "stop": "2022-01-11T19:40:09",
+      "project": 0,
+      "active": false,
+      "id": 53
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "",
+      "user": "2033",
+      "start": "2022-01-16T19:14:21",
+      "stop": "2022-01-16T20:27:42",
+      "project": 0,
+      "id": 54
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "",
+      "user": "2033",
+      "start": "2022-01-16T19:49:13",
+      "stop": "2022-01-16T21:01:22",
+      "project": 0,
+      "id": 55
+    },
+    {
+      "description": "",
+      "user": "3",
+      "start": "2022-01-16T21:08:32.825Z",
+      "stop": "2022-01-16T21:08:32.825Z",
+      "project": 0,
+      "active": true,
+      "id": 56
     }
   ]
 }

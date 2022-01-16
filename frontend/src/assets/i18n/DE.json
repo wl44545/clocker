@@ -40,5 +40,11 @@
   "stopTiming": "Timing stoppen",
   "account": "Konto",
   "changePassword": "Passwort ändern",
-  "deleteAccount": "Konto löschen"
+  "deleteAccount": "Konto löschen",
+  "confirm": "Bestätigen",
+  "cancel": "stornieren",
+  "oldPassword": "Aktuelles Passwort",
+  "newPassword": "Neues Passwort",
+  "wrongNewPassword": "Das neue Passwort muss sich vom vorherigen unterscheiden",
+  "wrongOldPassword": "Aktuelles Passwort falsch eingegeben"
 }

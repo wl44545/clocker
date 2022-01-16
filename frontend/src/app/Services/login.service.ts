@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {LoginRequestModel, LoginResponseModel} from "../Models/login.model";
 import {Router} from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import {Md5} from "ts-md5";
 
 
 @Injectable({
@@ -21,7 +22,7 @@ export class LoginService {
   }
 
   public login(username: string, password: string): boolean {
-   /* this.httpClient.post<LoginResponseModel>(`${environment.apiUrl}/login`, new LoginRequestModel(username, password)).subscribe(response => {
+  /* this.httpClient.post<LoginResponseModel>(`${environment.apiUrl}/login`, new LoginRequestModel(username, this.getHash(password).toString())).subscribe(response => {
       if(response.token != null && this.isJWTValid(response.token) && this.isJWTPayloadOk(response.token)){
           localStorage.setItem("TOKEN", response.token);
           if(this.isUser()){
@@ -37,6 +38,7 @@ export class LoginService {
         }
     });
     return false;*/
+
     if(username != "" && this.isJWTValid(username) && this.isJWTPayloadOk(username)){
       localStorage.setItem("TOKEN", username);
       if(this.isUser()){
@@ -128,6 +130,11 @@ export class LoginService {
         'Authorization': `Bearer ${this.loadToken()}`
       })
     };
+  }
+
+  private getHash(input: string){
+    const md5 = new Md5();
+    return md5.appendStr(input).end();
   }
 
 }

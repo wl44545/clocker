@@ -16,8 +16,16 @@ export class UserService{
     return this.httpClient.get<UserModel[]>(`${environment.apiUrl}/login`, this.loginService.getAuthorizedOptions());
   }
 
+  public getUser(userID:number): Observable<UserModel> {
+    return this.httpClient.get<UserModel>(`${environment.apiUrl}/login/${userID}`, this.loginService.getAuthorizedOptions());
+  }
+
   public updateRole(user:UserModel): Observable<UserModel>{
     console.log(user.role);
+    return this.httpClient.put<UserModel>(`${environment.apiUrl}/login/${user.id}`, user, this.loginService.getAuthorizedOptions());
+  }
+
+  public updateUser(user:UserModel): Observable<UserModel>{
     return this.httpClient.put<UserModel>(`${environment.apiUrl}/login/${user.id}`, user, this.loginService.getAuthorizedOptions());
   }
 
@@ -29,4 +37,8 @@ export class UserService{
     return this.httpClient.delete<UserModel>(`${environment.apiUrl}/login/${user.id}`, this.loginService.getAuthorizedOptions());
   }
 
-}
+  public removeUserByID(userID:number): Observable<UserModel> {
+    return this.httpClient.delete<UserModel>(`${environment.apiUrl}/login/${userID}`, this.loginService.getAuthorizedOptions());
+  }
+
+  }

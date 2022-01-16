@@ -25,16 +25,10 @@
   },
   "login": [
     {
-      "id": 2,
-      "username": "u",
-      "password": "u",
-      "role": "USER"
-    },
-    {
-      "id": 3,
-      "username": "testowy",
-      "password": "a",
-      "role": "USER"
+      "username": "user",
+      "role": "USER",
+      "password": "4a7d1ed414474e4033ac29ccb8653d9b",
+      "id": 3
     },
     {
       "username": "admin",

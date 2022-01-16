@@ -40,5 +40,11 @@
   "stopTiming": "Stop timing",
   "account": "Account",
   "changePassword": "Change password",
-  "deleteAccount": "Delete account"
+  "deleteAccount": "Delete account",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "oldPassword": "Current password",
+  "newPassword": "New password",
+  "wrongNewPassword": "The new password must be different from the previous one",
+  "wrongOldPassword": "Current password entered incorrectly"
 }

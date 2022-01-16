@@ -28,6 +28,7 @@
     "moment": "^2.29.1",
     "ngx-translate": "0.0.1-security",
     "rxjs": "~6.6.0",
+    "ts-md5": "^1.2.10",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },

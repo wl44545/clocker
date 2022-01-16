@@ -6,7 +6,7 @@ export class UserModel {
   role: string;
   password: string;
 
-  constructor(id:number, username: string, role: string, password: string) {
+  constructor(id: number, username: string, role: string, password: string) {
     this.username = username;
     this.role = role;
     this.password = password;

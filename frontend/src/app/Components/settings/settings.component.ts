@@ -13,8 +13,6 @@ import {ComponentService} from "../../Services/component.service";
 })
 export class SettingsComponent implements OnInit {
 
-  // languages: LanguageModel[] = [];
-  // language: string = "";
   settings: SettingsModel = new SettingsModel([], '', 0);
 
   constructor(public loginService: LoginService,
@@ -38,8 +36,10 @@ export class SettingsComponent implements OnInit {
   private loadSettings(){
     this.settingsService.getSettings().subscribe(settings => {
       this.settings = settings;
-      // this.languages = settings.languages;
-      // this.language = settings.language;
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
     });
   }
 
@@ -49,6 +49,10 @@ export class SettingsComponent implements OnInit {
         this.loadSettings();
         this.translateService.get('settingsSaved').subscribe(translation => {
           window.alert(translation);
+        });
+      },() => {
+        this.translateService.get('serverError').subscribe((text: string) => {
+          window.alert(text);
         });
       });
     }else{

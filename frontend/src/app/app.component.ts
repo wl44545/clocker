@@ -52,6 +52,10 @@ export class AppComponent implements OnInit{
      });
      this.translateService.addLangs(languages);
      this.translateService.setDefaultLang(settings.language);
+   },() => {
+     this.translateService.get('serverError').subscribe((text: string) => {
+       window.alert(text);
+     });
    });
  }
 

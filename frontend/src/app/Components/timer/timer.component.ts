@@ -275,6 +275,10 @@ export class TimerComponent implements OnInit {
           window.alert(text);
         });
       });
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        window.alert(text);
+      });
     });
   }
 

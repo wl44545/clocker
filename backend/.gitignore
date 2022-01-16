@@ -1,5 +1,9 @@
 
 ###> symfony/framework-bundle ###
+<<<<<<< HEAD
+/.env
+=======
+>>>>>>> 032d0e08fc73631e0ef1b900c31561613a296dba
 /.env.local
 /.env.local.php
 /.env.*.local

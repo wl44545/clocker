@@ -7,8 +7,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\UsersService;
+use PDO;
 
-
+use Doctrine\DBAL\Connection;
 
 /**
  * @Route("/users", name="users_")
@@ -43,10 +44,11 @@ class UserController extends AbstractController
     /**
      * @Route("/getusers", name="getusers", methods={"POST", "GET"})
      */
-    public function getUsers(): JsonResponse
+    public function getUsers(Connection $connection): JsonResponse
     {
-
-        return $this->json($this->userService->getUsers());
+        $users = $connection->fetchAllAssociative('SELECT * FROM users');
+        return $this->json($users);
+        //return $this->json($this->userService->getUsers());
     }
 
     /**

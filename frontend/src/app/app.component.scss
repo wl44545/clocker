@@ -19,7 +19,7 @@ nav{
   font-size: 20px;
 }
 .icon{
-  margin-right: 0.25vw;
+  margin-right: 3px;
 }
 label.logo{
   margin-left: 4vw;
@@ -56,6 +56,14 @@ nav ul li a{
 nav ul li.active a{
   font-weight: bolder;
   font-size: 20px;
+}
+
+nav ul li.langs{
+  margin-left: 15px;
+}
+
+nav ul li.actualTimer{
+  margin-right: 15px;
 }
 
 .actualTimer{
@@ -96,19 +104,22 @@ a:hover{
   margin-right: 1vw;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
 
   label.logo {
     font-size: 30px;
     padding-left: 50px;
   }
 
-  //}
-  //@media (max-width: 858px){
+  nav ul li.langs{
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
 
   .checkbtn {
     display: block;
   }
+
   ul {
     position: fixed;
     width: 100%;
@@ -135,9 +146,12 @@ a:hover{
     background: none;
     color: $GRAY;
   }
+
   nav ul li.actualTimer{
-    padding: 15px;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
+
   .actualTimer{
     color: $OAPL;
     font-weight: bolder;
@@ -148,13 +162,13 @@ a:hover{
   }
   .flag {
     height: 30px;
-    margin-right: 7.5px;
+    margin-right: 15px;
   }
   .actualTimer:hover{
     background: none;
     color: $GRAY;
   }
   .icon{
-    margin-right: 5px;
+    margin-right: 3px;
   }
 }

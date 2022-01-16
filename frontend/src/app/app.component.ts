@@ -17,6 +17,7 @@ export class AppComponent implements OnInit{
   title = 'clocker';
   appRoutes = APPROUTES;
   isNavOpen: boolean = false;
+  width = 0.05 * window.innerWidth;
 
   timerHandler: number = 0;
   localTimeInSec: number = 0;
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit{
   }
 
   public switchLang(language: string) {
+    this.isNavOpen = !this.isNavOpen;
     this.languageService.setCurrentLanguage(language);
  }
 

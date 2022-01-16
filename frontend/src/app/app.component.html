@@ -5,8 +5,7 @@
   </label>
   <label class="logo">Clocker</label>
   <ul (click)="isNavOpen = !isNavOpen">
-    <li style="" *ngIf="timeControl && !getComponent('TimerComponent') && loginService.isUser()" (click)="goToTimer()" class="actualTimer"><i class="icon fas fa-stopwatch"></i>{{getHour()}}{{getMinute()}}{{getSecund()}}</li>
-    <li style="width: 5vw;"></li>
+    <li *ngIf="timeControl && !getComponent('TimerComponent') && loginService.isUser()" (click)="goToTimer()" class="actualTimer"><i class="icon fas fa-stopwatch"></i>{{getHour()}}{{getMinute()}}{{getSecund()}}</li>
 <!--    <li *ngIf="loginService.isLogged()" class="welcome username"><i class="icon fas fa-user-circle"></i>{{this.loginService.getUsername()}}</li>-->
     <li *ngIf="loginService.isAdmin()" [ngClass]="{'active': getComponent('AdminComponent')}"><a routerLink="/{{appRoutes.ADMIN}}">{{ 'adminPanel' | translate}}</a></li>
     <li *ngIf="loginService.isAdmin()" [ngClass]="{'active': getComponent('UsersComponent')}"><a routerLink="/{{appRoutes.USERS}}">{{ 'users' | translate}}</a></li>
@@ -16,7 +15,7 @@
     <li *ngIf="loginService.isUser()" [ngClass]="{'active': getComponent('ClientsComponent')}"><a routerLink="/{{appRoutes.CLIENTS}}">{{ 'clients' | translate}}</a></li>
     <li *ngIf="loginService.isUser()" [ngClass]="{'active': getComponent('ReportsComponent')}"><a routerLink="/{{appRoutes.REPORTS}}">{{ 'reports' | translate}}</a></li>
     <li *ngIf="loginService.isLogged()" (click)="logout()"><a href="#">{{ 'logout' | translate}}</a></li>
-    <li>
+    <li class="langs">
       <img class="flag" (click)="switchLang('PL')" src="../assets/icons/PL.png" alt="PL"/>
       <img class="flag" (click)="switchLang('EN')" src="../assets/icons/EN.png" alt="EN"/>
       <img class="flag" (click)="switchLang('DE')" src="../assets/icons/DE.png" alt="DE"/>

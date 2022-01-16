@@ -15,7 +15,7 @@
       }
     ],
     "language": "PL",
-    "timerDays": 7
+    "timerDays": 1
   },
   "stats": {
     "dayStats": 1,
@@ -64,6 +64,11 @@
       "name": "aaa",
       "user": 2,
       "id": 3
+    },
+    {
+      "name": "AAA",
+      "user": "2033",
+      "id": 4
     }
   ],
   "projects": [
@@ -105,6 +110,12 @@
       "user": 2,
       "client": "3",
       "id": 6
+    },
+    {
+      "name": "BBB",
+      "user": "2033",
+      "client": "4",
+      "id": 7
     }
   ],
   "worklog": [
@@ -381,7 +392,7 @@
       "active": false,
       "description": "bieżące zadanie",
       "user": "2032",
-      "start": "2022-01-16T09:58:10",
+      "start": "2022-01-14T09:58:10",
       "stop": "2022-01-16T11:00:11",
       "project": 0,
       "id": 22
@@ -392,10 +403,10 @@
       "clientName": "",
       "timeDiff": "",
       "active": false,
-      "description": "bieżące zadanie",
+      "description": "AAAAAAAA",
       "user": "2032",
-      "start": "2022-01-16T10:00:12",
-      "stop": "2022-01-16T12:14:36",
+      "start": "2022-01-10T10:00:12",
+      "stop": "2022-01-11T12:14:36",
       "project": 0,
       "id": 23
     },
@@ -407,6 +418,41 @@
       "project": 0,
       "active": true,
       "id": 24
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "taski na ai",
+      "user": "2033",
+      "start": "2022-01-16T12:26:24",
+      "stop": "2022-01-16T12:27:01",
+      "project": "7",
+      "id": 25
+    },
+    {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
+      "description": "biezące zadanie",
+      "user": "2033",
+      "start": "2022-01-16T12:29:21",
+      "stop": "2022-01-16T12:35:20",
+      "project": "7",
+      "id": 26
+    },
+    {
+      "description": "biezące zadanie",
+      "user": "2033",
+      "start": "2022-01-16T11:39:44.420Z",
+      "stop": "2022-01-16T11:39:44.420Z",
+      "project": 0,
+      "active": true,
+      "id": 27
     }
   ]
 }

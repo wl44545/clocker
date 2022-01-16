@@ -33,7 +33,7 @@
   "PL": "Polish",
   "EN": "English",
   "DE": "German",
-  "timerDays": "How many days in the timer history",
+  "timerDays": "Days displayed",
   "settingsSaved": "Settings saved",
   "settingsSaveError": "An error occurred while saving the settings",
   "startTiming": "Start timing",

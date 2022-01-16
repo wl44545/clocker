@@ -32,7 +32,7 @@ export class TimerComponent implements OnInit {
   localTimeInSec: number = 0;
   localTimeModelId: number | undefined;
 
-  private withoutMicrosec(value:string){
+  private withoutMilliseconds(value:string){
     let index = value.indexOf('.');
     if(index > 0){
       return value.slice(0,index);
@@ -40,10 +40,11 @@ export class TimerComponent implements OnInit {
     return value;
   }
 
+
   public start() {
     console.log('start');
     this.timerActive = true;
-    this.localTimeStart = this.withoutMicrosec(formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en'));
+    this.localTimeStart = this.withoutMilliseconds(formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en'));
     this.localTimeInSec = 0;
     this.timer();
 
@@ -143,7 +144,7 @@ export class TimerComponent implements OnInit {
     return wynik;
   }
 
-  getSecund(){
+  getSecond(){
     let sec = this.localTimeInSec % 3600;
     let wynik = Math.floor(sec % 60).toString();
     if(wynik.length == 1){
@@ -239,11 +240,23 @@ export class TimerComponent implements OnInit {
 
             let ms = (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
             let seconds = ms / 1000;
-            const hours = Math.floor(seconds / 3600);
+            let hours = Math.floor(seconds / 3600);
             seconds = seconds % 3600;
-            const minutes = Math.floor(seconds / 60);
+            let minutes = Math.floor(seconds / 60);
             seconds = seconds % 60;
-            entry.timeDiff = `${hours}:${minutes}:${seconds}`;
+            let h = hours.toString();
+            let m = minutes.toString();
+            let s = seconds.toString();
+            if(hours < 10){
+              h = '0' + h;
+            }
+            if(minutes < 10){
+              m = '0' + m;
+            }
+            if(seconds < 10){
+              s = '0' + s;
+            }
+            entry.timeDiff = `${h}:${m}:${s}`;
 
             if(entry.active){
               this.localTimeTitle = entry.description;
@@ -252,7 +265,7 @@ export class TimerComponent implements OnInit {
               this.localProject = entry.project;
               this.timerActive = true;
               this.localTimeInSec = ms / 1000;
-              this.localTimeStart = this.withoutMicrosec(entry.start.toString());
+              this.localTimeStart = this.withoutMilliseconds(entry.start.toString());
               this.timer();
             }
             else{
@@ -288,11 +301,23 @@ export class TimerComponent implements OnInit {
       ms += (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
     }
     let seconds = ms / 1000;
-    const hours = Math.floor(seconds / 3600);
+    let hours = Math.floor(seconds / 3600);
     seconds = seconds % 3600;
-    const minutes =  Math.floor(seconds / 60);
+    let minutes =  Math.floor(seconds / 60);
     seconds = seconds % 60;
-    this.totalTime = `${hours}:${minutes}:${seconds}`;
+    let h = hours.toString();
+    let m = minutes.toString();
+    let s = seconds.toString();
+    if(hours < 10){
+      h = '0' + h;
+    }
+    if(minutes < 10){
+      m = '0' + m;
+    }
+    if(seconds < 10){
+      s = '0' + s;
+    }
+    this.totalTime = `${h}:${m}:${s}`;
   }
 
   public editEntry(entry: TimeEntryModel) {

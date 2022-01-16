@@ -90,11 +90,23 @@ export class ReportsComponent implements OnInit {
         }
         let ms = (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
         let seconds = ms / 1000;
-        const hours = Math.floor(seconds / 3600);
+        let hours = Math.floor(seconds / 3600);
         seconds = seconds % 3600;
-        const minutes =  Math.floor(seconds / 60);
+        let minutes =  Math.floor(seconds / 60);
         seconds = seconds % 60;
-        entry.timeDiff = `${hours}:${minutes}:${seconds}`;
+        let h = hours.toString();
+        let m = minutes.toString();
+        let s = seconds.toString();
+        if(hours < 10){
+          h = '0' + h;
+        }
+        if(minutes < 10){
+          m = '0' + m;
+        }
+        if(seconds < 10){
+          s = '0' + s;
+        }
+        entry.timeDiff = `${h}:${m}:${s}`;
       }
       this.worklogQuery = this.worklog.sort((a, b) => {
         if ( a.stop < b.stop ){
@@ -115,11 +127,23 @@ export class ReportsComponent implements OnInit {
       ms += (new Date(entry.stop).getTime() - new Date(entry.start).getTime());
         }
     let seconds = ms / 1000;
-    const hours = Math.floor(seconds / 3600);
+    let hours = Math.floor(seconds / 3600);
     seconds = seconds % 3600;
-    const minutes =  Math.floor(seconds / 60);
+    let minutes =  Math.floor(seconds / 60);
     seconds = seconds % 60;
-    this.totalTime = `${hours}:${minutes}:${seconds}`;
+    let h = hours.toString();
+    let m = minutes.toString();
+    let s = seconds.toString();
+    if(hours < 10){
+      h = '0' + h;
+    }
+    if(minutes < 10){
+      m = '0' + m;
+    }
+    if(seconds < 10){
+      s = '0' + s;
+    }
+    this.totalTime = `${h}:${m}:${s}`;
   }
 
   public doQuery() {

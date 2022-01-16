@@ -5,7 +5,7 @@
   </label>
   <label class="logo">Clocker</label>
   <ul (click)="isNavOpen = !isNavOpen">
-    <li *ngIf="timeControl && !getComponent('TimerComponent') && loginService.isUser()" (click)="goToTimer()" class="actualTimer"><i class="icon fas fa-stopwatch"></i>{{getHour()}}{{getMinute()}}{{getSecund()}}</li>
+    <li *ngIf="timeControl && !getComponent('TimerComponent') && loginService.isUser()" (click)="goToTimer()" class="actualTimer"><i class="icon fas fa-stopwatch"></i>{{getHour()}}{{getMinute()}}{{getSecond()}}</li>
 <!--    <li *ngIf="loginService.isLogged()" class="welcome username"><i class="icon fas fa-user-circle"></i>{{this.loginService.getUsername()}}</li>-->
     <li *ngIf="loginService.isAdmin()" [ngClass]="{'active': getComponent('AdminComponent')}"><a routerLink="/{{appRoutes.ADMIN}}">{{ 'adminPanel' | translate}}</a></li>
     <li *ngIf="loginService.isAdmin()" [ngClass]="{'active': getComponent('UsersComponent')}"><a routerLink="/{{appRoutes.USERS}}">{{ 'users' | translate}}</a></li>

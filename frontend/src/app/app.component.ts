@@ -17,7 +17,6 @@ export class AppComponent implements OnInit{
   title = 'clocker';
   appRoutes = APPROUTES;
   isNavOpen: boolean = false;
-  width = 0.05 * window.innerWidth;
 
   timerHandler: number = 0;
   localTimeInSec: number = 0;
@@ -91,7 +90,7 @@ export class AppComponent implements OnInit{
     return wynik;
   }
 
-  getSecund(){
+  getSecond(){
     let sec = this.localTimeInSec % 3600;
     let wynik = Math.floor(sec % 60).toString();
     if(wynik.length == 1){

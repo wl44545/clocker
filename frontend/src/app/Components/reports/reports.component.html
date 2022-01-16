@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="reports.component.scss">
 </head>
 <body>
-  <div class="query">
+  <div style="margin-bottom: 0" class="query">
     <div class="field">
       <i class="icon fas fa-project-diagram"></i>
       <select [(ngModel)]="queryProject" (change)="doQuery()">
@@ -22,8 +22,22 @@
         <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
       </select>
     </div>
-
   </div>
+  <div  style="margin-top: 0" class="query">
+    <div class="field">
+      <i class="icon far fa-play-circle"></i>
+      <input type="datetime-local" step=1 [(ngModel)]="queryStartFrom" (change)="doQuery()">
+      -
+      <input type="datetime-local" step=1 [(ngModel)]="queryStartTo" (change)="doQuery()">
+    </div>
+    <div class="field">
+      <i class="icon far fa-stop-circle"></i>
+      <input type="datetime-local" step=1 [(ngModel)]="queryStopFrom" (change)="doQuery()">
+      -
+      <input type="datetime-local" step=1 [(ngModel)]="queryStopTo" (change)="doQuery()">
+    </div>
+  </div>
+
   <div class="entry" *ngFor="let entry of worklogQuery">
     <div class="field">
       <i class="icon far fa-comment-dots"></i>
@@ -52,10 +66,10 @@
 
 
   </div>
-  <div *ngIf="totalTime!='0:0:0'" class="query">
+  <div *ngIf="totalTime!='00:00:00'" class="query">
     {{'totalTime' | translate}}: {{ totalTime }}
   </div>
-  <div *ngIf="totalTime!='0:0:0'" class="csv">
+  <div *ngIf="totalTime!='00:00:00'" class="csv">
     <i class="icon fas fa-file-csv"></i>
     <angular2csv [data]="worklogQuery" filename="report" [options]="csvOptions" ></angular2csv>
   </div>

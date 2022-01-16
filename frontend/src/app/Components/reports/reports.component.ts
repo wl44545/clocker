@@ -23,6 +23,12 @@ export class ReportsComponent implements OnInit {
   clients: ClientModel[] = [];
   queryProject: number = -1;
   queryClient: number = -1;
+
+  dateNull: Date = new Date("0000-01-01T00:00:00");
+  queryStartFrom: Date = this.dateNull;
+  queryStartTo: Date = this.dateNull;
+  queryStopFrom: Date = this.dateNull;
+  queryStopTo: Date = this.dateNull;
   totalTime: string = "";
 
   csvOptions = {
@@ -147,19 +153,42 @@ export class ReportsComponent implements OnInit {
   }
 
   public doQuery() {
-    if(this.queryClient == -1 && this.queryProject == -1){
+    if(this.queryClient == -1 && this.queryProject == -1 && !this.queryStartFrom && !this.queryStartTo && !this.queryStopFrom && !this.queryStopTo){
       this.worklogQuery = this.worklog;
     }else{
       this.worklogQuery = [];
       for (let entry of this.worklog) {
-        let query1: boolean = this.queryProject == entry.project || this.queryProject == -1;
-        let query2: boolean = this.queryClient == entry.client || this.queryClient == -1;
-        if (query1 && query2) {
+        let query1: boolean = true;
+        if(this.queryProject != -1){
+          query1 = this.queryProject == entry.project;
+        }
+        let query2: boolean = true;
+        if(this.queryClient != -1){
+          query2 = this.queryClient == entry.client;
+        }
+        let query3: boolean = true;
+        if(this.queryStartFrom != this.dateNull){
+          query3 = new Date(entry.start) >= new Date(this.queryStartFrom);
+        }
+        let query4: boolean = true;
+        if(this.queryStartTo != this.dateNull){
+          query4 = new Date(entry.start) <= new Date(this.queryStartTo);
+        }
+        let query5: boolean = true;
+        if(this.queryStopFrom != this.dateNull){
+          query5 = new Date(entry.stop) >= new Date(this.queryStopFrom);
+        }
+        let query6: boolean = true;
+        if(this.queryStopTo != this.dateNull){
+          query6 = new Date(entry.stop) <= new Date(this.queryStopTo);
+        }
+
+        if (query1 && query2 && query3 && query4 && query5 && query6) {
           this.worklogQuery.push(entry);
         }
       }
     }
-	this.getTotalTime();
+    this.getTotalTime();
   }
 
   public getProjects(){

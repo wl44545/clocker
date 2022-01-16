@@ -42,12 +42,15 @@
   color: $PURPLE;
 }
 select{
-  width: 17.5vw;
+  width: 15vw;
   height: 5vh;
-  margin-left: 0.5vw;
+}
+input{
+  width: 15vw;
+  height: 5vh;
 }
 
-@media (max-width: 900px){
+@media (max-width: 1000px){
   .entry{
     display: block;
     width: auto;
@@ -81,7 +84,10 @@ select{
     display: inline;
   }
   select{
-    width: 50%;
+    width: 85%;
+  }
+  input{
+    width: 40%;
   }
 
 

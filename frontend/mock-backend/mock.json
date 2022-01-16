@@ -15,7 +15,7 @@
       }
     ],
     "language": "PL",
-    "timerDays": 7
+    "timerDays": 5
   },
   "stats": {
     "dayStats": 1,
@@ -797,6 +797,15 @@
       "stop": "2022-01-16T18:38:59",
       "project": 0,
       "id": 52
+    },
+    {
+      "description": "ppp",
+      "user": "2033",
+      "start": "2022-01-10T19:40:06",
+      "stop": "2022-01-11T19:40:09",
+      "project": 0,
+      "active": false,
+      "id": 53
     }
   ]
 }

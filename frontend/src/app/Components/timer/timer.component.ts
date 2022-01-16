@@ -26,7 +26,7 @@ export class TimerComponent implements OnInit {
   timerHandler: number = 0;
 
   localTimeStart: string | null | undefined;
-  localTimeTitle: string = "biezące zadanie";
+  localTimeTitle: string = "";
   localClient: number = 0;
   localProject: number = 0;
   localTimeInSec: number = 0;
@@ -60,7 +60,7 @@ export class TimerComponent implements OnInit {
   clearLocal(){
     this.timerActive = false;
     clearInterval(this.timerHandler);
-    this.localTimeTitle = "bieżące zadanie";
+    this.localTimeTitle = "";
     this.localClient = 0;
     this.localProject = 0;
     this.localTimeInSec = 0;
@@ -329,7 +329,8 @@ export class TimerComponent implements OnInit {
   }
 
   public saveEntry() {
-    if(this.manualDescription != "" && new Date(this.manualStop) > new Date(this.manualStart)){
+    // if(this.manualDescription != "" && new Date(this.manualStop) > new Date(this.manualStart)){
+    if(new Date(this.manualStop) > new Date(this.manualStart)){
       this.manualEntry.description = this.manualDescription;
       this.manualEntry.project = this.manualProject;
       this.manualEntry.start = this.manualStart;

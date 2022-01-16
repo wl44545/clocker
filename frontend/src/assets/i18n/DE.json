@@ -35,5 +35,7 @@
   "DE": "Deutsch",
   "timerDays": "Wie viele Tage ist der Verlauf",
   "settingsSaved": "Einstellungen gespeichert",
-  "settingsSaveError": "Beim Speichern der Einstellungen ist ein Fehler aufgetreten"
+  "settingsSaveError": "Beim Speichern der Einstellungen ist ein Fehler aufgetreten",
+  "startTiming": "Zeitmessung starten",
+  "stopTiming": "Timing stoppen"
 }

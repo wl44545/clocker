@@ -6,27 +6,33 @@
 </head>
 <body>
   <div *ngIf="!timerActive" class="timer auto start">
-    <button (click)="start()">{{'start' | translate}}</button>
+    <button class="startButton" (click)="start()">{{'startTiming' | translate}}</button>
   </div>
   <div *ngIf="timerActive" class="timer auto stop">
 
-    <label>{{getHour()}}</label>
-    <label>:</label>
-    <label>{{getMinute()}}</label>
-    <label>:</label>
-    <label style="margin-right: 10px;">{{getSecund()}}</label>
+    <div class="field timeSpent">
+      <i class="icon fas fa-stopwatch"></i>{{getHour()}}:{{getMinute()}}:{{getSecund()}}
+    </div>
 
-    <input type="text" [(ngModel)]="localTimeTitle" [value]="localTimeTitle" (change)="changeHandler()"/>
+    <div class="field">
+      <i class="icon far fa-comment-dots"></i>
+      <input type="text"  placeholder="{{'description' | translate}}" [(ngModel)]="localTimeTitle" [value]="localTimeTitle" (change)="changeHandler()"/>
+    </div>
 
-    <select [(ngModel)]="localProject" (change)="changeHandler()">
-      <option [value]=0>{{'noProject' | translate}}</option>
-      <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
-    </select>
+    <div class="field">
+      <i class="icon fas fa-project-diagram"></i>
+      <select [(ngModel)]="localProject" (change)="changeHandler()">
+        <option [value]=0>{{'noProject' | translate}}</option>
+        <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+      </select>
+    </div>
 
-    <button (click)="saveChange()" *ngIf="update">Zatwierdź zmiany</button>
-    <button (click)="stop()">{{'stop' | translate}}</button>
+    <div class="field">
+      <button (click)="saveChange()" *ngIf="update">{{'save' | translate}}</button>
+      <button class="stopButton" (click)="stop()">{{'stopTiming' | translate}}</button>
+    </div>
+
   </div>
-
 
   <div class="timer manual">
     <div class="field">
@@ -55,7 +61,7 @@
   </div>
   <div class="entry" *ngFor="let entry of worklog">
     <div class="field">
-      <i class="icon far fa-comment-dots"></i>
+      <i *ngIf="entry.description" class="icon far fa-comment-dots"></i>
       {{entry.description}}
     </div>
     <div class="field">

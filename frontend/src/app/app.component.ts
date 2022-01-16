@@ -72,9 +72,9 @@ export class AppComponent implements OnInit{
   getHour(){
     let wynik = Math.floor(this.localTimeInSec / 3600).toString();
     if(wynik.length == 1){
-      if(wynik == '0'){
-        return "    ";
-      }
+      // if(wynik == '0'){
+      //   return "    ";
+      // }
       wynik = '0' + wynik;
     }
     wynik = wynik + ':';

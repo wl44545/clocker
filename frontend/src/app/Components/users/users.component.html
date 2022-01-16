@@ -7,7 +7,7 @@
 
 <div class="newUser" id="newUser" *ngIf="show">
 
-  <input type="text" name="newName" placeholder="{{ 'name' | translate}}" [(ngModel)]="newEmail">
+  <input type="text" name="newName" placeholder="{{ 'username' | translate}}" [(ngModel)]="newEmail">
   <!-- <input type="password"> -->
   <input type="password" name="newPassword" placeholder="{{ 'password' | translate}}" [(ngModel)]="newPassword">
   <select [(ngModel)]="newRole">
@@ -16,7 +16,7 @@
     <option [value]="role[2]">User & Admin</option>
   </select>
   <button type="reset" class="anuluj" style="margin-top: 4%" (click)="toMin()"> Anuluj </button>
-  <button type="submit" (click)="addUser()"> Dodaj </button>
+  <button type="submit" (click)="addUser()">{{ 'add' | translate}}</button>
 
 </div>
 

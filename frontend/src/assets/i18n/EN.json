@@ -17,7 +17,7 @@
   "statsWeek": "minutes this week",
   "statsMonth": "minutes this month",
   "statsYear": "minutes this year",
-  "username": "User",
+  "username": "Username",
   "password": "Password",
   "login": "Log in",
   "wrongLoginPassword": "Wrong login or password!",
@@ -35,5 +35,7 @@
   "DE": "German",
   "timerDays": "How many days in the timer history",
   "settingsSaved": "Settings saved",
-  "settingsSaveError": "An error occurred while saving the settings"
+  "settingsSaveError": "An error occurred while saving the settings",
+  "startTiming": "Start timing",
+  "stopTiming": "Stop timing"
 }

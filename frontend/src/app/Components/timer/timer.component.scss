@@ -42,16 +42,37 @@ button{
   margin-left: 1vw;
   height: 5vh;
 }
+button.startButton{
+  background-color: lightgreen;
+  width: auto;
+  height: auto;
+  border: solid 5px lightgreen;
+  border-radius: 5px;
+  font-size: 15px;
+}
+button.stopButton{
+  background-color: indianred;
+  width: auto;
+  height: auto;
+  border: solid 5px indianred;
+  border-radius: 5px;
+  font-size: 15px;
+}
 .panel{
   margin-left: 2vw;
   color: $PURPLE;
 }
 .icon{
-  margin-left: 1vw;
-  margin-right: 0.25vw;
+  margin-left: 15px;
+  margin-right: 5px;
   color: $PURPLE;
 }
-
+.timeSpent{
+  color: $PURPLE;
+  font-weight: bolder;
+  font-size: 25px;
+  margin-right: 15px;
+}
 
 
 @media (max-width: 1000px){
@@ -60,7 +81,7 @@ button{
     width: auto;
     height: auto;
     background-color: $BLUE;
-    padding: 2vh 2vw;
+    padding: 15px;
     text-align: center;
     justify-content:center;
     align-items:center;
@@ -70,7 +91,7 @@ button{
     width: auto;
     height: auto;
     background-color: $GRAY;
-    padding: 1vh 1vw;
+    padding: 15px;
     text-align: center;
     justify-content:center;
     align-items:center;
@@ -88,10 +109,10 @@ button{
     display: inline;
   }
   select{
-    width: 50%;
+    width: 75%;
   }
   input{
-    width: 50%;
+    width: 75%;
   }
 
 }

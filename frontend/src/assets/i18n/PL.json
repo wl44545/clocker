@@ -35,6 +35,7 @@
   "DE": "Niemiecki",
   "timerDays": "Z ilu dni historia timera",
   "settingsSaved": "Zapisano ustawienia",
-  "settingsSaveError": "Wystąpił błąd podczas zapisywania ustawień"
-
+  "settingsSaveError": "Wystąpił błąd podczas zapisywania ustawień",
+  "startTiming": "Rozpocznij mierzenie czasu",
+  "stopTiming": "Zakończ mierzenie czasu"
 }

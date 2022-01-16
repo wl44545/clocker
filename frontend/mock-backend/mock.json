@@ -27,7 +27,7 @@
     {
       "username": "user",
       "role": "USER",
-      "password": "4a7d1ed414474e4033ac29ccb8653d9b",
+      "password": "fa246d0262c3925617b0c72bb20eeb1d",
       "id": 3
     },
     {
@@ -822,13 +822,26 @@
       "id": 55
     },
     {
+      "client": 0,
+      "projectName": "",
+      "clientName": "",
+      "timeDiff": "",
+      "active": false,
       "description": "",
       "user": "3",
-      "start": "2022-01-16T21:08:32.825Z",
-      "stop": "2022-01-16T21:08:32.825Z",
+      "start": "2022-01-16T21:08:32",
+      "stop": "2022-01-16T22:19:07",
+      "project": 0,
+      "id": 56
+    },
+    {
+      "description": "",
+      "user": "3",
+      "start": "2022-01-16T21:23:21.827Z",
+      "stop": "2022-01-16T21:23:21.827Z",
       "project": 0,
       "active": true,
-      "id": 56
+      "id": 57
     }
   ]
 }

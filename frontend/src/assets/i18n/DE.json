@@ -37,5 +37,8 @@
   "settingsSaved": "Einstellungen gespeichert",
   "settingsSaveError": "Beim Speichern der Einstellungen ist ein Fehler aufgetreten",
   "startTiming": "Zeitmessung starten",
-  "stopTiming": "Timing stoppen"
+  "stopTiming": "Timing stoppen",
+  "account": "Konto",
+  "changePassword": "Passwort ändern",
+  "deleteAccount": "Konto löschen"
 }

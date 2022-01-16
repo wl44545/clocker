@@ -9,6 +9,7 @@ import {ClientsComponent} from "./Components/clients/clients.component";
 import {ReportsComponent} from "./Components/reports/reports.component";
 import {UsersComponent} from "./Components/users/users.component";
 import {SettingsComponent} from "./Components/settings/settings.component";
+import {AccountComponent} from "./Components/account/account.component";
 
 const routes: Routes = [
   {path: APPROUTES.HOME, pathMatch: 'full', component: StartPageComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: APPROUTES.PROJECTS, component: ProjectsComponent},
   {path: APPROUTES.CLIENTS, component: ClientsComponent},
   {path: APPROUTES.REPORTS, component: ReportsComponent},
+  {path: APPROUTES.ACCOUNT, component: AccountComponent},
   {path: '**', component: StartPageComponent}
 
 ];

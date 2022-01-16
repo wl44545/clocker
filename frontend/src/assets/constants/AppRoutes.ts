@@ -1,5 +1,6 @@
 export enum APPROUTES {
   HOME = '',
+  ACCOUNT = "account",
   ADMIN = 'admin',
   USERS = 'users',
   SETTINGS = 'settings',

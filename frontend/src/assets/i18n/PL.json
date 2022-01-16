@@ -37,5 +37,8 @@
   "settingsSaved": "Zapisano ustawienia",
   "settingsSaveError": "Wystąpił błąd podczas zapisywania ustawień",
   "startTiming": "Rozpocznij mierzenie czasu",
-  "stopTiming": "Zakończ mierzenie czasu"
+  "stopTiming": "Zakończ mierzenie czasu",
+  "account": "Konto",
+  "changePassword": "Zmień hasło",
+  "deleteAccount": "Usuń konto"
 }

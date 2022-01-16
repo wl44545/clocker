@@ -37,5 +37,8 @@
   "settingsSaved": "Settings saved",
   "settingsSaveError": "An error occurred while saving the settings",
   "startTiming": "Start timing",
-  "stopTiming": "Stop timing"
+  "stopTiming": "Stop timing",
+  "account": "Account",
+  "changePassword": "Change password",
+  "deleteAccount": "Delete account"
 }

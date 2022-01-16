@@ -18,6 +18,7 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
 import { SettingsComponent } from './Components/settings/settings.component';
+import { AccountComponent } from './Components/account/account.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SettingsComponent } from './Components/settings/settings.component';
     ReportsComponent,
     AdminComponent,
     UsersComponent,
-    SettingsComponent
+    SettingsComponent,
+    AccountComponent
   ],
     imports: [
         BrowserModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../../Services/login.service";
 import {Router} from "@angular/router";
+import {ComponentService} from "../../Services/component.service";
 
 @Component({
   selector: 'app-admin',
@@ -10,10 +11,12 @@ import {Router} from "@angular/router";
 export class AdminComponent implements OnInit {
 
   constructor(public loginService: LoginService,
-              public router: Router) { }
+              public router: Router,
+              private componentService: ComponentService) { }
 
   ngOnInit(): void {
     this.checkPermission();
+    this.componentService.setComponent('AdminComponent');
   }
 
   private checkPermission(){

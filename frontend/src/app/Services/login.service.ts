@@ -99,7 +99,6 @@ export class LoginService {
   }
 
 
-
   private isJWTPayloadOk(token: string): boolean {
     const userIdExists = this.jwtService.decodeToken(token)['user_id'] != null;
     const userNameExists = this.jwtService.decodeToken(token)['user_name'] != null;

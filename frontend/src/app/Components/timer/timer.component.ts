@@ -10,7 +10,8 @@ import {ClientsService} from "../../Services/clients.service";
 import {formatDate} from '@angular/common';
 import {TranslateService} from "@ngx-translate/core";
 import {SettingsService} from "../../Services/settings.service";
-
+import {ComponentService} from "../../Services/component.service";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-timer',
@@ -25,17 +26,27 @@ export class TimerComponent implements OnInit {
   timerHandler: number = 0;
 
   localTimeStart: string | null | undefined;
-  localTimeTitle: string = "bierzące zadanie";
+  localTimeTitle: string = "biezące zadanie";
   localClient: number = 0;
   localProject: number = 0;
   localTimeInSec: number = 0;
   localTimeModelId: number | undefined;
 
+  private withoutMicrosec(value:string){
+    let index = value.indexOf('.');
+    if(index > 0){
+      return value.slice(0,index);
+    }
+    return value;
+  }
+
   public start() {
+    console.log('start');
     this.timerActive = true;
-    this.localTimeStart = formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en');
+    this.localTimeStart = this.withoutMicrosec(formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en'));
     this.localTimeInSec = 0;
     this.timer();
+
 
     this.timerService.addEntry(this.localTimeTitle, this.loginService.getUserID(), new Date(), new Date(), 0, true).subscribe( response =>{
       this.localTimeModelId = response.id;
@@ -49,7 +60,7 @@ export class TimerComponent implements OnInit {
   clearLocal(){
     this.timerActive = false;
     clearInterval(this.timerHandler);
-    this.localTimeTitle = "bierzące zadanie";
+    this.localTimeTitle = "bieżące zadanie";
     this.localClient = 0;
     this.localProject = 0;
     this.localTimeInSec = 0;
@@ -87,9 +98,11 @@ export class TimerComponent implements OnInit {
   }
 
   public stop() {
+    console.log('stop');
     if(this.save(false)){
       this.getWorklog();
       this.clearLocal();
+      this.appComponent.stop();
     }
 
   }
@@ -105,6 +118,9 @@ export class TimerComponent implements OnInit {
   }
 
   timer(){
+    if (this.localTimeStart != null) {
+      this.appComponent.start(this.localTimeInSec);
+    }
     this.timerHandler = setInterval(() => {
       this.localTimeInSec += 1;
     },1000)
@@ -136,8 +152,6 @@ export class TimerComponent implements OnInit {
     return wynik;
   }
 
-  // reszta
-
   worklog: TimeEntryModel[] = [];
   projects: ProjectModel[] = [];
   clients: ClientModel[] = [];
@@ -157,13 +171,16 @@ export class TimerComponent implements OnInit {
               private projectsService: ProjectsService,
               private clientsService: ClientsService,
               private translateService: TranslateService,
-              private settingsService: SettingsService) { }
+              private settingsService: SettingsService,
+              private componentService: ComponentService,
+              private appComponent: AppComponent) { }
 
   ngOnInit(): void {
     this.checkPermission();
     this.getWorklog();
     this.getProjects();
     this.getClients();
+    this.componentService.setComponent('TimerComponent');
   }
 
   private checkPermission(){
@@ -234,8 +251,8 @@ export class TimerComponent implements OnInit {
               this.localClient = entry.client;
               this.localProject = entry.project;
               this.timerActive = true;
-              this.localTimeInSec = ms / 1000 + 3600;
-              this.localTimeStart = entry.start.toString();
+              this.localTimeInSec = ms / 1000;
+              this.localTimeStart = this.withoutMicrosec(entry.start.toString());
               this.timer();
             }
             else{

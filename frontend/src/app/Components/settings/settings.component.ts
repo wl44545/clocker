@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {SettingsService} from "../../Services/settings.service";
 import {LanguageModel, SettingsModel} from "../../Models/settings.model";
 import {TranslateService} from "@ngx-translate/core";
+import {ComponentService} from "../../Services/component.service";
 
 @Component({
   selector: 'app-settings',
@@ -19,11 +20,13 @@ export class SettingsComponent implements OnInit {
   constructor(public loginService: LoginService,
               public router: Router,
               private settingsService: SettingsService,
-              private translateService: TranslateService) { }
+              private translateService: TranslateService,
+              private componentService: ComponentService) { }
 
   ngOnInit() {
     this.checkPermission();
     this.loadSettings();
+    this.componentService.setComponent('SettingsComponent');
   }
 
   private checkPermission(){

@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {UserModel, UserModelRequest} from "../../Models/user.model";
 import {UserService} from "../../Services/user.service";
 import {TranslateService} from "@ngx-translate/core";
+import {ComponentService} from "../../Services/component.service";
 
 @Component({
   selector: 'app-users',
@@ -29,13 +30,15 @@ export class UsersComponent implements OnInit {
   constructor(private loginService: LoginService,
               private router: Router,
               private userService: UserService,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              private componentService: ComponentService) {
     this.getUsers();
   }
 
   ngOnInit(): void {
     this.checkPermission();
     this.control();
+    this.componentService.setComponent('UsersComponent');
   }
 
   private checkPermission(){

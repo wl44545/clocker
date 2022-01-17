@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-class UsersService 
+class UsersService
 {
     public function mygetUser($id): array
     {

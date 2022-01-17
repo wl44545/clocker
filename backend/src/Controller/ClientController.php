@@ -32,7 +32,7 @@ class ClientController extends AbstractController
         return $this->json($client);
     }
     /**
-     * @Route("/getclient/{desc}", name="getclientbyname", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     * @Route("/getclientbyname/{name}", name="getclientbyname", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
     public function getClientByName(Connection $connection, $name): JsonResponse
     {

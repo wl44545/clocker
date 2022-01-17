@@ -43,9 +43,9 @@ class ProjectController extends AbstractController
     /**
      * @Route("/getprojectbynameuser/{name}/{user}", name="getprojectbynameuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function getProjectByNameUser(Connection $connection, $name): JsonResponse
+    public function getProjectByNameUser(Connection $connection, $name, $user): JsonResponse
     {
-        $project = $connection->fetchAllAssociative('SELECT * FROM projects WHERE name="'.$name.'";');
+        $project = $connection->fetchAllAssociative('SELECT * FROM projects WHERE name="'.$name.'"; AND user='.$user.'');
         return $this->json($project);
     }
 

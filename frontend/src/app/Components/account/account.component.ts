@@ -6,7 +6,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {ComponentService} from "../../Services/component.service";
 import {UserService} from "../../Services/user.service";
 import {UserModel} from "../../Models/user.model";
-import {Md5} from 'ts-md5/dist/md5';
+import {LoginSecurity} from "../../Models/login.model";
 
 @Component({
   selector: 'app-account',
@@ -39,11 +39,6 @@ export class AccountComponent implements OnInit {
     }
   }
 
-  private getHash(input: string): string{
-    const md5 = new Md5();
-    return md5.appendStr(input).end().toString();
-  }
-
   public changePassword(){
     if(this.newPassword == this.oldPassword){
       this.translateService.get('wrongNewPassword').subscribe((text: string) => {
@@ -51,8 +46,8 @@ export class AccountComponent implements OnInit {
       });
     }else{
       this.userService.getUser(this.loginService.getUserID()).subscribe(user => {
-        if(this.getHash(this.oldPassword) == user.password){
-          let user = new UserModel(this.loginService.getUserID(), this.loginService.getUsername(), this.loginService.getRole(), this.getHash(this.newPassword));
+        if(LoginSecurity.getHash(this.oldPassword) == user.password){
+          let user = new UserModel(this.loginService.getUserID(), this.loginService.getUsername(), this.loginService.getRole(), LoginSecurity.getHash(this.newPassword));
           this.userService.updateUser(user).subscribe(user => {
             this.loginService.logout();
           },() => {

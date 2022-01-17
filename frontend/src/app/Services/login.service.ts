@@ -21,25 +21,27 @@ export class LoginService {
               private jwtService: JwtHelperService) {
   }
 
-  public login(username: string, password: string): boolean {
-  /* this.httpClient.post<LoginResponseModel>(`${environment.apiUrl}/login`, new LoginRequestModel(username, this.getHash(password).toString())).subscribe(response => {
-      if(response.token != null && this.isJWTValid(response.token) && this.isJWTPayloadOk(response.token)){
-          localStorage.setItem("TOKEN", response.token);
-          if(this.isUser()){
-            this.router.navigateByUrl("/timer").then();
-          }
-          else if(this.isAdmin()){
-            this.router.navigateByUrl("/admin").then();
-          }
-          else{
-            this.router.navigateByUrl("/").then();
-          }
-          return true;
+  /*public login(username: string, password: string): boolean {
+    this.httpClient.post<LoginResponseModel>(`${environment.apiUrl}/login`, new LoginRequestModel(username, password)).subscribe(response => {
+      if (response.token != null && this.isJWTValid(response.token) && this.isJWTPayloadOk(response.token)) {
+        localStorage.setItem("TOKEN", response.token);
+        if (this.isUser()) {
+          this.router.navigateByUrl("/timer").then();
+        } else if (this.isAdmin()) {
+          this.router.navigateByUrl("/admin").then();
+        } else {
+          this.router.navigateByUrl("/").then();
         }
+        return true;
+      } else {
+        return false;
+      }
     });
-    return false;*/
+    return false;
+  }*/
 
-    if(username != "" && this.isJWTValid(username) && this.isJWTPayloadOk(username)){
+  public login(username: string, password: string): boolean {
+   if(username != "" && this.isJWTValid(username) && this.isJWTPayloadOk(username)){
       localStorage.setItem("TOKEN", username);
       if(this.isUser()){
         this.router.navigateByUrl("/timer").then();
@@ -55,11 +57,14 @@ export class LoginService {
     return false;
   }
 
-  public logout() {
-    /*this.httpClient.post(`${environment.apiUrl}/logout`, null, this.getAuthorizedOptions()).subscribe(() => {
+  /*public logout() {
+    this.httpClient.post(`${environment.apiUrl}/logout`, null, this.getAuthorizedOptions()).subscribe(() => {
       localStorage.removeItem("TOKEN");
       this.router.navigateByUrl("/").then();
-    });*/
+    });
+  }*/
+
+  public logout() {
     localStorage.removeItem("TOKEN");
     this.router.navigateByUrl("/").then();
   }
@@ -132,9 +137,5 @@ export class LoginService {
     };
   }
 
-  private getHash(input: string): string{
-    const md5 = new Md5();
-    return md5.appendStr(input).end().toString();
-  }
 
 }

@@ -15,13 +15,6 @@ use Doctrine\DBAL\Connection;
  */
 class PostController extends AbstractController
 {
-    protected PostService $postService;
-
-
-    public function __construct(PostService $postService) {
-        $this->psotService = $postService;
-    }
-
     /**
      * @Route("/", name="index")
      */
@@ -39,6 +32,22 @@ class PostController extends AbstractController
         $post = $connection->fetchAllAssociative('SELECT * FROM worklog WHERE id='.$id.';');
         return $this->json($post);
     }
+    /**
+     * @Route("/user/{uid}", name="getuserpost", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     */
+    public function getUserPost(Connection $connection, $uid): JsonResponse
+    {
+        $post = $connection->fetchAllAssociative('SELECT * FROM worklog WHERE user='.$uid.';');
+        return $this->json($post);
+    }
+    /**
+     * @Route("/getpost/{desc}", name="getpostbydesc", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     */
+    public function getPostByDesc(Connection $connection, $desc): JsonResponse
+    {
+        $post = $connection->fetchAllAssociative('SELECT * FROM worklog WHERE description="'.$desc.'";');
+        return $this->json($post);
+    }
 
     /**
      * @Route("/getposts", name="getposts", methods={"POST", "GET"})
@@ -50,30 +59,32 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/addpost", name="addpost", methods={"POST", "GET"})
+     * @Route("/addpost/{desc}/{user}/{proj}", name="addpost", methods={"POST", "GET"})
      */
-    public function addPost(): JsonResponse
+    public function addPost(Connection $connection, $desc,$user,$proj): JsonResponse
     {
-        return $this->json(['added' => 'yes']);
+        $posts = $connection->fetchAllAssociative('INSERT INTO worklog (description, start, stop, user, project, active) VALUES ("'.$desc.'","2022-01-15 16:20:00","2022-01-15 16:25:00",'.$user.','.$proj.',0);');
+        $ret = $this->getPostByDesc($connection, $desc);
+        return $this->json($ret);
     }
 
 
     /**
-     * @Route("/updatepost/{id}", name="updatepost")
+     * @Route("/updatepost/{id}/{desc}", name="updatepost")
      */
-    public function updatePost($id): JsonResponse
+    public function updatePost(Connection $connection, $id, $desc): JsonResponse
     {
-
-        return $this->json(['updated' => 'yes']);
+        $posts = $connection->fetchAllAssociative('UPDATE worklog SET description = "'.$desc.'" WHERE id ='.$id.';');
+        return $this->json(['Updated post' => $id]);
     }
 
 
     /**
      * @Route("/removepost/{id}", name="removepost")
      */
-    public function removePost($id): JsonResponse
+    public function removePost(Connection $connection, $id): JsonResponse
     {
-
-        return $this->json(['removed' => 'yes']);
+        $posts = $connection->fetchAllAssociative('DELETE FROM worklog WHERE id='.$id.';');
+        return $this->json(['success']);;
     }
 }

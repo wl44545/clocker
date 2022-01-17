@@ -1,0 +1,24 @@
+
+###> symfony/framework-bundle ###
+<<<<<<< HEAD
+/.env
+=======
+>>>>>>> 032d0e08fc73631e0ef1b900c31561613a296dba
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###

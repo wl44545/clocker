@@ -12,7 +12,6 @@
 
 .user{
   width:98%;
-  padding: 1%;
   margin-top: 10px;
   min-height: 30px;
   margin-bottom: 10px;
@@ -99,7 +98,7 @@ button{
   display: none;
 }
 
-@media (max-width: 500px){
+@media (max-width: 1020px){
   .addUserButton{
     display: block;
   }
@@ -120,6 +119,30 @@ button{
 
   .anuluj{
     display: block;
+  }
+
+}
+
+@media (max-width: 600px){
+  .user{
+    display: block;
+    min-height: 140px;
+    width: 92%;
+    margin-left: 3%;
+    float: left;
+  }
+
+  .content{
+    clear: both;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 8px;
+  }
+
+  .name{
+    text-align: center;
+    width: 90%;
+    margin-left: 5%;
   }
 
 }

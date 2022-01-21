@@ -80,6 +80,17 @@ button.stopButton{
   margin-right: 15px;
 }
 
+.fa-trash, .fa-edit{
+  margin: 5px;
+}
+
+.fa-edit:hover{
+  color: white;
+}
+
+.fa-trash:hover{
+  color: red;
+}
 
 @media (max-width: 1200px){
   .entry{

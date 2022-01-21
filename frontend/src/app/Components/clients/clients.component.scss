@@ -1,5 +1,17 @@
 @import "src/assets/constants/Colors";
 
+.fa-trash, .fa-edit{
+  margin: 5px;
+}
+
+.fa-edit:hover{
+  color: white;
+}
+
+.fa-trash:hover{
+  color: red;
+}
+
 .add{
   width: 97vw;
   height: 10vh;

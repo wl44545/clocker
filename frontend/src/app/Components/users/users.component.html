@@ -3,7 +3,7 @@
   <button class="type_bad" (click)="exitError()">ok</button>
 </div>
 
-<div class="addUserButton" *ngIf="!show" (click)="toMax()">Nowy użytkownik</div>
+<div class="addUserButton" *ngIf="show == false" (click)="toMax()">Nowy użytkownik</div>
 
 <div class="newUser" id="newUser" *ngIf="show">
 

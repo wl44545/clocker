@@ -70,7 +70,7 @@ class PostController extends AbstractController
 
 
     /**
-     * @Route("/updatepost/{id}/{desc}", name="updatepost")
+     * @Route("/updatepost/{id}/{desc}", name="updatepost", requirements={"id": "\d+"})
      */
     public function updatePost(Connection $connection, $id, $desc): JsonResponse
     {
@@ -80,7 +80,7 @@ class PostController extends AbstractController
 
 
     /**
-     * @Route("/removepost/{id}", name="removepost")
+     * @Route("/removepost/{id}", name="removepost", requirements={"id": "\d+"})
      */
     public function removePost(Connection $connection, $id): JsonResponse
     {

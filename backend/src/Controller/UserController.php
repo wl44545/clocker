@@ -56,7 +56,7 @@ class UserController extends AbstractController
      */
     public function addUser($username, $pass, $role): JsonResponse
     {
-        return $this->json($this->userService->addUser());
+        return $this->json($this->userService->addUser($username, $pass, $role));
     }
 
 

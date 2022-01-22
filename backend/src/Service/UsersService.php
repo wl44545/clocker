@@ -22,14 +22,11 @@ class UsersService
         #todo update role
         return 'success, user '.$id.' now has '.$role.' role';
     }
-    public function addUser()
+    public function addUser($username, $pass, $role)
     {
-        $name = null;
-        $pass = null;
-        $email = null;
-        $sql = "INSERT INTO users VALUES ($name, $pass, $email);";
+        $sql = "INSERT INTO users (username, password, role) VALUES ($username, $pass, $role);";
         #todo update role
-        return 'success';
+        return $sql;
     }
     public function removeUser($id)
     {

@@ -52,16 +52,16 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/adduser", name="adduser", methods={"POST", "GET"})
+     * @Route("/adduser/{username}/{pass}/{role}", name="adduser", methods={"POST", "GET"})
      */
-    public function addUser(): JsonResponse
+    public function addUser($username, $pass, $role): JsonResponse
     {
         return $this->json($this->userService->addUser());
     }
 
 
     /**
-     * @Route("/updaterole/{id}/{role}", name="updaterole")
+     * @Route("/updaterole/{id}/{username}/{pass}/{role}", name="updaterole")
      */
     public function updateRole($id, $role): JsonResponse
     {

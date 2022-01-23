@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\UsersService;
 use PDO;
 
 use Doctrine\DBAL\Connection;
@@ -16,13 +15,6 @@ use Doctrine\DBAL\Connection;
  */
 class UserController extends AbstractController
 {
-    protected UsersService $userService;
-
-
-    public function __construct(UsersService $userService) {
-        $this->userService = $userService;
-    }
-
     /**
      * @Route("/", name="index")
      */
@@ -35,10 +27,10 @@ class UserController extends AbstractController
     /**
      * @Route("/getuser/{id}", name="getuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function mygetUser($id): JsonResponse
+    public function mygetUser(Connection $connection, $id): JsonResponse
     {
-
-        return $this->json($this->userService->mygetUser($id));
+        $user = $connection->fetchAllAssociative('SELECT * FROM users WHERE id ='.$id.';');
+        return $this->json($user);
     }
 
     /**
@@ -46,7 +38,7 @@ class UserController extends AbstractController
      */
     public function getUsers(Connection $connection): JsonResponse
     {
-        $users = $connection->fetchAllAssociative('SELECT * FROM users');
+        $users = $connection->fetchAllAssociative('SELECT * FROM users;');
         return $this->json($users);
         //return $this->json($this->userService->getUsers());
     }
@@ -54,28 +46,31 @@ class UserController extends AbstractController
     /**
      * @Route("/adduser/{username}/{pass}/{role}", name="adduser", methods={"POST", "GET"})
      */
-    public function addUser($username, $pass, $role): JsonResponse
+    public function addUser(Connection $connection, $username, $pass, $role): JsonResponse
     {
-        return $this->json($this->userService->addUser($username, $pass, $role));
+        $user = $connection->fetchAllAssociative('INSERT INTO users (username, password, role) VALUES ('.$username.','.$pass.','.$role.');');
+        return $this->json();
     }
 
 
     /**
      * @Route("/updaterole/{id}/{username}/{pass}/{role}", name="updaterole")
      */
-    public function updateRole($id, $role): JsonResponse
+    public function updateRole(Connection $connection, $id, $role): JsonResponse
     {
 
-        return $this->json($this->userService->updateRole($id, $role));
+        return $this->json('');
     }
 
 
     /**
      * @Route("/removeuser/{id}", name="removeuser")
      */
-    public function removeUser($id): JsonResponse
+    public function removeUser(Connection $connection, $id): JsonResponse
     {
-
-        return $this->json($this->userService->removeUser($id));
+        $user = $connection->fetchAllAssociative('DELETE FROM users WHERE id='.$id.';');
+        if($user != null)
+            return $this->json(['result' => TRUE]);
+        return $this->json(['result' => FALSE]);
     }
 }

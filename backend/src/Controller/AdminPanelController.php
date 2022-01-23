@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\ExampleService;
 use PDO;
 use Doctrine\DBAL\Connection;
 use \Datetime;
@@ -16,28 +15,13 @@ use \Datetime;
  */
 class AdminPanelController extends AbstractController
 {
-    protected ExampleService $myService;
-
-
-    public function __construct(ExampleService $myService) {
-        $this->myService = $myService;
-    }
 
     /**
      * @Route("/", name="index")
      */
     public function main(): Response
     {
-        return $this->render('adminPanel.html.twig', $this->myService->getPersonalData());
-    }
-
-    /**
-     * @Route("/jsonresponse", name="jsonresponse")
-     */
-    public function getJson(): JsonResponse
-    {
-        return new JsonResponse($this->myService->getPersonalData());
-        // return $this->json($this->myService->getPersonalData());
+        return $this->render('adminPanel.html.twig');
     }
 
     /**

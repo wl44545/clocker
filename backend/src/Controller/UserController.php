@@ -25,52 +25,87 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/getuser/{id}", name="getuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     * @Route("/getuser/{id}/{token}", name="getuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function mygetUser(Connection $connection, $id): JsonResponse
+    public function mygetUser(Connection $connection, $id, $token): JsonResponse
     {
+      if($this->check_access_token($token))
+        {
         $user = $connection->fetchAllAssociative('SELECT * FROM users WHERE id ='.$id.';');
         return $this->json($user);
+      }
+      else {
+        return $this->json(null);
+      }
+
     }
 
 
     /**
-     * @Route("/getusers", name="getusers", methods={"POST", "GET"})
+     * @Route("/getusers/{token}", name="getusers", methods={"POST", "GET"})
      */
-    public function getUsers(Connection $connection): JsonResponse
+    public function getUsers(Connection $connection, $token): JsonResponse
     {
+      if($this->check_access_token($token))
+        {
         $users = $connection->fetchAllAssociative('SELECT * FROM users;');
         return $this->json($users);
         //return $this->json($this->userService->getUsers());
+      }
+      else {
+        return $this->json(null);
+      }
+
     }
 
     /**
-     * @Route("/adduser/{username}/{pass}/{role}", name="adduser", methods={"POST", "GET"})
+     * @Route("/adduser/{username}/{pass}/{role}/{token}", name="adduser", methods={"POST", "GET"})
      */
-    public function addUser(Connection $connection, $username, $pass, $role): JsonResponse
+    public function addUser(Connection $connection, $username, $pass, $role, $token): JsonResponse
     {
+      if($this->check_access_token($token))
+        {
         $user = $connection->fetchAllAssociative('INSERT INTO users (username, password, role) VALUES ('.$username.','.$pass.','.$role.');');
         return $this->json();
+      }
+      else {
+        return $this->json(null);
+      }
+
     }
 
 
     /**
-     * @Route("/updaterole/{id}/{username}/{pass}/{role}", name="updaterole")
+     * @Route("/updaterole/{id}/{username}/{pass}/{role}/{token}", name="updaterole")
      */
-    public function updateRole(Connection $connection, $id, $role): JsonResponse
+    public function updateRole(Connection $connection, $id, $role, $token): JsonResponse
     {
+      if($this->check_access_token($token))
+        {
         return $this->json('');
+      }
+      else {
+        return $this->json(null);
+      }
+
     }
 
 
     /**
-     * @Route("/removeuser/{id}", name="removeuser")
+     * @Route("/removeuser/{id}/{token}", name="removeuser")
      */
-    public function removeUser(Connection $connection, $id): JsonResponse
+    public function removeUser(Connection $connection, $id, $token): JsonResponse
     {
+      if($this->check_access_token($token))
+        {
         $user = $connection->fetchAllAssociative('DELETE FROM users WHERE id='.$id.';');
         if($user != null)
             return $this->json(['result' => TRUE]);
         return $this->json(['result' => FALSE]);
+      }
+      else {
+        return $this->json(null);
+      }
+
     }
 }

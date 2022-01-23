@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use PDO;
 use Doctrine\DBAL\Connection;
 
+
 /**
  * @Route("/client", name="client_")
  */
@@ -22,16 +23,10 @@ class ClientController extends AbstractController
         return new Response('<html><body>hej klienci</body></html>');
     }
 
-    function base64url_decode($data)
+    public function check_access_token($string)
     {
-      return base64_decode(str_replace(array('-', '_'), array('+', '/'), $data));
-    }
-
-    public function decodetoken($string)
-    {
-      $data = explode('.', $string);
-      $data = $data[1];
-      $data = $this->base64url_decode($data);
+      $data = explode('.', $string)[1];
+      $data = base64_decode(str_replace(array('-', '_'), array('+', '/'), $data));
       $datajsonarray = json_decode($data, TRUE);
       $userrole = $datajsonarray['user_role'];
       $tokenexpiration = $datajsonarray['Expiration'];
@@ -53,7 +48,7 @@ class ClientController extends AbstractController
      */
     public function getClient(Connection $connection, $id, $token): JsonResponse
     {
-      if($this->decodetoken($token))
+      if($this->check_access_token($token))
         {
         $client = $connection->fetchAllAssociative('SELECT * FROM clients WHERE id='.$id.';');
         return $this->json($client);
@@ -63,59 +58,95 @@ class ClientController extends AbstractController
       }
     }
     /**
-     * @Route("/getclientbyname/{name}", name="getclientbyname", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     * @Route("/getclientbyname/{name}/{token}", name="getclientbyname", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function getClientByName(Connection $connection, $name): JsonResponse
+    public function getClientByName(Connection $connection, $name, $token): JsonResponse
     {
+        if($this->check_access_token($token))
+        {
         $client = $connection->fetchAllAssociative('SELECT * FROM clients WHERE name="'.$name.'";');
         return $this->json($client);
+        }
+        else {
+        return $this->json(null);
+        }
     }
 
     /**
-     * @Route("/getclients", name="getclients", methods={"POST", "GET"})
+     * @Route("/getclients/{token}", name="getclients", methods={"POST", "GET"})
      */
-    public function getClients(Connection $connection): JsonResponse
+    public function getClients(Connection $connection, $token): JsonResponse
     {
+        if($this->check_access_token($token))
+        {
         $clients = $connection->fetchAllAssociative('SELECT * FROM clients');
         return $this->json($clients);
+        }
+        else {
+        return $this->json(null);
+        }
     }
 
     /**
-     * @Route("/getclientsbyuser/{user}", name="getclientsbyuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     * @Route("/getclientsbyuser/{user}/{token}", name="getclientsbyuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function getClientsByUser(Connection $connection, $user): JsonResponse
+    public function getClientsByUser(Connection $connection, $user, $token): JsonResponse
     {
+        if($this->check_access_token($token))
+        {
         $client = $connection->fetchAllAssociative('SELECT * FROM clients WHERE user="'.$user.'";');
         return $this->json($client);
+        }
+        else {
+        return $this->json(null);
+        }
     }
 
     /**
-     * @Route("/addclient/{name}/{user}", name="addclient", methods={"POST", "GET"})
+     * @Route("/addclient/{name}/{user}/{token}", name="addclient", methods={"POST", "GET"})
      */
-    public function addClient(Connection $connection, $name,$user): JsonResponse
+    public function addClient(Connection $connection, $name,$user, $token): JsonResponse
     {
+        if($this->check_access_token($token))
+        {
         $clients = $connection->fetchAllAssociative('INSERT INTO clients (name, user) VALUES ("'.$name.'",'.$user.');');
         $ret = $this->getClientByName($connection, $name);
         return $this->json($ret);
+        }
+        else {
+        return $this->json(null);
+        }
     }
 
 
     /**
-     * @Route("/updateclient/{id}/{name}/{user}", name="updateclient")
+     * @Route("/updateclient/{id}/{name}/{user}/{token}", name="updateclient")
      */
-    public function updateClient(Connection $connection, $id, $name, $user): JsonResponse
+    public function updateClient(Connection $connection, $id, $name, $user, $token): JsonResponse
     {
+        if($this->check_access_token($token))
+        {
         $clients = $connection->fetchAllAssociative('UPDATE clients SET name = "'.$name.'", user = '.$user.' WHERE id ='.$id.';');
         return $this->json(['Updated client' => $id]);
+        }
+        else {
+        return $this->json(null);
+        }
     }
 
 
     /**
-     * @Route("/removeclient/{id}", name="removeclient")
+     * @Route("/removeclient/{id}/{token}", name="removeclient")
      */
-    public function removeClient(Connection $connection, $id): JsonResponse
+    public function removeClient(Connection $connection, $id, $token): JsonResponse
     {
+        if($this->check_access_token($token))
+        {
         $posts = $connection->fetchAllAssociative('DELETE FROM clients WHERE id='.$id.';');
-        return $this->json(['success']);;
+        return $this->json(['success']);
+        }
+        else {
+        return $this->json(null);
+        }
     }
 }

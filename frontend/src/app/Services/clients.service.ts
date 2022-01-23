@@ -15,22 +15,22 @@ export class ClientsService {
   }
 
   public getClients(user: number): Observable<ClientModel[]> {
-    return this.httpClient.get<ClientModel[]>(`${environment.apiUrl}/clients?user=${user}`, this.loginService.getAuthorizedOptions());
+    return this.httpClient.get<ClientModel[]>(`${environment.apiUrl}/client/getclientbyuser/${user}`, this.loginService.getAuthorizedOptions());
   }
 
   public getClient(id: number): Observable<ClientModel> {
-    return this.httpClient.get<ClientModel>(`${environment.apiUrl}/clients/${id}`, this.loginService.getAuthorizedOptions());
+    return this.httpClient.get<ClientModel>(`${environment.apiUrl}/client/getclient/${id}`, this.loginService.getAuthorizedOptions());
   }
 
   public addClient(clientName: string, user: number): Observable<ClientModel> {
-    return this.httpClient.post<ClientModel>(`${environment.apiUrl}/clients`, new ClientModelRequest(clientName, user), this.loginService.getAuthorizedOptions());
+    return this.httpClient.post<ClientModel>(`${environment.apiUrl}/client/addclient/${clientName}/${user}`, new ClientModelRequest(clientName, user), this.loginService.getAuthorizedOptions());
   }
 
   public editClient(client: ClientModel): Observable<ClientModel>{
-    return this.httpClient.put<ClientModel>(`${environment.apiUrl}/clients/${client.id}`, client, this.loginService.getAuthorizedOptions());
+    return this.httpClient.put<ClientModel>(`${environment.apiUrl}/client/updateclient/${client.id}/${client.name}/${client.user}`, client, this.loginService.getAuthorizedOptions());
   }
 
   public removeClient(client: ClientModel): Observable<ClientModel>{
-    return this.httpClient.delete<ClientModel>(`${environment.apiUrl}/clients/${client.id}`, this.loginService.getAuthorizedOptions());
+    return this.httpClient.delete<ClientModel>(`${environment.apiUrl}/client/removeclient/${client.id}`, this.loginService.getAuthorizedOptions());
   }
 }

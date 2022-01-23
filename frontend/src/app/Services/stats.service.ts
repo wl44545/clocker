@@ -15,7 +15,7 @@ export class StatsService {
   }
 
   public getStats(): Observable<StatsModel> {
-    return this.httpClient.get<StatsModel>(`${environment.apiUrl}/stats`);
+    return this.httpClient.get<StatsModel>(`${environment.apiUrl}/adminpanel/stats`);
   }
 
 }

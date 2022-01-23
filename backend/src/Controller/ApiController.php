@@ -38,7 +38,7 @@ class ApiController extends AbstractController
         if($user[0]['password'] == $passwordhash)
         {
           $header = '{"alg": "HS256", "typ": "JWT"}';
-          $payload = '{"Issuer": "Clocker", "Issued At": "'.date("Y-m-d H:i:s").'", "Expiration": "'.date("Y-m-d H:i:s", strtotime("+2 hours")).'", "user_name": "'.$user[0]['username'].'", "user_role": "'.$user[0]['role'].'", "user_id": "'.$user[0]['id'].'"}';
+          $payload = '{"Issuer": "Clocker", "Issued At": "'.date("Y-m-d H:i:s", strtotime("+1 hours")).'", "Expiration": "'.date("Y-m-d H:i:s", strtotime("+2 hours")).'", "user_name": "'.$user[0]['username'].'", "user_role": "'.$user[0]['role'].'", "user_id": "'.$user[0]['id'].'"}';
           $key = "GCG95kMjrEKeC11z8GuUQD4mGmixiSYUAKLHZ_e6dZk";
           $tmp = $this->base64_encode_url($header) . '.' . $this->base64_encode_url($payload);
           $signature = hash_hmac('sha256', $tmp, $key);

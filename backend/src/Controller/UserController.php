@@ -25,87 +25,78 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/getuser/{id}/{token}", name="getuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     * @Route("/getuser/{id}", name="getuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function mygetUser(Connection $connection, $id, $token): JsonResponse
+    public function mygetUser(Connection $connection, $id): JsonResponse
     {
-      if($this->check_access_token($token))
-        {
         $user = $connection->fetchAllAssociative('SELECT * FROM users WHERE id ='.$id.';');
         return $this->json($user);
-      }
-      else {
-        return $this->json(null);
-      }
-
     }
 
+    /**
+     * @Route("/getuserbyname/{name}", name="getuserbyname", methods={"POST", "GET"})
+     */
+    public function getUserByName(Connection $connection, $name): JsonResponse
+    {
+        $sql = "SELECT * FROM users WHERE username = :name";
+        $stmt = $connection->prepare($sql);
+        $stmt->bindValue("name", $name);
+        $resultSet = $stmt->executeQuery();
+        return $this->json($resultSet->fetch());
+    }
 
     /**
-     * @Route("/getusers/{token}", name="getusers", methods={"POST", "GET"})
+     * @Route("/getusers", name="getusers", methods={"POST", "GET"})
      */
-    public function getUsers(Connection $connection, $token): JsonResponse
+    public function getUsers(Connection $connection): JsonResponse
     {
-      if($this->check_access_token($token))
-        {
         $users = $connection->fetchAllAssociative('SELECT * FROM users;');
         return $this->json($users);
-        //return $this->json($this->userService->getUsers());
-      }
-      else {
-        return $this->json(null);
-      }
-
     }
 
     /**
-     * @Route("/adduser/{username}/{pass}/{role}/{token}", name="adduser", methods={"POST", "GET"})
+     * @Route("/adduser/{username}/{pass}/{role}", name="adduser", methods={"POST", "GET"})
      */
-    public function addUser(Connection $connection, $username, $pass, $role, $token): JsonResponse
+    public function addUser(Connection $connection, $username, $pass, $role): JsonResponse
     {
-      if($this->check_access_token($token))
-        {
-        $user = $connection->fetchAllAssociative('INSERT INTO users (username, password, role) VALUES ('.$username.','.$pass.','.$role.');');
-        return $this->json();
-      }
-      else {
-        return $this->json(null);
-      }
 
+        $sql = "INSERT INTO users (username, password, role) VALUES (:name, :pass, :role)";
+        $stmt = $connection->prepare($sql);
+        $stmt->bindValue("name", $username);
+        $stmt->bindValue("pass", $pass);
+        $stmt->bindValue("role", $role);
+        $resultSet = $stmt->executeQuery();
+
+        $ret = $this->getUserByName($connection, $username);
+        return $this->json(json_decode($ret->getContent()));
     }
 
 
     /**
-     * @Route("/updaterole/{id}/{username}/{pass}/{role}/{token}", name="updaterole")
+     * @Route("/updateuser/{id}/{username}/{pass}/{role}", name="updateuser")
      */
-    public function updateRole(Connection $connection, $id, $role, $token): JsonResponse
+    public function updateUser(Connection $connection, $id, $username, $pass, $role): JsonResponse
     {
-      if($this->check_access_token($token))
-        {
-        return $this->json('');
-      }
-      else {
-        return $this->json(null);
-      }
-
+        $sql = "UPDATE users SET username = :name, password = :pass, role = :role WHERE id = :id";
+        $stmt = $connection->prepare($sql);
+        $stmt->bindValue("name", $username);
+        $stmt->bindValue("pass", $pass);
+        $stmt->bindValue("role", $role);
+        $stmt->bindValue("id", $id);
+        $resultSet = $stmt->executeQuery();
+        $ret = $this->getUserByName($connection, $username);
+        return $this->json(json_decode($ret->getContent()));
     }
 
 
     /**
-     * @Route("/removeuser/{id}/{token}", name="removeuser")
+     * @Route("/removeuser/{id}", name="removeuser")
      */
-    public function removeUser(Connection $connection, $id, $token): JsonResponse
+    public function removeUser(Connection $connection, $id): JsonResponse
     {
-      if($this->check_access_token($token))
-        {
         $user = $connection->fetchAllAssociative('DELETE FROM users WHERE id='.$id.';');
-        if($user != null)
+        if($user == null)
             return $this->json(['result' => TRUE]);
         return $this->json(['result' => FALSE]);
-      }
-      else {
-        return $this->json(null);
-      }
-
     }
 }

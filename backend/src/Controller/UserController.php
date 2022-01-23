@@ -33,6 +33,7 @@ class UserController extends AbstractController
         return $this->json($user);
     }
 
+
     /**
      * @Route("/getusers", name="getusers", methods={"POST", "GET"})
      */
@@ -58,7 +59,6 @@ class UserController extends AbstractController
      */
     public function updateRole(Connection $connection, $id, $role): JsonResponse
     {
-
         return $this->json('');
     }
 

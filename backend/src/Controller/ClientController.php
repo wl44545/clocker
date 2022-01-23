@@ -22,14 +22,45 @@ class ClientController extends AbstractController
         return new Response('<html><body>hej klienci</body></html>');
     }
 
+    function base64url_decode($data)
+    {
+      return base64_decode(str_replace(array('-', '_'), array('+', '/'), $data));
+    }
+
+    public function decodetoken($string)
+    {
+      $data = explode('.', $string);
+      $data = $data[1];
+      $data = $this->base64url_decode($data);
+      $datajsonarray = json_decode($data, TRUE);
+      $userrole = $datajsonarray['user_role'];
+      $tokenexpiration = $datajsonarray['Expiration'];
+      if($userrole == "USER" || $userrole == "USERADMIN" || $userrole == "ADMIN")
+      {
+        if(date($tokenexpiration) > date("Y-m-d H:i:s"))
+        {
+          return TRUE;
+        }
+        else
+          return FALSE;
+      }
+      return FALSE;
+    }
+
 
     /**
-     * @Route("/getclient/{id}", name="getclient", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     * @Route("/getclient/{id}/{token}", name="getclient", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function getClient(Connection $connection, $id): JsonResponse
+    public function getClient(Connection $connection, $id, $token): JsonResponse
     {
+      if($this->decodetoken($token))
+        {
         $client = $connection->fetchAllAssociative('SELECT * FROM clients WHERE id='.$id.';');
         return $this->json($client);
+      }
+      else {
+        return $this->json(null);
+      }
     }
     /**
      * @Route("/getclientbyname/{name}", name="getclientbyname", methods={"POST", "GET"}, requirements={"id": "\d+"})

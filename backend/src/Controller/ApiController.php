@@ -50,5 +50,18 @@ class ApiController extends AbstractController
           return $this->json(null, 200);
         }
     }
+
+    function base64url_decode($data)
+    {
+      return base64_decode(str_replace(array('-', '_'), array('+', '/'), $data));
+    }
+
+    public function decodetoken($string, $role)
+    {
+      $data = explode('.', $string);
+      $data = $data[1];
+      $data = $this->base64url_decode($data);
+      $datajson = $this->json($data);
+      print_r($data);    }
 }
 ?>

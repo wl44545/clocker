@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="users.component.scss">
+</head>
+<body *ngIf="!isServerError">
 <div class="error" *ngIf="error">
   {{komunikat}}
   <button class="type_bad" (click)="exitError()">ok</button>
@@ -39,3 +46,10 @@
     <i class="fa fa-trash" aria-hidden="true"></i></div>
 
 </div>
+
+
+</body>
+</html>
+
+
+

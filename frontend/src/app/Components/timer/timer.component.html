@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="timer.component.scss">
 </head>
-<body>
+<body *ngIf="!isServerError">
   <div *ngIf="!timerActive" class="timer auto start">
     <button class="startButton" (click)="start()">{{'startTiming' | translate}}</button>
   </div>

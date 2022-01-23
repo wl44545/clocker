@@ -17,6 +17,7 @@ import {ComponentService} from "../../Services/component.service";
 })
 export class ReportsComponent implements OnInit {
 
+  isServerError: boolean = false;
   worklog: TimeEntryModel[] = [];
   worklogQuery: TimeEntryModel[] = [];
   projects: ProjectModel[] = [];
@@ -85,7 +86,10 @@ export class ReportsComponent implements OnInit {
             }
           },() => {
             this.translateService.get('serverError').subscribe((text: string) => {
-              window.alert(text);
+              if(!this.isServerError){
+                this.isServerError = true;
+                window.alert(text);
+              }
             });
           });
         }else{
@@ -196,7 +200,10 @@ export class ReportsComponent implements OnInit {
       this.projects = projects;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }
@@ -205,7 +212,10 @@ export class ReportsComponent implements OnInit {
       this.clients = clients;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }

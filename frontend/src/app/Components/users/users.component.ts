@@ -22,7 +22,7 @@ export class UsersComponent implements OnInit {
   role: string[] = ['ADMIN', 'USER', 'USERADMIN'];
   error: boolean = false;
   komunikat: string = "";
-
+  isServerError: boolean = false;
   newEmail: string = "";
   newPassword: string = "";
   newRole: string = "";
@@ -78,7 +78,10 @@ export class UsersComponent implements OnInit {
       this.users = response;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }
@@ -105,7 +108,10 @@ export class UsersComponent implements OnInit {
       this.userService.getUsers();
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }
@@ -131,7 +137,10 @@ export class UsersComponent implements OnInit {
       this.getUsers();
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
     this.newPassword = "";
@@ -147,7 +156,10 @@ export class UsersComponent implements OnInit {
       this.getUsers();
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }

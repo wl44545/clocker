@@ -1,7 +1,7 @@
 <?php
-namespace App
+namespace App\Entity
 
-class UserService
+class User
 {
     private $_email;
     private $_password;

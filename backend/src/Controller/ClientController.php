@@ -50,6 +50,15 @@ class ClientController extends AbstractController
     }
 
     /**
+     * @Route("/getclientsbyuser/{user}", name="getclientsbyuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     */
+    public function getClientsByUser(Connection $connection, $user): JsonResponse
+    {
+        $client = $connection->fetchAllAssociative('SELECT * FROM clients WHERE user="'.$user.'";');
+        return $this->json($client);
+    }
+
+    /**
      * @Route("/addclient/{name}/{user}", name="addclient", methods={"POST", "GET"})
      */
     public function addClient(Connection $connection, $name,$user): JsonResponse

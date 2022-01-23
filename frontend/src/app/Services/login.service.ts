@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 import {UserModel} from "../Models/user.model";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
-import {LoginRequestModel, LoginResponseModel} from "../Models/login.model";
+import {LoginRequestModel, LoginResponseModel, LoginSecurity} from "../Models/login.model";
 import {Router} from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import {Md5} from "ts-md5";
@@ -21,10 +21,10 @@ export class LoginService {
               private jwtService: JwtHelperService) {
   }
 
-  /*public login(username: string, password: string): boolean {
-    this.httpClient.post<LoginResponseModel>(`${environment.apiUrl}/login`, new LoginRequestModel(username, password)).subscribe(response => {
-      if (response.token != null && this.isJWTValid(response.token) && this.isJWTPayloadOk(response.token)) {
-        localStorage.setItem("TOKEN", response.token);
+  public login(username: string, password: string): boolean {
+    this.httpClient.post<string>(`${environment.apiUrl}/api/login_check/${username}/${LoginSecurity.getHash(password)}`, new LoginRequestModel(username, LoginSecurity.getHash(password))).subscribe(response => {
+      if (response != null && this.isJWTValid(response) && this.isJWTPayloadOk(response)) {
+        localStorage.setItem("TOKEN", response);
         if (this.isUser()) {
           this.router.navigateByUrl("/timer").then();
         } else if (this.isAdmin()) {
@@ -38,31 +38,7 @@ export class LoginService {
       }
     });
     return false;
-  }*/
-
-  public login(username: string, password: string): boolean {
-   if(username != "" && this.isJWTValid(username) && this.isJWTPayloadOk(username)){
-      localStorage.setItem("TOKEN", username);
-      if(this.isUser()){
-        this.router.navigateByUrl("/timer").then();
-      }
-      else if(this.isAdmin()){
-        this.router.navigateByUrl("/admin").then();
-      }
-      else{
-        this.router.navigateByUrl("/").then();
-      }
-      return true;
-    }
-    return false;
   }
-
-  /*public logout() {
-    this.httpClient.post(`${environment.apiUrl}/logout`, null, this.getAuthorizedOptions()).subscribe(() => {
-      localStorage.removeItem("TOKEN");
-      this.router.navigateByUrl("/").then();
-    });
-  }*/
 
   public logout() {
     localStorage.removeItem("TOKEN");
@@ -137,5 +113,8 @@ export class LoginService {
     };
   }
 
+  public getToken() {
+    return localStorage.getItem("TOKEN") || "";
+  }
 
 }

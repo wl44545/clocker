@@ -15,7 +15,7 @@ export class ClientsService {
   }
 
   public getClients(user: number): Observable<ClientModel[]> {
-    return this.httpClient.get<ClientModel[]>(`${environment.apiUrl}/client/getclientbyuser/${user}/${this.loginService.getToken()}`, this.loginService.getAuthorizedOptions());
+    return this.httpClient.get<ClientModel[]>(`${environment.apiUrl}/client/getclientsbyuser/${user}/${this.loginService.getToken()}`, this.loginService.getAuthorizedOptions());
   }
 
   public getClient(id: number): Observable<ClientModel> {

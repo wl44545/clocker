@@ -30,7 +30,7 @@ class ApiController extends AbstractController
       return str_replace(['+','/','='], ['-','_',''], base64_encode($string));
     }
     /**
-     * @Route("/login_check/{username}/{passwordhash}", methods={"GET"})
+     * @Route("/login_check/{username}/{passwordhash}", methods={"GET", "POST"})
      */
     public function login(Connection $connection, $username, $passwordhash)
     {

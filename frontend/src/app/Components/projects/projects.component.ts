@@ -21,6 +21,7 @@ export class ProjectsComponent implements OnInit {
   projectEdit: boolean = false;
   clientId: number = 0;
   clients: ClientModel[] = [];
+  isServerError: boolean = false;
 
   constructor(private loginService: LoginService,
               private router: Router,
@@ -47,7 +48,10 @@ export class ProjectsComponent implements OnInit {
       this.clients = clients;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }
@@ -59,7 +63,10 @@ export class ProjectsComponent implements OnInit {
         this.clearInput();
       },() => {
         this.translateService.get('serverError').subscribe((text: string) => {
-          window.alert(text);
+          if(!this.isServerError){
+            this.isServerError = true;
+            window.alert(text);
+          }
         });
       });
     }
@@ -71,7 +78,10 @@ export class ProjectsComponent implements OnInit {
       this.clearInput();
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }
@@ -90,7 +100,10 @@ export class ProjectsComponent implements OnInit {
       }
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }
@@ -111,7 +124,10 @@ export class ProjectsComponent implements OnInit {
       this.clearInput();
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }

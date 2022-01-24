@@ -17,8 +17,8 @@ export class SettingsService {
   }
 
   public getSettings(): Observable<SettingsModel> {
-    //return this.httpClient.get<SettingsModel>("../assets/mock_settings.json", this.loginService.getAuthorizedOptions());
-    return this.httpClient.get<SettingsModel>(`${environment.apiUrl}/settings`, this.loginService.getAuthorizedOptions());
+    return this.httpClient.get<SettingsModel>("../assets/mock_settings.json", this.loginService.getAuthorizedOptions());
+    //return this.httpClient.get<SettingsModel>(`${environment.apiUrl}/settings`, this.loginService.getAuthorizedOptions());
   }
 
   public setSettings(settings: SettingsModel): Observable<SettingsModel> {

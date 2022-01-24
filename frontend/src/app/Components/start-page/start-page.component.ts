@@ -23,6 +23,7 @@ export class StartPageComponent implements OnInit {
   weekStats: number = 0;
   monthStats: number = 0;
   yearStats: number = 0;
+  isServerError: boolean = false;
 
   constructor(public loginService: LoginService,
               private statsService: StatsService,
@@ -65,7 +66,10 @@ export class StartPageComponent implements OnInit {
       this.yearStats = stats.yearStats;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }

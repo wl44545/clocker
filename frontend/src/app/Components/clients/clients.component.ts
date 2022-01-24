@@ -18,6 +18,7 @@ export class ClientsComponent implements OnInit {
   clients: ClientModel[] = [];
   client: ClientModel = new ClientModel(0,'',0);
   clientEdit: boolean = false;
+  isServerError: boolean = false;
 
   constructor(private loginService: LoginService,
               private router: Router,
@@ -44,7 +45,10 @@ export class ClientsComponent implements OnInit {
         this.getClients();
       },() => {
         this.translateService.get('serverError').subscribe((text: string) => {
-          window.alert(text);
+          if(!this.isServerError){
+            this.isServerError = true;
+            window.alert(text);
+          }
         });
       });
     }
@@ -54,6 +58,13 @@ export class ClientsComponent implements OnInit {
     this.clientService.removeClient(client).subscribe(client => {
       this.getClients();
       this.clearInput();
+    },() => {
+      this.translateService.get('serverError').subscribe((text: string) => {
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
+      });
     });
   }
 
@@ -62,7 +73,10 @@ export class ClientsComponent implements OnInit {
       this.clients = clients;
     },() => {
         this.translateService.get('serverError').subscribe((text:string) => {
-          window.alert(text);
+          if(!this.isServerError){
+            this.isServerError = true;
+            window.alert(text);
+          }
         });
       })
   }
@@ -81,7 +95,10 @@ export class ClientsComponent implements OnInit {
         this.clearInput();
       },() => {
         this.translateService.get('serverError').subscribe((text: string) => {
-          window.alert(text);
+          if(!this.isServerError){
+            this.isServerError = true;
+            window.alert(text);
+          }
         });
       });
     }

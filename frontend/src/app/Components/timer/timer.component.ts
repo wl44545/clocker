@@ -31,6 +31,7 @@ export class TimerComponent implements OnInit {
   localProject: number = 0;
   localTimeInSec: number = 0;
   localTimeModelId: number | undefined;
+  isServerError: boolean = false;
 
   private withoutMilliseconds(value:string){
     let index = value.indexOf('.');
@@ -53,7 +54,10 @@ export class TimerComponent implements OnInit {
       this.localTimeModelId = response.id;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }
@@ -86,7 +90,10 @@ export class TimerComponent implements OnInit {
           console.log(response);
         },() => {
           this.translateService.get('serverError').subscribe((text: string) => {
-            window.alert(text);
+            if(!this.isServerError){
+              this.isServerError = true;
+              window.alert(text);
+            }
           });
         });
       }
@@ -195,7 +202,10 @@ export class TimerComponent implements OnInit {
       this.projects = projects;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }
@@ -204,7 +214,10 @@ export class TimerComponent implements OnInit {
       this.clients = clients;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }
@@ -285,12 +298,18 @@ export class TimerComponent implements OnInit {
         });
       },() => {
         this.translateService.get('serverError').subscribe((text: string) => {
-          window.alert(text);
+          if(!this.isServerError){
+            this.isServerError = true;
+            window.alert(text);
+          }
         });
       });
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }
@@ -335,7 +354,10 @@ export class TimerComponent implements OnInit {
       this.clearInput();
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
-        window.alert(text);
+        if(!this.isServerError){
+          this.isServerError = true;
+          window.alert(text);
+        }
       });
     });
   }
@@ -347,7 +369,10 @@ export class TimerComponent implements OnInit {
         this.clearInput();
       },() => {
         this.translateService.get('serverError').subscribe((text: string) => {
-          window.alert(text);
+          if(!this.isServerError){
+            this.isServerError = true;
+            window.alert(text);
+          }
         });
       });
     }
@@ -368,7 +393,10 @@ export class TimerComponent implements OnInit {
         this.clearInput();
       },() => {
         this.translateService.get('serverError').subscribe((text: string) => {
-          window.alert(text);
+          if(!this.isServerError){
+            this.isServerError = true;
+            window.alert(text);
+          }
         });
       });
     }

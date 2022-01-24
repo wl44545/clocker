@@ -63,7 +63,7 @@ class PostController extends AbstractController
         }
     }
     /**
-     * @Route("/user/{uid}/{token}", name="getuserpost", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     * @Route("/user/{uid}/{token}", name="getuserpost", methods={"POST", "GET"}, requirements={"uid": "\d+"})
      */
     public function getUserPost(Connection $connection, $uid, $token): JsonResponse
     {
@@ -80,7 +80,7 @@ class PostController extends AbstractController
         }
     }
     /**
-     * @Route("/getpost/{desc}/{token}", name="getpostbydesc", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     * @Route("/getpost/{desc}/{token}", name="getpostbydesc", methods={"POST", "GET"})
      */
     public function getPostByDesc(Connection $connection, $desc, $token): JsonResponse
     {

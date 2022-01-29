@@ -60,10 +60,10 @@ export class StartPageComponent implements OnInit {
 
   private loadStats(){
     this.statsService.getStats().subscribe(stats => {
-      this.dayStats = stats.dayStats;
-      this.weekStats = stats.weekStats;
-      this.monthStats = stats.monthStats;
-      this.yearStats = stats.yearStats;
+      this.dayStats = Math.round(stats.dayStats/60);
+      this.weekStats = Math.round(stats.weekStats/60);
+      this.monthStats = Math.round(stats.monthStats/60);
+      this.yearStats = Math.round(stats.yearStats/60);
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {
         if(!this.isServerError){

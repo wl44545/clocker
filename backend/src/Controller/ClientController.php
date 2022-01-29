@@ -110,7 +110,7 @@ class ClientController extends AbstractController
         if($this->check_access_token($token))
         {
         $clients = $connection->fetchAllAssociative('INSERT INTO clients (name, user) VALUES ("'.$name.'",'.$user.');');
-        $ret = $this->getClientByName($connection, $name);
+        $ret = $this->getClientByName($connection, $name, $token);
         return $this->json($ret);
         }
         else {

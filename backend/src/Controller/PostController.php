@@ -69,11 +69,16 @@ class PostController extends AbstractController
     {
         if($this->check_access_token($token))
         {
+//             $sql = "SELECT * FROM worklog WHERE user = :uid";
+//             $stmt = $connection->prepare($sql);
+//             $stmt->bindValue("uid", $uid);
+//             $resultSet = $stmt->executeQuery();
+//             return $this->json($resultSet->fetch());
             $sql = "SELECT * FROM worklog WHERE user = :uid";
             $stmt = $connection->prepare($sql);
             $stmt->bindValue("uid", $uid);
             $resultSet = $stmt->executeQuery();
-            return $this->json($resultSet->fetch());
+            return $this->json($resultSet->fetchAllAssociative());
         }
         else {
         return $this->json(null);
@@ -113,9 +118,9 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/addpost/{desc}/{user}/{proj}/{active}/{token}", name="addpost", methods={"POST", "GET"})
+     * @Route("/addpost/{desc}/{user}/{start}/{stop}/{proj}/{active}/{token}", name="addpost", methods={"POST", "GET"})
      */
-    public function addPost(Connection $connection, $desc,$user,$proj, $active = 0, $token): JsonResponse
+    public function addPost(Connection $connection, $desc,$user,$start,$stop,$proj, $active = 0, $token): JsonResponse
     {
         if($this->check_access_token($token))
         {
@@ -125,13 +130,13 @@ class PostController extends AbstractController
             $stmt->bindValue("user", $user);
             $stmt->bindValue("proj", $proj);
             $stmt->bindValue("active", $active);
-            $stmt->bindValue("start", (new DateTime('NOW'))->format('Y-m-d G:i:s'));
-            $stmt->bindValue("stop", (new DateTime('NOW'))->format('Y-m-d G:i:s'));
+            $stmt->bindValue("start", (new DateTime($start))->format('Y-m-d G:i:s'));
+            $stmt->bindValue("stop", (new DateTime($stop))->format('Y-m-d G:i:s'));
 
             $resultSet = $stmt->executeQuery();
 
 
-            $ret = $this->getPostByDesc($connection, $desc);
+            $ret = $this->getPostByDesc($connection, $desc,$token);
             return $this->json(json_decode($ret->getContent()));
         }
         else {

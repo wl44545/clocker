@@ -86,7 +86,7 @@ export class TimerComponent implements OnInit {
       }
       console.log(localTime);
       if(localTime != null){
-        this.timerService.updateActive(this.localTimeModelId, localTime).subscribe(response=>{
+        this.timerService.updateActive(this.localTimeModelId, localTime).toPromise().then(response=>{
           console.log(response);
         },() => {
           this.translateService.get('serverError').subscribe((text: string) => {

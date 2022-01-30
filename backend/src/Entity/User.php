@@ -1,39 +1,118 @@
 <?php
-namespace App
 
-class UserService
+namespace App\Entity;
+
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: "users")]
+class User
 {
-    private $_email;
-    private $_password;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private $id;
 
-    public function login($email, $password)
+    #[ORM\Column(type: 'string', length: 255)]
+    private $username;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $password;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $role;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Client::class)]
+    private $clients;
+
+    public function __construct()
     {
-        $this->_email = mysql_real_escape_string($email);
-        $this->_password = mysql_real_escape_string($password);
-
-        $user_id = $this->_checkCredentials();
-        if($user_id){
-            $_SESSION['user_id'] = $user_id;
-            return $user_id;
-        }
-        return false;
+        $this->clients = new ArrayCollection();
     }
 
-    protected function _checkCredentials()
+    public function getId(): ?int
     {
-        $query = "SELECT *
-                    FROM users
-                    WHERE email = '$this->_email'";
-        $result = mysql_query($query);
-        if(!empty($result)){
-            $user = mysql_fetch_assoc($result);
-            $submitted_pass = sha1($user['salt'] . $this->_password);
-            if($submitted_pass == $user['password']){
-                return $user['id'];
+        return $this->id;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    public function toArray(): array
+    {
+        $ret = [
+            'id' => $this->getId(),
+            'username' => $this->getUsername(),
+        ];
+
+        return $ret;
+    }
+
+    /**
+     * @return Collection|Client[]
+     */
+    public function getClients(): Collection
+    {
+        return $this->clients;
+    }
+
+    public function addClient(Client $client): self
+    {
+        if (!$this->clients->contains($client)) {
+            $this->clients[] = $client;
+            $client->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClient(Client $client): self
+    {
+        if ($this->clients->removeElement($client)) {
+            // set the owning side to null (unless already changed)
+            if ($client->getUser() === $this) {
+                $client->setUser(null);
             }
         }
-        return false;
-    }
-}
 
- ?>
+        return $this;
+    }
+
+}

@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use PDO;
 
+use App\Repository\UserRepository;
+
 use Doctrine\DBAL\Connection;
 
 /**
@@ -44,14 +46,14 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/getuser/{id}/{token}", name="getuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     * @Route("/getuser/{id}/{token}", name="getuserbyid", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function mygetUser(Connection $connection, $id, $token): JsonResponse
+    public function mygetUser(Connection $connection, UserRepository $userrepo, $id, $token): JsonResponse
     {
         if($this->check_access_token($token))
         {
-        $user = $connection->fetchAllAssociative('SELECT * FROM users WHERE id ='.$id.';');
-        return $this->json($user);
+        $user = $userrepo->find($id);
+        return $this->json($user->toArray());
         }
         else {
         return $this->json(null);
@@ -80,12 +82,16 @@ class UserController extends AbstractController
     /**
      * @Route("/getusers/{token}", name="getusers", methods={"POST", "GET"})
      */
-    public function getUsers(Connection $connection, $token): JsonResponse
+    public function getUsers(Connection $connection, UserRepository $userrepo, $token): JsonResponse
     {
         if($this->check_access_token($token))
         {
-            $users = $connection->fetchAllAssociative('SELECT * FROM users;');
-            return $this->json($users);
+            $users = $userrepo->findAll();
+            $utable = [];
+            foreach($users as $user){
+                $utable[] = $user->toArray();
+            }
+            return $this->json($utable);
         }
         else {
         return $this->json(null);

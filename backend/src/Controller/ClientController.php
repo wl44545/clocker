@@ -8,7 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use PDO;
 use Doctrine\DBAL\Connection;
-
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ClientRepository;
+use App\Repository\UserRepository;
+use App\Entity\Client;
 
 /**
  * @Route("/client", name="client_")
@@ -46,12 +49,14 @@ class ClientController extends AbstractController
     /**
      * @Route("/getclient/{id}/{token}", name="getclient", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function getClient(Connection $connection, $id, $token): JsonResponse
+    public function getClient(Connection $connection, ClientRepository $clientrepo, $id, $token): JsonResponse
     {
       if($this->check_access_token($token))
         {
-        $client = $connection->fetchAllAssociative('SELECT * FROM clients WHERE id='.$id.';');
-        return $this->json($client);
+        $client = $clientrepo->find($id);
+
+        //$client = $connection->fetchAllAssociative('SELECT * FROM clients WHERE id='.$id.';');
+        return $this->json($client->toArray());
       }
       else {
         return $this->json(null);
@@ -60,12 +65,12 @@ class ClientController extends AbstractController
     /**
      * @Route("/getclientbyname/{name}/{token}", name="getclientbyname", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function getClientByName(Connection $connection, $name, $token): JsonResponse
+    public function getClientByName(Connection $connection, ClientRepository $clientrepo, $name, $token): JsonResponse
     {
         if($this->check_access_token($token))
         {
-        $client = $connection->fetchAllAssociative('SELECT * FROM clients WHERE name="'.$name.'";');
-        return $this->json($client);
+          $client = $clientrepo->findOneByName($name);
+        return $this->json($client->toArray());
         }
         else {
         return $this->json(null);
@@ -103,15 +108,20 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/addclient/{name}/{user}/{token}", name="addclient", methods={"POST", "GET"})
+     * @Route("/addclient/{name}/{uid}/{token}", name="addclient", methods={"POST", "GET"})
      */
-    public function addClient(Connection $connection, $name,$user, $token): JsonResponse
+    public function addClient(Connection $connection, EntityManagerInterface $em, $name, UserRepository $userrepo, $uid, $token): JsonResponse
     {
         if($this->check_access_token($token))
         {
-        $clients = $connection->fetchAllAssociative('INSERT INTO clients (name, user) VALUES ("'.$name.'",'.$user.');');
-        $ret = $this->getClientByName($connection, $name);
-        return $this->json($ret);
+
+        $client = new Client();
+        $client->setName($name);
+        $client->setUser($userrepo->find($uid));
+        $em->persist($client);
+        $em->flush();
+        
+        return $this->json($client->toArray());
         }
         else {
         return $this->json(null);

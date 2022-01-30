@@ -26,7 +26,7 @@ export class TimerComponent implements OnInit {
   timerHandler: number = 0;
 
   localTimeStart: string | null | undefined;
-  localTimeTitle: string = "";
+  localTimeTitle: string = " ";
   localClient: number = 0;
   localProject: number = 0;
   localTimeInSec: number = 0;
@@ -50,7 +50,7 @@ export class TimerComponent implements OnInit {
     this.timer();
 
 
-    this.timerService.addEntry(this.localTimeTitle, this.loginService.getUserID(), new Date(), new Date(), 0, true).subscribe( response =>{
+    this.timerService.addEntry(this.localTimeTitle, this.loginService.getUserID(), formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en'), formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en'), 0, true).subscribe( response =>{
       this.localTimeModelId = response.id;
     },() => {
       this.translateService.get('serverError').subscribe((text: string) => {

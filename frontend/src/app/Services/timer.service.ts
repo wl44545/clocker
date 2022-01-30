@@ -19,7 +19,7 @@ export class TimerService {
     return this.httpClient.get<TimeEntryModel[]>(`${environment.apiUrl}/post/user/${user}/${this.loginService.getToken()}`, this.loginService.getAuthorizedOptions());
   }
 
-  public addEntry(description: string, user: number, start: Date, stop: Date, project: number, active: boolean): Observable<TimeEntryModel> {
+  public addEntry(description: string, user: number, start: Date|string, stop: Date|string, project: number, active: boolean): Observable<TimeEntryModel> {
     return this.httpClient.post<TimeEntryModel>(`${environment.apiUrl}/post/addpost/${description}/${user}/${start}/${stop}/${project}/${active}/${this.loginService.getToken()}`,
       new TimeEntryModelRequest(description, user, start, stop, project, active), this.loginService.getAuthorizedOptions());
   }

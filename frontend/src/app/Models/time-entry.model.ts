@@ -26,12 +26,12 @@ export class TimeEntryModel {
 export class TimeEntryModelRequest {
   description: string;
   user: number;
-  start: Date;
-  stop: Date | null;
+  start: Date|string;
+  stop: Date | null|string;
   project: number;
   active: boolean;
 
-  constructor(description: string, user: number, start: Date, stop: Date | null, project: number, active: boolean) {
+  constructor(description: string, user: number, start: Date|string, stop: Date | null|string, project: number, active: boolean) {
     this.description = description;
     this.user = user;
     this.start = start;

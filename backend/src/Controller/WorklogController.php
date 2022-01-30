@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\WorklogRepository;
 use App\Repository\ProjectRepository;
 use App\Entity\Worklog;
+use App\Repository\UserRepository;
 
 
 use \DateTime;
@@ -51,12 +52,28 @@ class WorklogController extends AbstractController
     /**
      * @Route("/user/{uid}/{token}", name="getuserworklog", methods={"POST", "GET"}, requirements={"uid": "\d+"})
      */
-    public function getUserWorklog(Connection $connection, WorklogRepository $worklogrepo, $uid, $token): JsonResponse
+    public function getUserWorklog(Connection $connection, UserRepository $userrepo, $uid, $token): JsonResponse
     {
         if($this->check_access_token($token))
         {
-           $worklog = $worklogrepo->find($uid);
-           return $this->json($worklog->toArray());
+            $user = $userrepo->find($uid);
+            $worklogs = $user->getWorklogs();
+            $ret = [];
+           foreach($worklogs->getIterator() as $i => $worklog) {
+                $tmp = 0;
+                if($worklog->getProject())
+                    $tmp = $worklog->getProject()->getId();
+                $ret[] = [
+                    'id' => $worklog->getId(),
+                    'description' => $worklog->getDescription(),
+                    'start' => $worklog->getStart()->format('Y-m-d\TH:i:s'),
+                    'stop' => $worklog->getStop()->format('Y-m-d\TH:i:s'),
+                    'user' => $worklog->getUser()->getId(),
+                    'project' => $tmp,
+                    'active' => $worklog->getActive(),
+                ];
+            }
+            return new JsonResponse($ret);
         }
         else {
         return $this->json(null);
@@ -66,18 +83,18 @@ class WorklogController extends AbstractController
     /**
      * @Route("/addworklog/{desc}/{user}/{start}/{stop}/{proj}/{active}/{token}", name="addworklog", methods={"POST", "GET"})
      */
-    public function addWorklog(Connection $connection, EntityManagerInterface $em, $desc = ' ',$user,$proj, $active = 0, $start, $stop, $token): JsonResponse
+    public function addWorklog(Connection $connection, EntityManagerInterface $em, UserRepository $userrepo, ProjectRepository $projectrepo, $desc,$user,$proj, $active = 0, $start, $stop, $token): JsonResponse
     {
         if($this->check_access_token($token))
         {
             $worklog = new Worklog();
             $worklog->setDescription($desc);
-            $worklog->setStart($start);
+            $worklog->setStart(new DateTime($start));
             if($stop != 0 || $stop != NULL)
-                $worklog->setStop($stop);
-            $worklog->setActive($active);
-            $worklog->setUser($user);
-            $worklog->setProject($proj);
+                $worklog->setStop(new DateTime($stop));
+            $worklog->setActive($active=='true');
+            $worklog->setUser($userrepo->find($user));
+            $worklog->setProject($projectrepo->find($proj));
             $em->persist($worklog);
             $em->flush();
 
@@ -93,21 +110,21 @@ class WorklogController extends AbstractController
     /**
      * @Route("/updateworklog/{id}/{desc}/{user}/{start}/{stop}/{proj}/{active}/{token}", name="updateworklog", requirements={"id": "\d+"})
      */
-    public function updateWorklog(Connection $connection, EntityManagerInterface $em, WorklogRepository $worklogrepo, $id, $desc, $user, $start, $stop, $project, $active, $token): JsonResponse
+    public function updateWorklog(Connection $connection, EntityManagerInterface $em, UserRepository $userrepo, ProjectRepository $projectrepo, WorklogRepository $worklogrepo, $id, $desc, $user, $start, $stop, $proj, $active, $token): JsonResponse
     {
         if($this->check_access_token($token))
         {
             $worklog = $worklogrepo->find($id);
             $worklog->setDescription($desc);
-            $worklog->setStart($start);
-            $worklog->setStop($stop);
-            $worklog->setActive($active);
-            $worklog->setUser($user);
-            $worklog->setProject($proj);
+            $worklog->setStart(new DateTime($start));
+            $worklog->setStop(new DateTime($stop));
+            $worklog->setActive($active=='true');
+            $worklog->setUser($userrepo->find($user));
+            $worklog->setProject($projectrepo->find($proj));
             $em->persist($worklog);
             $em->flush();
 
-            return $this->json($user->toArray());
+            return $this->json($worklog->toArray());
         }
         else {
         return $this->json(null);
@@ -122,9 +139,10 @@ class WorklogController extends AbstractController
     {
         if($this->check_access_token($token))
         {
-            $worklog = $usrrepo->find($id);
-            $em->remove($user);
+            $worklog = $worklogrepo->find($id);
+            $em->remove($worklog);
             $em->flush();
         }
+        return new JsonResponse(null);
     }
 }

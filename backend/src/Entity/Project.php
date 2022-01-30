@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
@@ -23,6 +25,14 @@ class Project
 
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'projects')]
     private $client;
+
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: Worklog::class)]
+    private $worklogs;
+
+    public function __construct()
+    {
+        $this->worklogs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -78,5 +88,35 @@ class Project
         ];
 
         return $ret;
+    }
+
+    /**
+     * @return Collection|Worklog[]
+     */
+    public function getWorklogs(): Collection
+    {
+        return $this->worklogs;
+    }
+
+    public function addWorklog(Worklog $worklog): self
+    {
+        if (!$this->worklogs->contains($worklog)) {
+            $this->worklogs[] = $worklog;
+            $worklog->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorklog(Worklog $worklog): self
+    {
+        if ($this->worklogs->removeElement($worklog)) {
+            // set the owning side to null (unless already changed)
+            if ($worklog->getProject() === $this) {
+                $worklog->setProject(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -32,10 +32,14 @@ class User
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Project::class)]
     private $projects;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Worklog::class)]
+    private $worklogs;
+
     public function __construct()
     {
         $this->clients = new ArrayCollection();
         $this->projects = new ArrayCollection();
+        $this->worklogs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -144,6 +148,36 @@ class User
             // set the owning side to null (unless already changed)
             if ($project->getUser() === $this) {
                 $project->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Worklog[]
+     */
+    public function getWorklogs(): Collection
+    {
+        return $this->worklogs;
+    }
+
+    public function addWorklog(Worklog $worklog): self
+    {
+        if (!$this->worklogs->contains($worklog)) {
+            $this->worklogs[] = $worklog;
+            $worklog->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorklog(Worklog $worklog): self
+    {
+        if ($this->worklogs->removeElement($worklog)) {
+            // set the owning side to null (unless already changed)
+            if ($worklog->getUser() === $this) {
+                $worklog->setUser(null);
             }
         }
 

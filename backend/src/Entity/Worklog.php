@@ -22,14 +22,15 @@ class Worklog
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $stop;
 
-    #[ORM\Column(type: 'integer')]
-    private $user;
-
-    #[ORM\Column(type: 'integer')]
-    private $project;
-
     #[ORM\Column(type: 'boolean')]
     private $active;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'worklogs')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
+
+    #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'worklogs')]
+    private $project;
 
 
     public function getId(): ?int
@@ -73,30 +74,6 @@ class Worklog
         return $this;
     }
 
-    public function getUser(): ?string
-    {
-        return $this->user;
-    }
-
-    public function setUser(?int $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getProject(): ?string
-    {
-        return $this->project;
-    }
-
-    public function setProject(?int $project): self
-    {
-        $this->project = $project;
-
-        return $this;
-    }
-
     public function getActive(): ?bool
     {
         return $this->active;
@@ -111,16 +88,43 @@ class Worklog
 
     public function toArray(): array
     {
+        $tmp = 0;
+        if($this->getProject())
+            $tmp = $this->getProject()->getId();
         $ret = [
             'id' => $this->getId(),
             'description' => $this->getDescription(),
             'start' => $this->getStart(),
             'stop' => $this->getStop(),
-            'user' => $this->getUser(),
-            'project' => $this->getProject(),
+            'user' => $this->getUser()->getId(),
+            'project' => $tmp,
             'active' => $this->getActive(),
         ];
 
         return $ret;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
+
+        return $this;
     }
 }

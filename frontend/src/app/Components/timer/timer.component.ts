@@ -65,7 +65,7 @@ export class TimerComponent implements OnInit {
   clearLocal(){
     this.timerActive = false;
     clearInterval(this.timerHandler);
-    this.localTimeTitle = "";
+    this.localTimeTitle = " ";
     this.localClient = 0;
     this.localProject = 0;
     this.localTimeInSec = 0;

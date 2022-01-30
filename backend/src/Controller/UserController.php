@@ -141,5 +141,6 @@ class UserController extends AbstractController
             $em->remove($user);
             $em->flush();
           }
+          return new JsonResponse(null);
     }
 }

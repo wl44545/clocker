@@ -16,9 +16,9 @@
     <div class="column right" *ngIf="!loginService.isLogged()">
       <div class="login">
         <form>
-        <div class="wrong-login" *ngIf="wrongLogin">
-          {{ 'wrongLoginPassword' | translate}}
-        </div>
+<!--        <div class="wrong-login" *ngIf="wrongLogin">-->
+<!--          {{ 'wrongLoginPassword' | translate}}-->
+<!--        </div>-->
         <div>
           <input type="email" id="username" placeholder="{{ 'username' | translate}}" [(ngModel)]="username" name="username">
         </div>

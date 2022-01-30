@@ -29,63 +29,17 @@ class AdminPanelController extends AbstractController
      */
     public function getStats(Connection $connection): JsonResponse
     {
-        $stats = $connection->fetchAllAssociative('SELECT start, stop FROM worklog;');
+        $dayStats = $connection->fetchAllAssociative('SELECT SUM(TIME_TO_SEC(TIMEDIFF(stop,start))) from worklog  WHERE stop <= NOW() and stop >= NOW() - INTERVAL 1 DAY;');
+        $weekStats = $connection->fetchAllAssociative('SELECT SUM(TIME_TO_SEC(TIMEDIFF(stop,start))) from worklog  WHERE stop <= NOW() and stop >= NOW() - INTERVAL 7 DAY;');
+        $monthStats = $connection->fetchAllAssociative('SELECT SUM(TIME_TO_SEC(TIMEDIFF(stop,start))) from worklog  WHERE stop <= NOW() and stop >= NOW() - INTERVAL 1 MONTH;');
+        $yearStats = $connection->fetchAllAssociative('SELECT SUM(TIME_TO_SEC(TIMEDIFF(stop,start))) from worklog  WHERE stop <= NOW() and stop >= NOW() - INTERVAL 1 YEAR;');
 
-        $today = new DateTime('NOW');
-        $todayDay = $today->format('j');
-        $todayMonth = $today->format('n');
-        $todayYear = $today->format('Y');
-
-        $dayStats = 0;
-        $weekStats = 0;
-        $monthStats = 0;
-        $yearStats = 0;
-
-
-
-        foreach($stats as $stat)
-        {
-            $hour = (int)substr($stat['stop'], 11) - (int)substr($stat['start'], 11);
-            $minute = (int)substr($stat['stop'], 14) - (int)substr($stat['start'], 14);
-            $second = (int)substr($stat['stop'], 17) - (int)substr($stat['start'], 17);
-
-
-            if((string)(int)substr($stat['stop'], 8) == $todayDay && (string)(int)substr($stat['stop'], 5) == $todayMonth)
-            {
-                $dayStats += $second;
-                $dayStats += $minute * 60;
-                $dayStats += $hour * 3600;
-            }
-            elseif (($todayDay - (string)(int)substr($stat['stop'], 8)) <= 7)
-            {
-                $weekStats += $second;
-                $weekStats += $minute * 60;
-                $weekStats += $hour * 3600;
-            }
-            
-            if ((string)(int)substr($stat['stop'], 5) == $todayMonth)
-            {
-                $monthStats += $second;
-                $monthStats += $minute * 60;
-                $monthStats += $hour * 3600;
-            } 
-
-            if ((string)(int)substr($stat['stop'], 0) == $todayYear)
-            {
-                $yearStats += $second;
-                $yearStats += $minute * 60;
-                $yearStats += $hour * 3600;
-            } 
-
-            
-            
-        }
         return $this->json(
             [
-                "dayStats" => $dayStats,
-                "weekStats" => $weekStats,
-                "monthStats" => $monthStats,
-                "yearStats" => $yearStats,
+                "dayStats" => array_values($dayStats[0])[0],
+                "weekStats" => array_values($weekStats[0])[0],
+                "monthStats" => array_values($monthStats[0])[0],
+                "yearStats" => array_values($yearStats[0])[0],
             ]
     );
     }

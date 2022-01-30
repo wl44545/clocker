@@ -105,12 +105,13 @@ export class TimerComponent implements OnInit {
     }
   }
 
-  public stop() {
+  public async stop() {
     console.log('stop');
-    if(this.save(false)){
-      this.getWorklog();
+    let control: boolean = await this.save(false);
+    if (control) {
       this.clearLocal();
       this.appComponent.stop();
+      this.getWorklog();
     }
 
   }

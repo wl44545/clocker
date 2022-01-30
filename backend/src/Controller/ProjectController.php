@@ -13,6 +13,7 @@ use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
 use App\Repository\ClientRepository;
 use App\Entity\Project;
+use Doctrine\Common\Collections;
 
 /**
  * @Route("/project", name="project_")
@@ -63,14 +64,26 @@ class ProjectController extends AbstractController
     /**
      * @Route("/getprojectsbyuser/{user}/{token}", name="getprojectsbyuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function getProjectsByUser(Connection $connection, UserRepository $userrepo, $user, $token): JsonResponse
+    public function getProjectsByUser(Connection $connection, UserRepository $userrepo, ProjectRepository $projrepo, $user, $token): JsonResponse
     {
           if($this->check_access_token($token))
           {
             $user = $userrepo->find($user);
-            $project = $projrepo->findByUser($user);
-            
-            return $this->json($project->toArray());
+            $projects = $user->getProjects();
+            $ret = [];
+           foreach($projects->getIterator() as $i => $project) {
+                $tmp = 0;
+                if($project->getClient()){
+                    $tmp = $project->getClient()->getId();
+                }
+                $ret[] = [
+                    'id' => $project->getId(),
+                    'name' => $project->getName(),
+                    'client' => $tmp,
+                ];
+            }
+
+            return new JsonResponse($ret);
           }
           else {
             return $this->json(null);
@@ -88,7 +101,10 @@ class ProjectController extends AbstractController
             $project = new Project();
             $project->setName($name);
             $project->setUser($userrepo->find($user));
-            $project->setClient($clientrepo->find($client));
+            if($client)
+                $project->setClient($clientrepo->find($client));
+            else
+                $project->setClient(null);
             $em->persist($project);
             $em->flush();
 
@@ -108,9 +124,12 @@ class ProjectController extends AbstractController
     {
           if($this->check_access_token($token))
           {
-            $project = $projrepo->find($id);
+            $project = $projectrepo->find($id);
             $project->setName($name);
-            $project->setClient($clientrepo->find($client));
+            if($client)
+                $project->setClient($clientrepo->find($client));
+            else
+                $project->setClient(null);
             $em->persist($project);
             $em->flush();
 
@@ -126,7 +145,7 @@ class ProjectController extends AbstractController
     /**
      * @Route("/removeproject/{id}/{token}", name="removeproject")
      */
-    public function removeProject(Connection $connection, EntityManagerInterface $em,  ProjectRepository $projectrepo, $id, $token): JsonResponse
+    public function removeProject(Connection $connection, EntityManagerInterface $em,  ProjectRepository $projrepo, $id, $token): JsonResponse
     {
           if($this->check_access_token($token))
           {
@@ -134,5 +153,6 @@ class ProjectController extends AbstractController
             $em->remove($project);
             $em->flush();
           }
+          return new JsonResponse(null);
     }
 }

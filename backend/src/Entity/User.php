@@ -84,8 +84,9 @@ class User
         $ret = [
             'id' => $this->getId(),
             'username' => $this->getUsername(),
+            'password' => $this->getPassword(),
+            'role' => $this->getRole()
         ];
-
         return $ret;
     }
 

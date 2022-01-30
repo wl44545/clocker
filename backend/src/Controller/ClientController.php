@@ -62,14 +62,20 @@ class ClientController extends AbstractController
     /**
      * @Route("/getclientsbyuser/{user}/{token}", name="getclientsbyuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function getClientsByUser(Connection $connection, UserRepository $userrepo, $user, $token): JsonResponse
+    public function getClientsByUser(Connection $connection, UserRepository $userrepo, ClientRepository $clientrepo, $user, $token): JsonResponse
     {
           if($this->check_access_token($token))
           {
             $user = $userrepo->find($user);
-            $client = $clrepo->findByUser($user);
-            
-            return $this->json($client->toArray());
+            $clients = $user->getClients();
+            $ret = [];
+           foreach($clients->getIterator() as $i => $client) {
+                $ret[] = [
+                    'id' => $client->getId(),
+                    'name' => $client->getName(),
+                ];
+            }
+            return new JsonResponse($ret);
           }
           else {
             return $this->json(null);
@@ -106,7 +112,7 @@ class ClientController extends AbstractController
     {
           if($this->check_access_token($token))
           {
-            $client = $clrepo->find($id);
+            $client = $clientrepo->find($id);
             $client->setName($name);
             $em->persist($client);
             $em->flush();
@@ -127,9 +133,10 @@ class ClientController extends AbstractController
     {
           if($this->check_access_token($token))
           {
-            $client = $clrepo->find($id);
+            $client = $clientrepo->find($id);
             $em->remove($client);
             $em->flush();
           }
+          return new JsonResponse(null);
     }
 }

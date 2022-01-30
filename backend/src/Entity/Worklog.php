@@ -116,7 +116,7 @@ class Worklog
             'description' => $this->getDescription(),
             'start' => $this->getStart(),
             'stop' => $this->getStop(),
-            'user' => $this->getUser()->toArray(),
+            'user' => $this->getUser(),
             'project' => $this->getProject(),
             'active' => $this->getActive(),
         ];

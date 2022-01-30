@@ -67,11 +67,14 @@ class Project
 
     public function toArray(): array
     {
+        $tmp = 0;
+        if($this->getClient())
+            $tmp = $this->getClient()->getId();
         $ret = [
             'id' => $this->getId(),
             'name' => $this->getName(),
-            'user' => $this->getUser(),
-            'client' => $this->getClient(),
+            'user' => $this->getUser()->getId(),
+            'client' => $tmp,
         ];
 
         return $ret;

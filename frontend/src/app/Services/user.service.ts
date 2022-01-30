@@ -17,7 +17,7 @@ export class UserService{
   }
 
   public getUser(userID:number): Observable<UserModel> {
-    return this.httpClient.get<UserModel>(`${environment.apiUrl}/users/getuser/${userID}/${this.loginService.getToken()}`, this.loginService.getAuthorizedOptions());
+    return this.httpClient.get<UserModel>(`${environment.apiUrl}/users/mygetuser/${userID}/${this.loginService.getToken()}`, this.loginService.getAuthorizedOptions());
   }
 
   public updateRole(user:UserModel): Observable<UserModel>{

@@ -14,7 +14,7 @@ use App\Repository\ClientRepository;
 use App\Entity\User;
 
 /**
- * @Route("/user", name="user_")
+ * @Route("/users", name="users_")
  */
 class UserController extends AbstractController
 {
@@ -46,9 +46,9 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/getuser/{id}/{token}", name="getuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     * @Route("/mygetuser/{id}/{token}", name="mygetuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function getUser(Connection $connection, UserRepository $usrrepo, $id, $token): JsonResponse
+    public function mygetUser(Connection $connection, UserRepository $usrrepo, $id, $token): JsonResponse
     {
           if($this->check_access_token($token))
           {
@@ -62,12 +62,20 @@ class UserController extends AbstractController
     /**
      * @Route("/getusers/{token}", name="getusers", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function getUsers(Connection $connection, UserRepository $userrepo, $user, $token): JsonResponse
+    public function getUsers(Connection $connection, UserRepository $userrepo, $token): JsonResponse
     {
           if($this->check_access_token($token))
           {
-            $user = $userrepo->findAll();
-            return $this->json($user->toArray());
+            $users = $userrepo->findAll();
+            foreach ($users as $user) {
+                $ret[] = [
+                    'id' => $user->getId(),
+                    'username' => $user->getUsername(),
+                    'password' => $user->getPassword(),
+                    'role' => $user->getRole()
+                ];
+            }
+            return new JsonResponse($ret);
           }
           else {
             return $this->json(null);
@@ -78,7 +86,7 @@ class UserController extends AbstractController
     /**
      * @Route("/adduser/{name}/{password}/{role}/{token}", name="adduser", methods={"POST", "GET"})
      */
-    public function addUser(Connection $connection, EntityManagerInterface $em, UserRepository $userrepo, ClientRepository $clientrepo, $name, $password, $role, $token): JsonResponse
+    public function addUser(Connection $connection, EntityManagerInterface $em, $name, $password, $role, $token): JsonResponse
     {
           if($this->check_access_token($token))
           {
@@ -105,7 +113,7 @@ class UserController extends AbstractController
     {
           if($this->check_access_token($token))
           {
-            $user = $usrrepo->find($id);
+            $user = $userrepo->find($id);
             
 			      $user->setUsername($name);
             $user->setPassword($password);
@@ -129,7 +137,7 @@ class UserController extends AbstractController
     {
           if($this->check_access_token($token))
           {
-            $user = $usrrepo->find($id);
+            $user = $userrepo->find($id);
             $em->remove($user);
             $em->flush();
           }

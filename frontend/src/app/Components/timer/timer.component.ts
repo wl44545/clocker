@@ -25,6 +25,7 @@ export class TimerComponent implements OnInit {
   update: boolean = false;
   timerHandler: number = 0;
 
+  localTimeEntryModel!: TimeEntryModel;
   localTimeStart: string | null | undefined;
   localTimeTitle: string = " ";
   localClient: number = 0;
@@ -83,10 +84,13 @@ export class TimerComponent implements OnInit {
           this.localProject,
           active
         );
+        this.localTimeEntryModel.stop = new Date();
+        this.worklog.unshift(this.localTimeEntryModel);
+
       }
       console.log(localTime);
       if(localTime != null){
-        this.timerService.updateActive(this.localTimeModelId, localTime).toPromise().then(response=>{
+        this.timerService.updateActive(this.localTimeModelId, localTime).subscribe(response=>{
           console.log(response);
         },() => {
           this.translateService.get('serverError').subscribe((text: string) => {
@@ -105,13 +109,10 @@ export class TimerComponent implements OnInit {
     }
   }
 
-  public async stop() {
-    console.log('stop');
-    let control: boolean = await this.save(false);
-    if (control) {
+  public stop() {
+    if (this.save(false)) {
       this.clearLocal();
       this.appComponent.stop();
-      this.getWorklog();
     }
 
   }
@@ -273,6 +274,7 @@ export class TimerComponent implements OnInit {
             entry.timeDiff = `${h}:${m}:${s}`;
 
             if(entry.active){
+              this.localTimeEntryModel = entry;
               this.localTimeTitle = entry.description;
               this.localTimeModelId = entry.id;
               this.localClient = entry.client;

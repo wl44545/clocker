@@ -6,6 +6,7 @@ import {UserService} from "../../Services/user.service";
 import {TranslateService} from "@ngx-translate/core";
 import {ComponentService} from "../../Services/component.service";
 import {ProjectModel} from "../../Models/project.model";
+import {LoginSecurity} from "../../Models/login.model";
 
 @Component({
   selector: 'app-users',
@@ -132,7 +133,7 @@ export class UsersComponent implements OnInit {
       return;
     }
 
-    let user: UserModelRequest = new UserModelRequest(this.newEmail, this.newRole, this.newPassword);
+    let user: UserModelRequest = new UserModelRequest(this.newEmail, this.newRole, LoginSecurity.getHash(this.newPassword));
     this.userService.addUser(user).subscribe((response) => {
       this.getUsers();
     },() => {

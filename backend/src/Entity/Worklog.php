@@ -22,8 +22,15 @@ class Worklog
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $stop;
 
+    #[ORM\Column(type: 'integer')]
+    private $user;
+
+    #[ORM\Column(type: 'integer')]
+    private $project;
+
     #[ORM\Column(type: 'boolean')]
     private $active;
+
 
     public function getId(): ?int
     {
@@ -66,6 +73,30 @@ class Worklog
         return $this;
     }
 
+    public function getUser(): ?string
+    {
+        return $this->user;
+    }
+
+    public function setUser(?int $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getProject(): ?string
+    {
+        return $this->project;
+    }
+
+    public function setProject(?int $project): self
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
     public function getActive(): ?bool
     {
         return $this->active;
@@ -76,5 +107,20 @@ class Worklog
         $this->active = $active;
 
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        $ret = [
+            'id' => $this->getId(),
+            'description' => $this->getDescription(),
+            'start' => $this->getStart(),
+            'stop' => $this->getStop(),
+            'user' => $this->getUser()->toArray(),
+            'project' => $this->getProject(),
+            'active' => $this->getActive(),
+        ];
+
+        return $ret;
     }
 }

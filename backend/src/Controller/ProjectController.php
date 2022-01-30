@@ -8,6 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use PDO;
 use Doctrine\DBAL\Connection;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ProjectRepository;
+use App\Repository\UserRepository;
+use App\Repository\ClientRepository;
+use App\Entity\Project;
 
 /**
  * @Route("/project", name="project_")
@@ -44,12 +49,12 @@ class ProjectController extends AbstractController
     /**
      * @Route("/getproject/{id}/{token}", name="getproject", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function getProject(Connection $connection, $id, $token): JsonResponse
+    public function getProject(Connection $connection, ProjectRepository $projrepo, $id, $token): JsonResponse
     {
           if($this->check_access_token($token))
           {
-        $project = $connection->fetchAllAssociative('SELECT * FROM projects WHERE id='.$id.';');
-        return $this->json($project);
+            $project = $projrepo->find($id);
+            return $this->json($project->toArray());
           }
           else {
             return $this->json(null);
@@ -58,44 +63,14 @@ class ProjectController extends AbstractController
     /**
      * @Route("/getprojectsbyuser/{user}/{token}", name="getprojectsbyuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function getProjectsByUser(Connection $connection, $user, $token): JsonResponse
+    public function getProjectsByUser(Connection $connection, UserRepository $userrepo, $user, $token): JsonResponse
     {
           if($this->check_access_token($token))
           {
-        $project = $connection->fetchAllAssociative('SELECT * FROM projects WHERE user="'.$user.'";');
-        return $this->json($project);
-          }
-          else {
-            return $this->json(null);
-          }
-
-    }
-
-    /**
-     * @Route("/getprojectbynameuser/{name}/{user}/{token}", name="getprojectbynameuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
-     */
-    public function getProjectByNameUser(Connection $connection, $name, $user, $token): JsonResponse
-    {
-          if($this->check_access_token($token))
-          {
-        $project = $connection->fetchAllAssociative('SELECT * FROM projects WHERE name="'.$name.'"; AND user='.$user.'');
-        return $this->json($project);
-          }
-          else {
-            return $this->json(null);
-          }
-
-    }
-
-    /**
-     * @Route("/getprojects/{token}", name="getprojects", methods={"POST", "GET"})
-     */
-    public function getProjects(Connection $connection, $token): JsonResponse
-    {
-          if($this->check_access_token($token))
-          {
-        $projects = $connection->fetchAllAssociative('SELECT * FROM projects');
-        return $this->json($projects);
+            $user = $userrepo->find($user);
+            $project = $projrepo->findByUser($user);
+            
+            return $this->json($project->toArray());
           }
           else {
             return $this->json(null);
@@ -106,13 +81,18 @@ class ProjectController extends AbstractController
     /**
      * @Route("/addproject/{name}/{user}/{client}/{token}", name="addproject", methods={"POST", "GET"})
      */
-    public function addProject(Connection $connection, $name, $user, $client, $token): JsonResponse
+    public function addProject(Connection $connection, EntityManagerInterface $em, UserRepository $userrepo, ClientRepository $clientrepo, $name, $user, $client, $token): JsonResponse
     {
           if($this->check_access_token($token))
           {
-        $projects = $connection->fetchAllAssociative('INSERT INTO projects (name, user, client) VALUES ("'.$name.'",'.$user.', '.$client.');');
-        $ret = $this->getProjectByNameUser($connection, $name, $user);
-        return $this->json($ret);
+            $project = new Project();
+            $project->setName($name);
+            $project->setUser($userrepo->find($user));
+            $project->setClient($clientrepo->find($client));
+            $em->persist($project);
+            $em->flush();
+
+            return $this->json($project->toArray());
           }
           else {
             return $this->json(null);
@@ -124,12 +104,17 @@ class ProjectController extends AbstractController
     /**
      * @Route("/updateproject/{id}/{name}/{user}/{client}/{token}", name="updateproject")
      */
-    public function updateProject(Connection $connection, $id, $name, $user, $client, $token): JsonResponse
+    public function updateProject(Connection $connection,EntityManagerInterface $em, ProjectRepository $projectrepo, ClientRepository $clientrepo, $id, $name, $user, $client, $token): JsonResponse
     {
           if($this->check_access_token($token))
           {
-        $projects = $connection->fetchAllAssociative('UPDATE projects SET name = "'.$name.'", user = '.$user.', client = '.$client.' WHERE id ='.$id.';');
-        return $this->json(['Updated project' => $id]);
+            $project = $projrepo->find($id);
+            $project->setName($name);
+            $project->setClient($clientrepo->find($client));
+            $em->persist($project);
+            $em->flush();
+
+            return $this->json($project->toArray());
           }
           else {
             return $this->json(null);
@@ -141,16 +126,13 @@ class ProjectController extends AbstractController
     /**
      * @Route("/removeproject/{id}/{token}", name="removeproject")
      */
-    public function removeProject(Connection $connection, $id, $token): JsonResponse
+    public function removeProject(Connection $connection, EntityManagerInterface $em,  ProjectRepository $projectrepo, $id, $token): JsonResponse
     {
           if($this->check_access_token($token))
           {
-        $posts = $connection->fetchAllAssociative('DELETE FROM projects WHERE id='.$id.';');
-        return $this->json(['success']);
+            $project = $projrepo->find($id);
+            $em->remove($project);
+            $em->flush();
           }
-          else {
-            return $this->json(null);
-          }
-
     }
 }

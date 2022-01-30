@@ -29,9 +29,13 @@ class User
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Client::class)]
     private $clients;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Project::class)]
+    private $projects;
+
     public function __construct()
     {
         $this->clients = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +113,36 @@ class User
             // set the owning side to null (unless already changed)
             if ($client->getUser() === $this) {
                 $client->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        if ($this->projects->removeElement($project)) {
+            // set the owning side to null (unless already changed)
+            if ($project->getUser() === $this) {
+                $project->setUser(null);
             }
         }
 

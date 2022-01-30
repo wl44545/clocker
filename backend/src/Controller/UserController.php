@@ -7,13 +7,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use PDO;
-
-use App\Repository\UserRepository;
-
 use Doctrine\DBAL\Connection;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\UserRepository;
+use App\Repository\ClientRepository;
+use App\Entity\User;
 
 /**
- * @Route("/users", name="users_")
+ * @Route("/user", name="user_")
  */
 class UserController extends AbstractController
 {
@@ -22,7 +23,7 @@ class UserController extends AbstractController
      */
     public function main(): Response
     {
-        return new Response('<html><body>hej</body></html>');
+        return new Response('<html><body>hej usrekty</body></html>');
     }
 
     public function check_access_token($string)
@@ -44,106 +45,79 @@ class UserController extends AbstractController
       return FALSE;
     }
 
-
     /**
-     * @Route("/getuser/{id}/{token}", name="getuserbyid", methods={"POST", "GET"}, requirements={"id": "\d+"})
+     * @Route("/getuser/{id}/{token}", name="getuser", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function mygetUser(Connection $connection, UserRepository $userrepo, $id, $token): JsonResponse
+    public function getUser(Connection $connection, UserRepository $usrrepo, $id, $token): JsonResponse
     {
-        if($this->check_access_token($token))
-        {
-        $user = $userrepo->find($id);
-        return $this->json($user->toArray());
-        }
-        else {
-        return $this->json(null);
-        }
+          if($this->check_access_token($token))
+          {
+            $user = $usrrepo->find($id);
+            return $this->json($user->toArray());
+          }
+          else {
+            return $this->json(null);
+          }
     }
-
     /**
-     * @Route("/getuserbyname/{name}/{token}", name="getuserbyname", methods={"POST", "GET"})
+     * @Route("/getusers/{token}", name="getusers", methods={"POST", "GET"}, requirements={"id": "\d+"})
      */
-    public function getUserByName(Connection $connection, $name, $token): JsonResponse
+    public function getUsers(Connection $connection, UserRepository $userrepo, $user, $token): JsonResponse
     {
-        if($this->check_access_token($token))
-        {
-            $sql = "SELECT * FROM users WHERE username = :name";
-            $stmt = $connection->prepare($sql);
-            $stmt->bindValue("name", $name);
-            $resultSet = $stmt->executeQuery();
-            return $this->json($resultSet->fetch());
-        }
-        else {
-        return $this->json(null);
-        }
+          if($this->check_access_token($token))
+          {
+            $user = $userrepo->findAll();
+            return $this->json($user->toArray());
+          }
+          else {
+            return $this->json(null);
+          }
 
     }
 
     /**
-     * @Route("/getusers/{token}", name="getusers", methods={"POST", "GET"})
+     * @Route("/adduser/{name}/{password}/{role}/{token}", name="adduser", methods={"POST", "GET"})
      */
-    public function getUsers(Connection $connection, UserRepository $userrepo, $token): JsonResponse
+    public function addUser(Connection $connection, EntityManagerInterface $em, UserRepository $userrepo, ClientRepository $clientrepo, $name, $password, $role, $token): JsonResponse
     {
-        if($this->check_access_token($token))
-        {
-            $users = $userrepo->findAll();
-            $utable = [];
-            foreach($users as $user){
-                $utable[] = $user->toArray();
-            }
-            return $this->json($utable);
-        }
-        else {
-        return $this->json(null);
-        }
+          if($this->check_access_token($token))
+          {
+            $user = new User();
+            $user->setUsername($name);
+            $user->setPassword($password);
+            $user->setRole($role);
+            $em->persist($user);
+            $em->flush();
 
-    }
-
-    /**
-     * @Route("/adduser/{username}/{pass}/{role}/{token}", name="adduser", methods={"POST", "GET"})
-     */
-    public function addUser(Connection $connection, $username, $pass, $role, $token): JsonResponse
-    {
-        if($this->check_access_token($token))
-        {
-            $sql = "INSERT INTO users (username, password, role) VALUES (:name, :pass, :role)";
-            $stmt = $connection->prepare($sql);
-            $stmt->bindValue("name", $username);
-            $stmt->bindValue("pass", $pass);
-            $stmt->bindValue("role", $role);
-            $resultSet = $stmt->executeQuery();
-
-            $ret = $this->getUserByName($connection, $username);
-            return $this->json(json_decode($ret->getContent()));
-        }
-        else {
-        return $this->json(null);
-        }
+            return $this->json($user->toArray());
+          }
+          else {
+            return $this->json(null);
+          }
 
     }
 
 
     /**
-     * @Route("/updateuser/{id}/{username}/{pass}/{role}/{token}", name="updateuser")
+     * @Route("/updateuser/{id}/{name}/{password}/{role}/{token}", name="updateuser")
      */
-    public function updateUser(Connection $connection, $id, $username, $pass, $role, $token): JsonResponse
+    public function updateUser(Connection $connection,EntityManagerInterface $em, UserRepository $userrepo, ClientRepository $clientrepo, $id, $name, $password, $role, $token): JsonResponse
     {
-        if($this->check_access_token($token))
-        {
-            $sql = "UPDATE users SET username = :name, password = :pass, role = :role WHERE id = :id";
-            $stmt = $connection->prepare($sql);
-            $stmt->bindValue("name", $username);
-            $stmt->bindValue("pass", $pass);
-            $stmt->bindValue("role", $role);
-            $stmt->bindValue("id", $id);
-            $resultSet = $stmt->executeQuery();
-            $ret = $this->getUserByName($connection, $username);
-            return $this->json(json_decode($ret->getContent()));
-        }
-        else {
-        return $this->json(null);
-        }
+          if($this->check_access_token($token))
+          {
+            $user = $usrrepo->find($id);
+            
+			      $user->setUsername($name);
+            $user->setPassword($password);
+            $user->setRole($role);
+            $em->persist($user);
+            $em->flush();
 
+            return $this->json($user->toArray());
+          }
+          else {
+            return $this->json(null);
+          }
 
     }
 
@@ -151,18 +125,13 @@ class UserController extends AbstractController
     /**
      * @Route("/removeuser/{id}/{token}", name="removeuser")
      */
-    public function removeUser(Connection $connection, $id, $token): JsonResponse
+    public function removeUser(Connection $connection, EntityManagerInterface $em,  UserRepository $userrepo, $id, $token): JsonResponse
     {
-        if($this->check_access_token($token))
-        {
-            $user = $connection->fetchAllAssociative('DELETE FROM users WHERE id='.$id.';');
-            if($user == null)
-                return $this->json(['result' => TRUE]);
-            return $this->json(['result' => FALSE]);
-        }
-        else {
-        return $this->json(null);
-        }
-
+          if($this->check_access_token($token))
+          {
+            $user = $usrrepo->find($id);
+            $em->remove($user);
+            $em->flush();
+          }
     }
 }

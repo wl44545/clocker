@@ -84,7 +84,23 @@ export class TimerComponent implements OnInit {
           this.localProject,
           active
         );
-        this.localTimeEntryModel.stop = new Date();
+
+        this.localTimeEntryModel.client = 0;
+        this.localTimeEntryModel.clientName = "";
+        this.localTimeEntryModel.project = this.localProject;
+        if(this.localProject != 0)
+          this.projectsService.getProject(this.localProject).subscribe(project => {
+            this.localTimeEntryModel.projectName = project.name;
+            if (project.client != 0) {
+              this.clientsService.getClient(project.client).subscribe(client => {
+                this.localTimeEntryModel.clientName = client.name;
+                this.localTimeEntryModel.client = client.id;
+              })
+            }
+          });
+
+        this.localTimeEntryModel.description = this.localTimeTitle;
+        this.localTimeEntryModel.stop = new Date(formatDate(new Date(), 'yyyy-MM-ddTHH:mm:ss', 'en'));
         this.localTimeEntryModel.timeDiff = `${this.getHour()}:${this.getMinute()}:${this.getSecond()}`;
         this.worklog.unshift(this.localTimeEntryModel);
 

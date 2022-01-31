@@ -85,6 +85,7 @@ export class TimerComponent implements OnInit {
           active
         );
         this.localTimeEntryModel.stop = new Date();
+        this.localTimeEntryModel.timeDiff = `${this.getHour()}:${this.getMinute()}:${this.getSecond()}`;
         this.worklog.unshift(this.localTimeEntryModel);
 
       }
